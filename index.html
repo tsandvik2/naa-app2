@@ -149,7 +149,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 .punish-txt{font-size:16px;font-weight:700;line-height:1.35}
 
 /* COMPLETE CHALLENGE */
-.complete-bar{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.complete-bar{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px 18px;display:none;align-items:center;justify-content:space-between;gap:12px}
+.complete-bar.show{display:flex}
 .complete-lbl{font-size:14px;font-weight:700}
 .complete-sub{font-size:12px;color:var(--muted);margin-top:2px}
 .complete-tick{width:40px;height:40px;border-radius:50%;background:rgba(48,209,88,.12);border:1.5px solid rgba(48,209,88,.3);color:var(--green);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
@@ -844,8 +845,10 @@ function showChallenge(c){
   document.getElementById('btn-invite').style.display=isGroup?'block':'none';
   // Reset complete tick
   const tick=document.getElementById('complete-tick');
-  tick.classList.remove('done');tick.onclick=()=>completeChallenge();
-  document.getElementById('complete-bar').style.display='flex';
+  const bar=document.getElementById('complete-bar');
+  tick.classList.remove('done');
+  tick.onclick=()=>completeChallenge();
+  bar.classList.add('show');
   show('s-challenge');confetti();vibrate();
 }
 
@@ -864,15 +867,15 @@ function nextChallenge(){
 // Complete challenge directly from challenge screen
 function completeChallenge(){
   const tick=document.getElementById('complete-tick');
+  const bar=document.getElementById('complete-bar');
   if(tick.classList.contains('done'))return;
   tick.classList.add('done');
   tick.onclick=null;
+  // Hide bar after short delay so user sees the tick animation
+  setTimeout(()=>bar.classList.remove('show'),1200);
   addPoints(10,'🔥 +10 poeng! Streak: '+(PL.streak+1)+' dager!');
   PL.done++;PL.streak++;
-  if(PL.streak>PL.best){
-    PL.best=PL.streak;
-    // Record streak animation on profile
-  }
+  if(PL.streak>PL.best)PL.best=PL.streak;
   addToHistory(S.challenge,S.punishment?'wild':'medium');
   LB[0].pts=PL.pts;LB[0].streak=PL.streak;
   updateHeader();saveData();

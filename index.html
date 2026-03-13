@@ -3,60 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NÅ">
+<meta name="theme-color" content="#000000">
 <title>NÅ – Hva gjør vi nå?</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#07070d;--surface:#0f0f18;--card:#141420;--card2:#1a1a28;
-  --red:#ff2d55;--orange:#ff6b00;--yellow:#ffd60a;--green:#30d158;
-  --cyan:#00c7ff;--purple:#bf5af2;--text:#fff;--text2:#ebebf5cc;
-  --muted:#48485a;--border:#ffffff0f;--snap:#fffc00;
+  --bg:#000;--surface:#0a0a0f;--card:#111118;--card2:#161622;
+  --red:#ff2d55;--orange:#ff6b00;--yellow:#ffd60a;--green:#00e676;
+  --cyan:#00f0ff;--purple:#bf5af2;--text:#fff;--text2:#ebebf5cc;
+  --muted:#55556a;--border:#ffffff10;--snap:#fffc00;
 }
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden}
+html,body{height:100%;background:#000;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden}
 
-/* MESH */
+/* MESH BG */
 .mesh{position:fixed;inset:0;z-index:0;pointer-events:none}
-.mb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.28}
-.mb1{width:500px;height:500px;background:radial-gradient(circle,#ff2d5538,transparent 70%);top:-150px;left:-100px;animation:d1 12s ease-in-out infinite}
-.mb2{width:400px;height:400px;background:radial-gradient(circle,#00c7ff25,transparent 70%);bottom:-100px;right:-80px;animation:d2 15s ease-in-out infinite}
-.mb3{width:280px;height:280px;background:radial-gradient(circle,#ffd60a15,transparent 70%);top:40%;left:25%;animation:d3 10s ease-in-out infinite}
+.mb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.22}
+.mb1{width:500px;height:500px;background:radial-gradient(circle,rgba(255,45,85,.45),transparent 70%);top:-150px;left:-100px;animation:d1 12s ease-in-out infinite}
+.mb2{width:400px;height:400px;background:radial-gradient(circle,rgba(0,240,255,.18),transparent 70%);bottom:-100px;right:-80px;animation:d2 15s ease-in-out infinite}
+.mb3{width:280px;height:280px;background:radial-gradient(circle,rgba(255,214,10,.12),transparent 70%);top:40%;left:25%;animation:d3 10s ease-in-out infinite}
 @keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
 @keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,-20px)}}
 @keyframes d3{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-25px)}}
 
 /* SHELL */
-.app{position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:0 16px 90px}
+.app{position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:0 16px 100px}
 .screen{display:none}
-.screen.active{display:flex;flex-direction:column;gap:14px;animation:up .32s cubic-bezier(.16,1,.3,1)}
-@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.screen.active{display:flex;flex-direction:column;gap:14px;animation:slideUp .32s cubic-bezier(.16,1,.3,1)}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes countPop{from{transform:scale(0.4);opacity:0}to{transform:scale(1);opacity:1}}
 
 /* ══ ONBOARDING ══ */
-.ob-screen{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:32px 20px;gap:0;position:relative;z-index:1}
-.ob-screen.active{display:flex;animation:up .4s cubic-bezier(.16,1,.3,1)}
+.ob-screen{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px 20px 50px;position:relative;z-index:1;background:var(--bg)}
+.ob-screen.active{display:flex;animation:slideUp .4s cubic-bezier(.16,1,.3,1)}
 .ob-logo{font-family:'Bebas Neue',sans-serif;font-size:100px;letter-spacing:4px;line-height:1;background:linear-gradient(135deg,var(--red),var(--orange),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
-.ob-tagline{font-size:18px;font-weight:700;color:var(--text2);margin-bottom:44px;line-height:1.5}
-.ob-features{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:44px}
-.ob-feat{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;text-align:left}
+.ob-tagline{font-size:18px;font-weight:700;color:var(--text2);margin-bottom:36px;line-height:1.5;text-align:center}
+.ob-features{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:36px}
+.ob-feat{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px}
 .ob-feat-icon{font-size:28px;flex-shrink:0}
-.ob-feat-title{font-size:15px;font-weight:700;margin-bottom:2px}
+.ob-feat-title{font-size:15px;font-weight:700;margin-bottom:2px;color:var(--text)}
 .ob-feat-desc{font-size:12px;color:var(--muted)}
-.ob-dots{display:flex;gap:6px;margin-bottom:28px}
+.ob-dots{display:flex;gap:6px;margin-bottom:24px}
 .ob-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s}
 .ob-dot.on{background:var(--red);width:24px;border-radius:4px}
-.ob-name-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;text-align:left;width:100%}
-.ob-name-input{width:100%;padding:16px 18px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;outline:none;transition:border-color .2s;margin-bottom:20px}
-.ob-name-input:focus{border-color:var(--red)}
-.ob-name-input::placeholder{color:var(--muted)}
-.ob-emoji-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;text-align:left;width:100%}
-.ob-emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;width:100%;margin-bottom:28px}
-.ob-emoji-btn{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:11px 4px;font-size:22px;cursor:pointer;transition:all .15s}
-.ob-emoji-btn:active{transform:scale(.88)}
-.ob-emoji-btn.on{border-color:var(--red);background:rgba(255,45,85,.14)}
+.ob-step-title{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:1px;margin-bottom:6px;text-align:center;color:var(--text)}
+.ob-step-sub{font-size:14px;color:var(--muted);margin-bottom:24px;text-align:center}
+.ob-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;text-align:left;width:100%}
+.ob-input{width:100%;padding:16px 18px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;outline:none;transition:border-color .2s;margin-bottom:20px}
+.ob-input:focus{border-color:var(--red)}
+.ob-input::placeholder{color:var(--muted)}
+
+/* AVATAR GRID - 4 cols, bigger */
+.ob-emoji-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;margin-bottom:24px}
+.ob-emoji-btn{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px 8px;font-size:30px;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s;position:relative;overflow:visible;line-height:1;text-align:center}
+.ob-emoji-btn span{display:inline-block;transition:transform .15s}
+.ob-emoji-btn:active span{transform:scale(.8)}
+.ob-emoji-btn.on{border-color:var(--red);background:rgba(255,45,85,.18);box-shadow:0 0 20px rgba(255,45,85,.3)}
+@keyframes emojiBounce{
+  0%  {transform:scale(1)    translateY(0)     rotate(0deg)}
+  25% {transform:scale(1.9)  translateY(-32px)  rotate(-10deg)}
+  55% {transform:scale(1.5)  translateY(-16px)  rotate(6deg)}
+  80% {transform:scale(1.15) translateY(-4px)   rotate(-2deg)}
+  100%{transform:scale(1)    translateY(0)     rotate(0deg)}
+}
+.ob-emoji-btn.pop span{animation:emojiBounce .6s cubic-bezier(.34,1.56,.64,1) forwards}
+
+/* AGE GRID */
+.ob-age-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:100%;margin-bottom:28px}
+.ob-age-btn{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:18px 10px;font-size:13px;font-weight:700;cursor:pointer;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;text-align:center;transition:all .18s}
+.ob-age-btn em{font-size:26px;display:block;margin-bottom:7px;font-style:normal}
+.ob-age-btn.on{border-color:var(--red);color:#fff;background:rgba(255,45,85,.14)}
+
+/* ══ INSTALL BANNER ══ */
+.install-banner{background:linear-gradient(135deg,rgba(0,199,255,.08),rgba(0,199,255,.02));border:1.5px solid rgba(0,199,255,.18);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s}
+.install-banner:active{transform:scale(.97)}
+.install-icon{font-size:26px;flex-shrink:0}
+.install-title{font-size:14px;font-weight:800;margin-bottom:2px}
+.install-sub{font-size:12px;color:var(--muted);line-height:1.4}
+.install-arrow{font-size:20px;color:var(--cyan);flex-shrink:0;margin-left:auto}
 
 /* ══ HEADER ══ */
 .header{padding:48px 0 6px;display:flex;align-items:flex-end;justify-content:space-between}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:62px;line-height:.9;letter-spacing:2px;background:linear-gradient(135deg,#fff,#ffffff70);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:62px;line-height:.9;letter-spacing:2px;background:linear-gradient(135deg,#fff,#ffffff70);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(255,45,85,.6))}
 .logo-sub{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .user-pill{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px 6px 8px;cursor:pointer;transition:all .15s}
 .user-pill:active{transform:scale(.95)}
@@ -78,7 +109,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 .spec-title{font-size:15px;font-weight:800;margin-bottom:1px}
 .spec-hint{font-size:12px;color:var(--muted)}
 
-/* ══ DAILY CHALLENGE ══ */
+/* ══ DAILY ══ */
 .daily-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:16px 18px;position:relative;overflow:hidden}
 .daily-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--red),var(--orange))}
 .daily-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -90,33 +121,45 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 .daily-done{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--green)}
 
 /* ══ WIZARD ══ */
-.wiz-steps{display:flex;gap:5px;padding:4px 0 4px}
+.wiz-steps{display:flex;gap:5px;padding:4px 0}
 .ws{flex:1;height:3px;border-radius:100px;background:var(--border);transition:all .35s}
 .ws.on{background:linear-gradient(90deg,var(--red),var(--orange));flex:2.5}
 .ws.done{background:var(--green)}
-.wiz-panel{display:none;flex-direction:column;gap:14px;animation:up .3s cubic-bezier(.16,1,.3,1)}
+.wiz-panel{display:none;flex-direction:column;gap:14px;animation:slideUp .3s cubic-bezier(.16,1,.3,1)}
 .wiz-panel.active{display:flex}
 .wiz-q{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.5px;line-height:1.1}
 .wiz-hint{font-size:13px;color:var(--muted);font-weight:600;margin-top:-6px}
-
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 
-.chip{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:18px 10px;cursor:pointer;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;text-align:center;transition:all .18s;line-height:1.3}
-.chip em{font-size:26px;display:block;margin-bottom:7px;font-style:normal}
-.chip:active{transform:scale(.93)}
-.chip.sel{border-color:var(--red);color:#fff;background:rgba(255,45,85,.14)}
+/* CHIPS */
+.chip{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:18px 10px;cursor:pointer;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;text-align:center;transition:all .18s cubic-bezier(.34,1.56,.64,1);line-height:1.3;position:relative;overflow:hidden}
+.chip em{font-size:26px;display:block;margin-bottom:7px;font-style:normal;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.chip:active{transform:scale(.92)}
+.chip:active em{transform:scale(1.2) rotate(-8deg)}
+.chip.sel{border-color:var(--red);color:#fff;background:rgba(255,45,85,.14);transform:scale(1.04);box-shadow:0 0 18px rgba(255,45,85,.22)}
+.chip.sel em{transform:scale(1.15) rotate(-5deg)}
+@keyframes chipPop{0%{transform:scale(1)}40%{transform:scale(1.1)}70%{transform:scale(1.02)}100%{transform:scale(1.04)}}
+.chip.sel{animation:chipPop .35s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes chipBreathe{0%,100%{border-color:var(--border)}50%{border-color:rgba(255,255,255,.12)}}
+.wiz-panel.active .chip:not(.sel){animation:chipBreathe 2.5s ease-in-out infinite}
+.wiz-panel.active .chip:not(.sel):nth-child(2){animation-delay:.4s}
+.wiz-panel.active .chip:not(.sel):nth-child(3){animation-delay:.8s}
+.wiz-panel.active .chip:not(.sel):nth-child(4){animation-delay:1.2s}
+@keyframes rippleAnim{0%{transform:translate(-50%,-50%) scale(0);opacity:1}100%{transform:translate(-50%,-50%) scale(3.5);opacity:0}}
+
+.join-pill{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:14px;cursor:pointer;font-size:14px;font-weight:700;color:var(--text2);transition:all .15s;width:100%}
+.join-pill:active{transform:scale(.97);border-color:var(--cyan);color:var(--cyan)}
 
 /* ══ BUTTONS ══ */
 .btn{width:100%;padding:17px;border-radius:16px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:all .15s;letter-spacing:.2px}
 .btn:active{transform:scale(.97)}
-.btn-primary{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;box-shadow:0 4px 24px rgba(255,45,85,.28)}
+.btn-primary{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;box-shadow:0 8px 32px rgba(255,45,85,.45),0 2px 8px rgba(0,0,0,.4)}
 .btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--muted);font-size:15px}
-.btn-ghost:active{border-color:var(--muted)}
 .btn-snap{background:var(--snap);color:#000;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800}
-.btn-green{background:linear-gradient(135deg,var(--green),#22a03a);color:#fff;box-shadow:0 4px 20px rgba(48,209,88,.2)}
-.btn-done{background:rgba(48,209,88,.1);border:1.5px solid rgba(48,209,88,.3);color:var(--green);font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-insta{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800}
+.btn-tiktok{background:#010101;color:#fff;border:1.5px solid #333;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800}
+.btn-green{background:linear-gradient(135deg,var(--green),#22a03a);color:#fff}
+.btn-camera{background:linear-gradient(135deg,var(--cyan),#0099cc);color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800}
 
 /* ══ LOADING ══ */
 .load{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;gap:24px}
@@ -130,8 +173,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 
 /* ══ CHALLENGE CARD ══ */
 .c-outer{position:relative;margin:4px 0}
-.c-glow{position:absolute;inset:-2px;border-radius:23px;background:linear-gradient(135deg,var(--red),var(--orange),var(--yellow));opacity:.45;filter:blur(10px);z-index:0;animation:glow 3s ease-in-out infinite}
-@keyframes glow{0%,100%{opacity:.3}50%{opacity:.55}}
+.c-glow{position:absolute;inset:-2px;border-radius:23px;background:linear-gradient(135deg,var(--red),var(--orange),var(--yellow));opacity:.4;filter:blur(10px);z-index:0;animation:glow 3s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.25}50%{opacity:.5}}
 .c-card{background:var(--card);border-radius:22px;overflow:hidden;position:relative;z-index:1;border:1px solid rgba(255,255,255,.07)}
 .c-stripe{height:3px;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--cyan))}
 .c-body{padding:22px 20px 20px}
@@ -139,39 +182,87 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 .lv-easy{background:rgba(0,199,255,.1);color:var(--cyan)}
 .lv-med{background:rgba(255,214,10,.1);color:var(--yellow)}
 .lv-wild{background:rgba(255,45,85,.12);color:var(--red)}
-.c-text{font-size:20px;font-weight:800;line-height:1.35;margin-bottom:18px;color:#fff;letter-spacing:-.1px}
+.c-text{font-size:20px;font-weight:800;line-height:1.35;margin-bottom:18px;color:#fff}
 .c-tags{display:flex;flex-wrap:wrap;gap:6px}
 .c-tag{font-size:11px;color:var(--muted);background:rgba(255,255,255,.05);padding:4px 10px;border-radius:8px;font-weight:600}
+
+/* CAMERA BTN on challenge */
+.camera-btn{display:none;background:linear-gradient(135deg,rgba(0,199,255,.12),rgba(0,199,255,.05));border:1.5px solid rgba(0,199,255,.25);border-radius:14px;padding:14px 16px;align-items:center;gap:12px;cursor:pointer;transition:all .15s;width:100%}
+.camera-btn.show{display:flex}
+.camera-btn:active{transform:scale(.97)}
+.camera-btn-icon{font-size:26px}
+.camera-btn-title{font-size:14px;font-weight:800;color:var(--cyan)}
+.camera-btn-sub{font-size:12px;color:var(--muted)}
 
 /* PUNISHMENT */
 .punish{background:rgba(255,45,85,.06);border:1.5px solid rgba(255,45,85,.18);border-radius:16px;padding:16px 18px;text-align:center}
 .punish-lbl{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
 .punish-txt{font-size:16px;font-weight:700;line-height:1.35}
 
-/* COMPLETE CHALLENGE */
+/* FRIEND BOX */
+.friend-box{background:linear-gradient(135deg,rgba(255,252,0,.06),rgba(255,252,0,.02));border:1.5px solid rgba(255,252,0,.22);border-radius:18px;padding:16px 18px;flex-direction:column;gap:12px;display:none}
+.friend-box.show{display:flex}
+.friend-box-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.friend-box-title{font-size:15px;font-weight:800;margin-bottom:3px}
+.friend-box-sub{font-size:12px;color:var(--muted)}
+.friend-code{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:5px;background:linear-gradient(135deg,var(--red),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;flex-shrink:0}
+
+/* COMPLETE BAR */
 .complete-bar{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px 18px;display:none;align-items:center;justify-content:space-between;gap:12px}
-.complete-bar.show{display:flex}
+.complete-bar.show{display:flex!important}
 .complete-lbl{font-size:14px;font-weight:700}
 .complete-sub{font-size:12px;color:var(--muted);margin-top:2px}
-.complete-tick{width:40px;height:40px;border-radius:50%;background:rgba(48,209,88,.12);border:1.5px solid rgba(48,209,88,.3);color:var(--green);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.complete-tick{width:44px;height:44px;border-radius:50%;background:rgba(48,209,88,.12);border:1.5px solid rgba(48,209,88,.3);color:var(--green);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
 .complete-tick:active{transform:scale(.88)}
-.complete-tick.done{background:var(--green);border-color:var(--green);color:#000;animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
-@keyframes pop{0%{transform:scale(.8)}100%{transform:scale(1)}}
+.complete-tick.done{background:var(--green);border-color:var(--green);color:#000;animation:tickPop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes tickPop{0%{transform:scale(.8)}100%{transform:scale(1)}}
 
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.btn-half{padding:14px;border-radius:14px;border:1.5px solid var(--border);background:var(--card);color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px}
-.btn-half:active{transform:scale(.94)}
+/* SKIP BAR */
+.skip-bar{display:flex}
+.skip-btn{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--muted);font-size:14px}
+.skip-cost{font-size:12px;font-weight:800;color:var(--red);background:rgba(255,45,85,.1);padding:2px 8px;border-radius:8px}
 
-/* ══ INVITE ══ */
-.inv-box{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:28px 20px;text-align:center}
-.inv-code{font-family:'Bebas Neue',sans-serif;font-size:56px;letter-spacing:8px;background:linear-gradient(135deg,var(--red),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:14px 0 10px;line-height:1}
-.inv-desc{font-size:13px;color:var(--muted);line-height:1.6}
-.join-section{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:18px}
-.join-lbl{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.join-row{display:flex;gap:8px}
-.join-input{flex:1;padding:13px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;outline:none;text-transform:uppercase;letter-spacing:3px}
-.join-input:focus{border-color:var(--cyan)}
-.join-btn{padding:13px 18px;background:var(--cyan);border:none;border-radius:12px;color:#000;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;cursor:pointer}
+/* RESULT CARD */
+.result-card{background:linear-gradient(135deg,#1a0a0e,#0a0a1a);border:1.5px solid rgba(255,45,85,.2);border-radius:20px;padding:20px;text-align:center;display:none;position:relative;overflow:hidden}
+.result-card.show{display:block;animation:slideUp .4s cubic-bezier(.16,1,.3,1)}
+.result-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--cyan))}
+.result-top{font-size:40px;margin-bottom:8px}
+.result-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;margin-bottom:4px}
+.result-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.result-challenge{font-size:14px;font-weight:700;line-height:1.4;margin-bottom:14px;color:var(--text2)}
+.result-pts{font-family:'Bebas Neue',sans-serif;font-size:42px;background:linear-gradient(135deg,var(--yellow),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
+.result-pts-lbl{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.share-section{margin-top:16px}
+.share-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:4px}
+.share-subtitle{font-size:11px;color:var(--muted);margin-bottom:12px}
+.share-divider{font-size:12px;color:var(--muted);text-align:center;margin:4px 0 16px}
+.share-btns-row{display:flex;gap:10px;justify-content:center}
+.share-big-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:14px 10px;border-radius:16px;border:none;cursor:pointer;
+  transition:all .18s;font-family:'Plus Jakarta Sans',sans-serif;
+}
+.share-big-btn:active{transform:scale(.93)}
+.sbb-icon{font-size:26px}
+.sbb-label{font-size:11px;font-weight:800;color:#fff}
+.share-tiktok{background:linear-gradient(135deg,#010101,#1a1a2e)}
+.share-snap{background:linear-gradient(135deg,#fffc00,#ffd000);}.share-snap .sbb-label{color:#000}
+.share-insta{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)}
+.share-sms{background:linear-gradient(135deg,#30d158,#00a86b)}
+.btn-cam-result{
+  width:100%;margin-top:10px;padding:12px;
+  background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);
+  border-radius:14px;color:rgba(255,255,255,.7);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;transition:all .2s;
+}
+.btn-cam-result:active{border-color:var(--red);color:#fff}
+.share-btns{display:flex;flex-direction:column;gap:8px}
+
+/* JOIN */
+.join-big-input{width:100%;padding:20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:36px;font-weight:800;outline:none;text-align:center;letter-spacing:8px;transition:border-color .2s;margin-bottom:8px}
+.join-big-input:focus{border-color:var(--cyan)}
+.join-big-input::placeholder{color:var(--muted);letter-spacing:4px;font-size:24px}
 
 /* ══ LEADERBOARD ══ */
 .lb-hero{background:linear-gradient(135deg,var(--card),var(--card2));border:1.5px solid var(--border);border-radius:20px;padding:20px;text-align:center}
@@ -205,27 +296,21 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 .profile-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;line-height:1;margin-bottom:6px}
 .profile-tags{display:flex;gap:6px;flex-wrap:wrap}
 .ptag{font-size:11px;color:var(--muted);background:rgba(255,255,255,.05);padding:3px 10px;border-radius:8px;font-weight:600}
-
-.streak-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:20px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;cursor:pointer;transition:all .2s}
+.streak-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:20px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
 .streak-card::before{content:'🔥';position:absolute;right:-8px;bottom:-8px;font-size:90px;opacity:.05;pointer-events:none}
-.streak-card.record{border-color:rgba(255,214,10,.4);animation:recordPulse 1s ease-in-out 3}
-@keyframes recordPulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 20px rgba(255,214,10,.3)}}
-.streak-big{font-family:'Bebas Neue',sans-serif;font-size:58px;line-height:1;background:linear-gradient(135deg,var(--red),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;transition:all .3s}
+.streak-big{font-family:'Bebas Neue',sans-serif;font-size:58px;line-height:1;background:linear-gradient(135deg,var(--red),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .streak-lbl{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
-.streak-best-num{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--cyan);text-align:right;transition:all .3s}
+.streak-best-num{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--cyan);text-align:right}
 .streak-best-lbl{font-size:11px;color:var(--muted);font-weight:600;text-align:right}
-.streak-record-badge{display:none;font-size:11px;font-weight:800;color:var(--yellow);text-transform:uppercase;letter-spacing:1px;text-align:right;margin-top:3px}
-
 .history-section{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:16px 18px}
 .history-title{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
 .history-list{display:flex;flex-direction:column;gap:8px}
 .history-item{display:flex;align-items:flex-start;gap:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .history-item:last-child{border-bottom:none;padding-bottom:0}
-.history-em{font-size:20px;flex-shrink:0;margin-top:1px}
+.history-em{font-size:18px;flex-shrink:0;margin-top:1px}
 .history-txt{font-size:13px;font-weight:600;line-height:1.35;flex:1}
 .history-date{font-size:11px;color:var(--muted);margin-top:3px}
 .history-empty{font-size:13px;color:var(--muted);text-align:center;padding:12px 0}
-
 .badges-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--text2)}
 .badges-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .badge-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px 12px;text-align:center;transition:all .2s}
@@ -237,8 +322,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 .badge-tick{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);margin-top:5px}
 
 /* BADGE UNLOCK OVERLAY */
-.badge-unlock{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:900;align-items:center;justify-content:center;padding:32px}
+.badge-unlock{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:900;align-items:center;justify-content:center;padding:32px}
 .badge-unlock.on{display:flex;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .bu-card{background:var(--card);border:1.5px solid rgba(255,214,10,.4);border-radius:28px;padding:36px 28px;text-align:center;max-width:320px;width:100%;box-shadow:0 0 40px rgba(255,214,10,.15);animation:scaleIn .4s cubic-bezier(.34,1.56,.64,1)}
 @keyframes scaleIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
 .bu-em{font-size:64px;display:block;margin-bottom:12px}
@@ -246,38 +332,177 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 .bu-name{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;margin-bottom:6px}
 .bu-desc{font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:24px}
 
-/* ══ SHARE SHEET ══ */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);z-index:800;align-items:flex-end;justify-content:center}
-.overlay.on{display:flex;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.share-sheet{width:100%;max-width:430px;background:var(--surface);border-radius:28px 28px 0 0;overflow:hidden;border-top:1px solid rgba(255,255,255,.07);animation:slideUp2 .3s cubic-bezier(.16,1,.3,1);padding-bottom:max(24px,env(safe-area-inset-bottom))}
-@keyframes slideUp2{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.share-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:14px auto 0}
-.share-preview{margin:16px 16px 0;background:linear-gradient(135deg,#160820,#080c18,#081418);border-radius:20px;padding:20px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
-.share-preview::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--cyan))}
-.sh-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;background:linear-gradient(135deg,var(--red),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
-.sh-challenge{font-size:16px;font-weight:700;line-height:1.35;margin-bottom:14px}
-.sh-code-box{background:rgba(255,255,255,.05);border-radius:12px;padding:10px 14px}
-.sh-code-lbl{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.sh-code{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:5px;background:linear-gradient(135deg,var(--red),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.share-sec-lbl{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:14px 16px 6px}
-.share-actions{display:flex;flex-direction:column;gap:8px;padding:0 16px 4px}
+/* ══ CAMERA OVERLAY ══ */
+.cam-overlay{display:none;position:fixed;inset:0;z-index:800;background:#000;flex-direction:column}
+.cam-overlay.on{display:flex}
+.cam-video{width:100%;flex:1;object-fit:cover;background:#000}
+.cam-canvas{display:none}
+/* Filter overlay on video */
+.cam-filter{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:env(safe-area-inset-top,20px) 0 0}
+/* TikTok-stil filter */
+.cam-filter-top{background:linear-gradient(180deg,rgba(0,0,0,.7),transparent);padding:16px 20px 32px;display:flex;align-items:center;justify-content:space-between}
+.cam-filter-logo{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;color:#fff;text-shadow:0 0 16px rgba(255,45,85,.9)}
+.cam-filter-tag{font-size:9px;font-weight:800;color:#fff;letter-spacing:1.5px;text-transform:uppercase;background:var(--red);padding:4px 10px;border-radius:100px}
+/* TikTok side buttons */
+.cam-filter-side{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:18px}
+.cam-side-btn{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.cam-side-icon{font-size:26px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.8))}
+.cam-side-label{font-size:9px;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.9)}
+/* TikTok bottom info */
+.cam-filter-bottom{background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);padding:40px 50px 16px 14px}
+.cam-filter-user{font-size:13px;font-weight:800;color:#fff;margin-bottom:4px;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.cam-filter-challenge{font-size:12px;color:rgba(255,255,255,.85);line-height:1.4;margin-bottom:5px;font-weight:600}
+.cam-filter-hashtags{font-size:11px;color:rgba(100,180,255,.9);font-weight:700;line-height:1.5}
+/* TikTok border */
+.cam-filter-border{position:absolute;inset:6px;border:1.5px solid rgba(255,45,85,.35);border-radius:12px;pointer-events:none}
+.cam-filter-corner{position:absolute;width:18px;height:18px;border-color:var(--red);border-style:solid}
+.cam-filter-corner.tl{top:6px;left:6px;border-width:2.5px 0 0 2.5px;border-radius:4px 0 0 0}
+.cam-filter-corner.tr{top:6px;right:6px;border-width:2.5px 2.5px 0 0;border-radius:0 4px 0 0}
+.cam-filter-corner.bl{bottom:6px;left:6px;border-width:0 0 2.5px 2.5px;border-radius:0 0 0 4px}
+.cam-filter-corner.br{bottom:6px;right:6px;border-width:0 2.5px 2.5px 0;border-radius:0 0 4px 0}
+/* Camera controls */
+.cam-controls{position:absolute;bottom:0;left:0;right:0;padding:20px 24px max(32px,env(safe-area-inset-bottom));background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.cam-close{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cam-shutter{width:72px;height:72px;border-radius:50%;background:#fff;border:4px solid rgba(255,255,255,.4);cursor:pointer;transition:all .15s;flex-shrink:0}
+.cam-shutter:active{transform:scale(.88)}
+.cam-flip{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* Photo preview after capture */
+.cam-preview{display:none;position:fixed;inset:0;z-index:810;background:#000;flex-direction:column}
+.cam-preview.on{display:flex}
+.cam-preview-img{width:100%;flex:1;object-fit:cover}
+/* Filter on preview */
+.cam-preview-filter{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:env(safe-area-inset-top,20px) 0 0}
+.cam-preview-actions{position:absolute;bottom:0;left:0;right:0;padding:16px 20px max(32px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px;background:linear-gradient(0deg,rgba(0,0,0,.95),transparent)}
+.cam-preview-title{font-size:13px;font-weight:800;color:rgba(255,255,255,.6);text-align:center;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+
+/* ══ INSTALL OVERLAY ══ */
+.install-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:900;align-items:flex-end;justify-content:center;padding:0}
+.install-overlay.on{display:flex;animation:fadeIn .3s ease}
+.install-sheet{width:100%;max-width:430px;background:var(--surface);border-radius:28px 28px 0 0;padding:28px 24px max(32px,env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,.08);animation:sheetUp .35s cubic-bezier(.16,1,.3,1)}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.install-sheet-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;margin-bottom:6px}
+.install-step{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.install-step:last-of-type{border-bottom:none}
+.install-step-num{width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.install-step-txt{font-size:14px;font-weight:600;line-height:1.4}
 
 /* ══ NAV ══ */
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(7,7,13,.93);backdrop-filter:blur(18px);border-top:1px solid var(--border);display:flex;z-index:500;padding:8px 0 max(12px,env(safe-area-inset-bottom))}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(0,0,0,.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(255,255,255,.08);display:flex;z-index:500;padding:8px 0 max(20px,env(safe-area-inset-bottom))}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:6px 0;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;transition:color .15s}
 .nav-btn .ni{font-size:22px;transition:transform .2s cubic-bezier(.34,1.56,.64,1);display:block}
 .nav-btn.on{color:var(--red)}
 .nav-btn.on .ni{transform:scale(1.18)}
 
-/* ══ TOAST ══ */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(60px);background:#fff;color:#000;padding:12px 24px;border-radius:100px;font-size:13px;font-weight:700;transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:999;white-space:nowrap;pointer-events:none;box-shadow:0 4px 24px rgba(0,0,0,.3)}
-.toast.on{transform:translateX(-50%) translateY(0)}
+/* ══ TIMER BAR ══ */
+.timer-bar{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:14px 18px;display:none}
+.timer-bar.show{display:block}
+.timer-bar.urgent{border-color:rgba(255,45,85,.4);background:rgba(255,45,85,.06);animation:timerPulse 1s ease-in-out infinite}
+@keyframes timerPulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 20px rgba(255,45,85,.3)}}
+.timer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.timer-label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.timer-digits{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;transition:color .3s}
+.timer-digits.ok{color:var(--green)}
+.timer-digits.warn{color:var(--yellow)}
+.timer-digits.urgent{color:var(--red)}
+.timer-track{height:6px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.timer-fill{height:100%;border-radius:100px;transition:width .9s linear,background .3s;background:var(--green)}
+.timer-fill.warn{background:var(--yellow)}
+.timer-fill.urgent{background:var(--red)}
+
+/* ══ PROOF / COMPLETE BAR ══ */
+.complete-bar{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px 18px;display:none}
+.complete-bar.show{display:block!important}
+.complete-steps{display:flex;align-items:center;gap:8px}
+.complete-step{display:flex;align-items:center;gap:10px;flex:1}
+.cs-arrow{font-size:20px;color:var(--muted);flex-shrink:0}
+.cs-num{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.cs-num.locked{background:rgba(255,255,255,.08);color:var(--muted)}
+.cs-num.done{background:var(--green)}
+.cs-title{font-size:13px;font-weight:800;line-height:1.2}
+.cs-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ══ TIMER EXPIRED OVERLAY ══ */
+.timer-expired{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:750;align-items:center;justify-content:center;padding:32px}
+.timer-expired.on{display:flex;animation:fadeIn .3s ease}
+.te-card{background:var(--card);border:1.5px solid rgba(255,45,85,.3);border-radius:28px;padding:36px 28px;text-align:center;max-width:320px;width:100%}
+.te-em{font-size:64px;display:block;margin-bottom:12px}
+.te-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;margin-bottom:8px;color:var(--red)}
+.te-sub{font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:24px}
+/* ══ CAM MODE BAR ══ */
+.cam-mode-bar{position:absolute;bottom:110px;left:50%;transform:translateX(-50%);display:flex;gap:8px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border-radius:100px;padding:6px 8px;z-index:10}
+.cam-mode-btn{padding:8px 20px;border-radius:100px;border:none;background:transparent;color:rgba(255,255,255,.6);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.cam-mode-btn.active{background:#fff;color:#000}
+.cam-rec{position:absolute;top:20px;left:50%;transform:translateX(-50%);background:rgba(255,45,85,.9);color:#fff;font-size:13px;font-weight:800;padding:6px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;z-index:10}
+.cam-rec-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:recBlink 1s ease-in-out infinite}
+@keyframes recBlink{0%,100%{opacity:1}50%{opacity:0}}
+.cam-shutter.recording{background:var(--red);transform:scale(.8);border-radius:8px}
+
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(25,25,35,.97);color:#fff;padding:12px 24px;border-radius:100px;font-size:13px;font-weight:700;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .35s;z-index:999;white-space:nowrap;pointer-events:none;box-shadow:0 4px 24px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08);opacity:0}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1}
 
 /* CONFETTI */
-.cf{position:fixed;inset:0;pointer-events:none;z-index:850}
+.cf{position:fixed;inset:0;pointer-events:none;z-index:490}
 .cp{position:absolute;animation:fall 2.2s ease-in forwards}
 @keyframes fall{from{opacity:1;transform:translateY(-10px) rotate(0)}to{opacity:0;transform:translateY(100vh) rotate(540deg)}}
+
+/* ══ NAV BADGE ══ */
+.nav-btn{position:relative}
+.nav-badge{position:absolute;top:2px;right:18px;background:var(--red);color:#fff;font-size:10px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;line-height:1}
+
+/* ══ FRIENDS SCREEN ══ */
+.my-code-card{background:linear-gradient(135deg,rgba(255,45,85,.08),rgba(255,107,0,.05));border:1.5px solid rgba(255,45,85,.25);border-radius:20px;padding:18px 20px}
+.my-code-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.my-code-label{font-size:11px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}
+.my-code-sub{font-size:12px;color:var(--muted)}
+.my-code-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:5px;background:linear-gradient(135deg,var(--red),var(--yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;flex-shrink:0;user-select:all}
+
+.add-friend-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:16px 18px}
+.add-friend-title{font-size:15px;font-weight:800}
+.add-friend-input{flex:1;padding:13px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;outline:none;transition:border-color .2s;min-width:0;letter-spacing:1px}
+.add-friend-input:focus{border-color:var(--cyan)}
+.add-friend-input::placeholder{color:var(--muted);letter-spacing:0;font-weight:600;font-size:14px}
+.add-friend-btn{padding:13px 18px;background:linear-gradient(135deg,var(--cyan),#0099cc);color:#fff;border:none;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.add-friend-btn:active{transform:scale(.95)}
+.add-friend-hint{font-size:12px;font-weight:700;margin-top:8px;min-height:18px;transition:all .2s}
+.add-friend-hint.ok{color:var(--green)}
+.add-friend-hint.err{color:var(--red)}
+
+.friends-section-title{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;padding:4px 2px}
+
+.friends-empty{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:32px 20px;text-align:center;color:var(--text)}
+
+/* Friend card */
+.friend-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:border-color .15s}
+.friend-card.online{border-color:rgba(48,209,88,.25)}
+.friend-av{font-size:30px;width:44px;height:44px;background:var(--card2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.friend-info{flex:1;min-width:0}
+.friend-name{font-size:15px;font-weight:800;margin-bottom:2px}
+.friend-stats{font-size:11px;color:var(--muted);font-weight:600}
+.friend-streak{font-size:12px;font-weight:800;color:var(--red)}
+.friend-actions{display:flex;gap:8px;flex-shrink:0}
+.friend-challenge-btn{padding:8px 14px;background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap}
+.friend-challenge-btn:active{transform:scale(.93)}
+.friend-remove-btn{width:34px;height:34px;background:rgba(255,255,255,.05);border:1.5px solid var(--border);border-radius:10px;color:var(--muted);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.friend-remove-btn:active{background:rgba(255,45,85,.12);border-color:var(--red);color:var(--red)}
+
+/* Pending challenge card */
+.pending-card{background:linear-gradient(135deg,rgba(255,214,10,.06),rgba(255,107,0,.04));border:1.5px solid rgba(255,214,10,.2);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.pending-av{font-size:26px;flex-shrink:0}
+.pending-info{flex:1}
+.pending-from{font-size:13px;font-weight:800;margin-bottom:3px}
+.pending-txt{font-size:12px;color:var(--muted);line-height:1.4}
+.pending-accept{padding:9px 14px;background:var(--yellow);color:#000;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .15s;white-space:nowrap}
+.pending-accept:active{transform:scale(.93)}
+
+/* Challenge friend modal */
+.cf-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:900;align-items:flex-end;justify-content:center;padding:0}
+.cf-modal.on{display:flex;animation:fadeIn .25s ease}
+.cf-sheet{width:100%;max-width:430px;background:var(--surface);border-radius:28px 28px 0 0;padding:24px 20px max(32px,env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,.08);animation:sheetUp .3s cubic-bezier(.16,1,.3,1)}
+.cf-sheet-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;margin-bottom:4px}
+.cf-sheet-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.cf-challenge-preview{background:var(--card);border-radius:14px;padding:14px;margin-bottom:16px;font-size:14px;font-weight:700;line-height:1.4;border:1.5px solid var(--border)}
+.cf-btns{display:flex;flex-direction:column;gap:8px}
 </style>
 </head>
 <body>
@@ -288,36 +513,48 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
   <div class="ob-logo">NÅ</div>
   <div class="ob-tagline">Slutt å scrolle.<br>Begynn å leve.</div>
   <div class="ob-features">
-    <div class="ob-feat"><div class="ob-feat-icon">🎯</div><div><div class="ob-feat-title">AI-genererte utfordringer</div><div class="ob-feat-desc">Tilpasset humøret ditt, tid og antall</div></div></div>
-    <div class="ob-feat"><div class="ob-feat-icon">👯</div><div><div class="ob-feat-title">Utfordre venner</div><div class="ob-feat-desc">Send kode på Snapchat – taperen får straffen</div></div></div>
-    <div class="ob-feat"><div class="ob-feat-icon">🔥</div><div><div class="ob-feat-title">Bygg streak & klatr på lista</div><div class="ob-feat-desc">Samle poeng, lås opp badges, bli #1</div></div></div>
+    <div class="ob-feat"><div class="ob-feat-icon">🎯</div><div><div class="ob-feat-title">Utfordringer tilpasset deg</div><div class="ob-feat-desc">Basert på humør, tid og antall</div></div></div>
+    <div class="ob-feat"><div class="ob-feat-icon">👯</div><div><div class="ob-feat-title">Spill mot venner</div><div class="ob-feat-desc">Send kode på Snapchat – taperen får straffen</div></div></div>
+    <div class="ob-feat"><div class="ob-feat-icon">🔥</div><div><div class="ob-feat-title">Bygg streak og klatr på lista</div><div class="ob-feat-desc">Samle poeng, lås opp badges, bli #1</div></div></div>
   </div>
-  <div class="ob-dots"><div class="ob-dot on"></div><div class="ob-dot"></div></div>
+  <div class="ob-dots"><div class="ob-dot on"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
   <button class="btn btn-primary" onclick="obNext(1)">Kom i gang →</button>
 </div>
 
 <div class="ob-screen" id="ob1">
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:1px;margin-bottom:8px;text-align:center;position:relative;z-index:1">Hvem er du? 👋</div>
-  <div style="font-size:14px;color:var(--muted);margin-bottom:28px;text-align:center">Vi tilpasser appen for deg</div>
-  <div class="ob-name-label">Ditt kallenavn</div>
-  <input class="ob-name-input" id="ob-name" type="text" placeholder="Skriv navnet ditt..." maxlength="20" autocomplete="off">
-  <div class="ob-emoji-label">Velg din avatar</div>
+  <div class="ob-step-title">Hvem er du? 👋</div>
+  <div class="ob-step-sub">Vi tilpasser appen for deg</div>
+  <div class="ob-label">Ditt kallenavn</div>
+  <input class="ob-input" id="ob-name" type="text" placeholder="Skriv navnet ditt..." maxlength="20" autocomplete="off" onkeydown="if(event.key==='Enter')obGoToAge()">
+  <div class="ob-label">Velg din avatar</div>
   <div class="ob-emoji-grid">
-    <button class="ob-emoji-btn on" onclick="pickEmoji(this,'🔥')">🔥</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'⚡')">⚡</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🦋')">🦋</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'😎')">😎</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🐺')">🐺</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🦊')">🦊</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🐉')">🐉</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🌙')">🌙</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'⭐')">⭐</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🎯')">🎯</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🏆')">🏆</button>
-    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🎭')">🎭</button>
+    <button class="ob-emoji-btn on" onclick="pickEmoji(this,'🔥')"><span>🔥</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'💀')"><span>💀</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'👾')"><span>👾</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🤙')"><span>🤙</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'😈')"><span>😈</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🥷')"><span>🥷</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🐉')"><span>🐉</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'⚡')"><span>⚡</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🎭')"><span>🎭</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🌊')"><span>🌊</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🦋')"><span>🦋</span></button>
+    <button class="ob-emoji-btn" onclick="pickEmoji(this,'🌙')"><span>🌙</span></button>
   </div>
-  <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot on"></div></div>
-  <button class="btn btn-primary" onclick="finishOnboarding()">La oss gå! 🚀</button>
+  <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot on"></div><div class="ob-dot"></div></div>
+  <button class="btn btn-primary" onclick="obGoToAge()">Neste →</button>
+</div>
+
+<div class="ob-screen" id="ob2">
+  <div class="ob-step-title">Hvor gammel er du? 🎂</div>
+  <div class="ob-step-sub">Aldersgruppen avgjør hvilke utfordringer du får</div>
+  <div class="ob-age-grid">
+    <button class="ob-age-btn" onclick="pickAge(this,'13-15')"><em>🧒</em>13–15 år<br><span style="font-size:10px;color:var(--muted);font-weight:600">Trygt & gøy</span></button>
+    <button class="ob-age-btn" onclick="pickAge(this,'16-19')"><em>🧑</em>16–19 år<br><span style="font-size:10px;color:var(--muted);font-weight:600">Litt kaos</span></button>
+    <button class="ob-age-btn" onclick="pickAge(this,'20+')"><em>👤</em>20+ år<br><span style="font-size:10px;color:var(--muted);font-weight:600">Full galskap</span></button>
+  </div>
+  <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot on"></div></div>
+  <button class="btn btn-ghost" style="margin-top:0" onclick="obNext(1)">← Tilbake</button>
 </div>
 
 <!-- ══ MAIN APP ══ -->
@@ -332,30 +569,30 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
 
   <!-- SETUP -->
   <div class="screen active" id="s-setup">
+    <div id="install-wrap"></div>
     <div id="special-banner"></div>
     <div id="daily-wrap"></div>
     <div class="wiz-steps">
-      <div class="ws on" id="ws0"></div><div class="ws" id="ws1"></div>
-      <div class="ws" id="ws2"></div><div class="ws" id="ws3"></div>
+      <div class="ws on" id="ws0"></div><div class="ws" id="ws1"></div><div class="ws" id="ws2"></div>
     </div>
     <div class="wiz-panel active" id="wp0">
       <div class="wiz-q">Hvordan har du det? 👀</div>
       <div class="wiz-hint">Velg ett alternativ</div>
       <div class="g2">
-        <button class="chip" id="chip-mood-0" onclick="wizPick(0,this,'mood','Energisk')"><em>⚡</em>Energisk</button>
-        <button class="chip" id="chip-mood-1" onclick="wizPick(0,this,'mood','Avslappet')"><em>😌</em>Avslappet</button>
-        <button class="chip" id="chip-mood-2" onclick="wizPick(0,this,'mood','Lei og rastløs')"><em>😑</em>Lei meg</button>
-        <button class="chip" id="chip-mood-3" onclick="wizPick(0,this,'mood','Klar for galskap')"><em>🤪</em>Full kaos</button>
+        <button class="chip" id="cm0" onclick="wizPick(0,this,'mood','Energisk')"><em>⚡</em>Energisk</button>
+        <button class="chip" id="cm1" onclick="wizPick(0,this,'mood','Avslappet')"><em>😌</em>Avslappet</button>
+        <button class="chip" id="cm2" onclick="wizPick(0,this,'mood','Lei og rastløs')"><em>😑</em>Lei meg</button>
+        <button class="chip" id="cm3" onclick="wizPick(0,this,'mood','Klar for galskap')"><em>🤪</em>Full kaos</button>
       </div>
     </div>
     <div class="wiz-panel" id="wp1">
       <div class="wiz-q">Hvor mye tid? ⏱</div>
       <div class="wiz-hint">Velg ett alternativ</div>
       <div class="g2">
-        <button class="chip" id="chip-time-0" onclick="wizPick(1,this,'time','10 min')"><em>⚡</em>10 min</button>
-        <button class="chip" id="chip-time-1" onclick="wizPick(1,this,'time','30 min')"><em>🕐</em>30 min</button>
-        <button class="chip" id="chip-time-2" onclick="wizPick(1,this,'time','1 time')"><em>🕑</em>1 time</button>
-        <button class="chip" id="chip-time-3" onclick="wizPick(1,this,'time','Hele kvelden')"><em>🌙</em>Hele kvelden</button>
+        <button class="chip" id="ct0" onclick="wizPick(1,this,'time','10 min')"><em>⚡</em>10 min</button>
+        <button class="chip" id="ct1" onclick="wizPick(1,this,'time','30 min')"><em>🕐</em>30 min</button>
+        <button class="chip" id="ct2" onclick="wizPick(1,this,'time','1 time')"><em>🕑</em>1 time</button>
+        <button class="chip" id="ct3" onclick="wizPick(1,this,'time','Hele kvelden')"><em>🌙</em>Hele kvelden</button>
       </div>
       <button class="btn btn-ghost" style="margin-top:4px;padding:13px" onclick="wizBack(1)">← Tilbake</button>
     </div>
@@ -363,23 +600,14 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
       <div class="wiz-q">Hvor mange er dere? 👥</div>
       <div class="wiz-hint">Velg ett alternativ</div>
       <div class="g2">
-        <button class="chip" id="chip-players-0" onclick="wizPick(2,this,'players',1)"><em>🙋</em>Bare meg</button>
-        <button class="chip" id="chip-players-1" onclick="wizPick(2,this,'players',2)"><em>👯</em>2 personer</button>
-        <button class="chip" id="chip-players-2" onclick="wizPick(2,this,'players',3)"><em>👨‍👩‍👦</em>3 personer</button>
-        <button class="chip" id="chip-players-3" onclick="wizPick(2,this,'players','4+')"><em>🎉</em>4+ personer</button>
+        <button class="chip" id="cp0" onclick="wizPick(2,this,'players',1)"><em>🙋</em>Bare meg</button>
+        <button class="chip" id="cp1" onclick="wizPick(2,this,'players',2)"><em>👯</em>2 personer</button>
+        <button class="chip" id="cp2" onclick="wizPick(2,this,'players',3)"><em>👨‍👩‍👦</em>3 personer</button>
+        <button class="chip" id="cp3" onclick="wizPick(2,this,'players','4+')"><em>🎉</em>4+ personer</button>
       </div>
       <button class="btn btn-ghost" style="margin-top:4px;padding:13px" onclick="wizBack(2)">← Tilbake</button>
     </div>
-    <div class="wiz-panel" id="wp3">
-      <div class="wiz-q">Aldersgruppe? 🎂</div>
-      <div class="wiz-hint">Velg ett alternativ</div>
-      <div class="g3">
-        <button class="chip" id="chip-age-0" onclick="wizAge(this,'13-15')"><em>🧒</em>13–15</button>
-        <button class="chip" id="chip-age-1" onclick="wizAge(this,'16-19')"><em>🧑</em>16–19</button>
-        <button class="chip" id="chip-age-2" onclick="wizAge(this,'20+')"><em>👤</em>20+</button>
-      </div>
-      <button class="btn btn-ghost" style="margin-top:4px;padding:13px" onclick="wizBack(3)">← Tilbake</button>
-    </div>
+    <button class="join-pill" onclick="navTo('s-join','n0')">👯 Fått en kode fra en venn? Trykk her!</button>
   </div>
 
   <!-- LOADING -->
@@ -387,6 +615,57 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
     <div class="load">
       <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
       <div class="load-txt" id="load-txt">Finner noe gøyalt...</div>
+    </div>
+  </div>
+
+  <!-- REVEAL -->
+  <div class="screen" id="s-reveal" style="flex-direction:column;align-items:center;padding:40px 0 20px;gap:0;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;" id="reveal-summary-label">Klar til å starte?</div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;" id="reveal-tags"></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:88px;letter-spacing:6px;color:var(--text);line-height:1;margin-bottom:6px;filter:drop-shadow(0 0 24px rgba(255,45,85,.5));">NÅ</div>
+      <div style="font-size:15px;color:var(--muted);font-weight:500;">Din utfordring venter</div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;font-size:17px;padding:18px;" onclick="startRevealCountdown()">START UTFORDRING</button>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="screen" id="s-count" style="flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:0;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:190px;line-height:1;color:var(--text);" id="count-num">3</div>
+    <div style="font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:12px;">Gjør deg klar...</div>
+  </div>
+
+  <!-- FLIP -->
+  <div class="screen" id="s-flip" style="flex-direction:column;align-items:center;padding:20px 0;">
+    <div style="width:100%;perspective:1000px;">
+      <div id="card-flipper" style="width:100%;position:relative;transform-style:preserve-3d;transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);min-height:320px;">
+        <!-- Bakside -->
+        <div style="position:absolute;width:100%;top:0;left:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;background:var(--card);border:1px solid var(--border);min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:110px;color:rgba(255,255,255,0.05);line-height:1;">?</div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Avsløres nå...</div>
+        </div>
+        <!-- Forside -->
+        <div id="flip-front" style="position:absolute;width:100%;top:0;left:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);border-radius:22px;background:var(--card);border:1px solid rgba(255,45,85,.18);min-height:320px;display:flex;flex-direction:column;overflow:hidden;">
+          <div style="height:3px;background:linear-gradient(90deg,var(--red),#ff6b00,var(--yellow));flex-shrink:0;"></div>
+          <div style="flex:1;padding:22px 20px;display:flex;flex-direction:column;justify-content:space-between;">
+            <div>
+              <div id="flip-badge" class="c-level lv-med" style="margin-bottom:14px;">🟡 MEDIUM</div>
+              <div id="flip-text" style="font-size:20px;font-weight:700;line-height:1.45;color:var(--text);">–</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+              <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text2);">
+                <div style="width:6px;height:6px;border-radius:50%;background:var(--red);animation:boing 1.5s infinite;"></div>
+                <span id="flip-timer">–</span>
+              </div>
+              <div id="flip-cam" style="display:none;font-size:11px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.05);padding:4px 10px;border-radius:8px;">📸 Krever bevis</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Knapper under flip -->
+    <div id="flip-actions" style="width:100%;margin-top:14px;display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(10px);transition:all 0.4s ease 0.5s;">
+      <button class="btn btn-primary" onclick="goToChallenge()" style="font-size:15px;">Til utfordringen →</button>
     </div>
   </div>
 
@@ -403,51 +682,119 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
         </div>
       </div>
     </div>
+    <!-- Camera button - shown when challenge needs photo/video -->
+    <div class="camera-btn" id="camera-btn" onclick="openCamera()">
+      <div class="camera-btn-icon">📸</div>
+      <div>
+        <div class="camera-btn-title">Ta bilde / video</div>
+        <div class="camera-btn-sub">Del med NÅ-filter på Snap, Insta & TikTok</div>
+      </div>
+      <span style="font-size:20px;color:var(--cyan);margin-left:auto">›</span>
+    </div>
     <div class="punish" id="punish" style="display:none">
       <div class="punish-lbl">😈 Straff for taperen</div>
       <div class="punish-txt" id="punish-txt"></div>
     </div>
-    <!-- Complete on challenge screen -->
-    <div class="complete-bar" id="complete-bar">
-      <div>
-        <div class="complete-lbl">Fullførte du den? 💪</div>
-        <div class="complete-sub">+10 poeng og streak!</div>
+    <div class="friend-box" id="friend-box">
+      <div class="friend-box-top">
+        <div><div class="friend-box-title">👯 Spill med venn</div><div class="friend-box-sub">Send koden – dere gjør samme utfordring</div></div>
+        <div class="friend-code" id="friend-code">NÅ-???</div>
       </div>
-      <div class="complete-tick" id="complete-tick" onclick="completeChallenge()">✓</div>
+      <button class="btn btn-snap" onclick="snapChallenge()">👻 Send kode på Snapchat</button>
     </div>
-    <div class="row2">
-      <button class="btn-half" onclick="nextChallenge()">🔄 Ny utfordring</button>
-      <button class="btn-half" onclick="copyChallenge()">📋 Kopier</button>
+    <!-- TIMER BAR -->
+    <div class="timer-bar" id="timer-bar">
+      <div class="timer-top">
+        <div class="timer-label">⏱ Tid igjen</div>
+        <div class="timer-digits" id="timer-digits">10:00</div>
+      </div>
+      <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
     </div>
-    <button class="btn btn-snap" onclick="openShare()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M12 2C9.24 2 6.8 3.28 5.23 5.3 4.12 6.7 3.44 8.47 3.44 10.4c0 .36.03.72.08 1.06-.44.17-.9.27-1.37.27-.52 0-.97-.14-1.28-.14-.44 0-.74.24-.74.6 0 .38.27.68.8.9.54.22 1.28.4 1.6 1.1.07.17.1.35.1.54 0 .2-.04.42-.13.63-.5 1.28-1.46 2.22-2.6 2.76-.3.15-.44.36-.44.58 0 .4.44.74 1.3 1.02.3.1.63.18 1 .25.16.03.28.14.33.28.06.15.05.31-.01.46-.06.18-.13.35-.13.52 0 .3.2.52.6.52.2 0 .43-.05.7-.14.6-.2 1.18-.3 1.73-.3.47 0 .92.07 1.34.21.8.53 1.7.83 2.66.87h.2c.96-.04 1.86-.34 2.66-.87.42-.14.87-.21 1.34-.21.55 0 1.13.1 1.73.3.27.09.5.14.7.14.4 0 .6-.22.6-.52 0-.17-.07-.34-.13-.52-.06-.15-.07-.31-.01-.46.05-.14.17-.25.33-.28.37-.07.7-.15 1-.25.86-.28 1.3-.62 1.3-1.02 0-.22-.14-.43-.44-.58-1.14-.54-2.1-1.48-2.6-2.76-.09-.21-.13-.43-.13-.63 0-.19.03-.37.1-.54.32-.7 1.06-.88 1.6-1.1.53-.22.8-.52.8-.9 0-.36-.3-.6-.74-.6-.31 0-.76.14-1.28.14-.47 0-.93-.1-1.37-.27.05-.34.08-.7.08-1.06 0-1.93-.68-3.7-1.79-5.1C17.2 3.28 14.76 2 12 2z"/></svg>
-      Del på Snapchat
-    </button>
-    <button class="btn btn-primary" id="btn-invite" onclick="goInvite()" style="display:none">📨 Utfordre en venn!</button>
-    <button class="btn btn-ghost" onclick="backToSetup()">← Endre valg</button>
+
+    <!-- PROOF BAR: requires photo before completing -->
+    <div class="complete-bar" id="complete-bar">
+      <div class="complete-steps">
+        <div class="complete-step" id="step-photo">
+          <div class="cs-num" id="cs-num-1">1</div>
+          <div>
+            <div class="cs-title">Ta bevisbildet 📸</div>
+            <div class="cs-sub">Kamera åpnes automatisk</div>
+          </div>
+        </div>
+        <div class="cs-arrow">›</div>
+        <div class="complete-step" id="step-done">
+          <div class="cs-num locked" id="cs-num-2">2</div>
+          <div>
+            <div class="cs-title" id="cs-done-title">Marker fullført ✓</div>
+            <div class="cs-sub" id="cs-done-sub">Ta bilde først</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn btn-camera" style="flex:1;padding:14px;font-size:14px" id="proof-photo-btn" onclick="openProofCamera()">📸 Ta bilde</button>
+        <button class="btn btn-green" style="flex:1;padding:14px;font-size:14px;opacity:.35;pointer-events:none" id="proof-done-btn" onclick="completeChallenge()">✓ Fullført!</button>
+      </div>
+    </div>
+    <div class="result-card" id="result-card">
+      <div class="result-top">🎉</div>
+      <div class="result-title">FULLFØRT!</div>
+      <div class="result-challenge" id="result-challenge-txt"></div>
+      <div class="result-pts" id="result-pts">0</div>
+      <div class="result-pts-lbl">POENG TOTALT</div>
+
+      <!-- STEG 1: Del video -->
+      <div class="share-section" id="share-step1">
+        <div class="share-title">📲 Del på sosiale medier</div>
+        <div class="share-subtitle">Lagrer video til kamera → åpner appen</div>
+        <div class="share-btns-row">
+          <button class="share-big-btn share-tiktok" onclick="quickShare('tiktok')">
+            <span class="sbb-icon">🎵</span>
+            <span class="sbb-label">TikTok</span>
+          </button>
+          <button class="share-big-btn share-snap" onclick="quickShare('snap')">
+            <span class="sbb-icon">👻</span>
+            <span class="sbb-label">Snapchat</span>
+          </button>
+          <button class="share-big-btn share-insta" onclick="quickShare('insta')">
+            <span class="sbb-icon">📸</span>
+            <span class="sbb-label">Reels</span>
+          </button>
+        </div>
+        <button class="btn-cam-result" onclick="openCameraFromResult()">🎥 Film med NÅ-filter først</button>
+      </div>
+
+      <!-- STEG 2: Utfordre venn -->
+      <div class="share-section" id="share-step2">
+        <div class="share-divider">— eller —</div>
+        <div class="share-title">👯 Utfordre en venn!</div>
+        <div class="share-subtitle">Send utfordringen direkte — de får samme utfordring</div>
+        <div class="share-btns-row">
+          <button class="share-big-btn share-snap" onclick="inviteFriend('snap')">
+            <span class="sbb-icon">👻</span>
+            <span class="sbb-label">Send på Snap</span>
+          </button>
+          <button class="share-big-btn share-sms" onclick="inviteFriend('sms')">
+            <span class="sbb-icon">💬</span>
+            <span class="sbb-label">Send SMS</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="margin-top:16px" onclick="nextChallenge()">Neste utfordring 🎯</button>
+    </div>
+    <div class="skip-bar" id="skip-bar">
+      <button class="btn btn-ghost skip-btn" onclick="skipChallenge()">⏭ Hopp over <span class="skip-cost">−5 pts</span></button>
+    </div>
+    <button class="btn btn-ghost" onclick="backToSetup()" style="font-size:13px;padding:12px">← Endre valg</button>
   </div>
 
-  <!-- INVITE -->
-  <div class="screen" id="s-invite">
-    <div class="inv-box">
-      <div style="font-size:44px;margin-bottom:12px">👯</div>
-      <div style="font-size:17px;font-weight:800;margin-bottom:4px">Send koden til vennen din!</div>
-      <div class="inv-code" id="inv-code">NÅ-???</div>
-      <div class="inv-desc">Samme utfordring – den som ikke gjør det får straffen! 😄</div>
-    </div>
-    <button class="btn btn-snap" onclick="snapInvite()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M12 2C9.24 2 6.8 3.28 5.23 5.3 4.12 6.7 3.44 8.47 3.44 10.4c0 .36.03.72.08 1.06-.44.17-.9.27-1.37.27-.52 0-.97-.14-1.28-.14-.44 0-.74.24-.74.6 0 .38.27.68.8.9.54.22 1.28.4 1.6 1.1.07.17.1.35.1.54 0 .2-.04.42-.13.63-.5 1.28-1.46 2.22-2.6 2.76-.3.15-.44.36-.44.58 0 .4.44.74 1.3 1.02.3.1.63.18 1 .25.16.03.28.14.33.28.06.15.05.31-.01.46-.06.18-.13.35-.13.52 0 .3.2.52.6.52.2 0 .43-.05.7-.14.6-.2 1.18-.3 1.73-.3.47 0 .92.07 1.34.21.8.53 1.7.83 2.66.87h.2c.96-.04 1.86-.34 2.66-.87.42-.14.87-.21 1.34-.21.55 0 1.13.1 1.73.3.27.09.5.14.7.14.4 0 .6-.22.6-.52 0-.17-.07-.34-.13-.52-.06-.15-.07-.31-.01-.46.05-.14.17-.25.33-.28.37-.07.7-.15 1-.25.86-.28 1.3-.62 1.3-1.02 0-.22-.14-.43-.44-.58-1.14-.54-2.1-1.48-2.6-2.76-.09-.21-.13-.43-.13-.63 0-.19.03-.37.1-.54.32-.7 1.06-.88 1.6-1.1.53-.22.8-.52.8-.9 0-.36-.3-.6-.74-.6-.31 0-.76.14-1.28.14-.47 0-.93-.1-1.37-.27.05-.34.08-.7.08-1.06 0-1.93-.68-3.7-1.79-5.1C17.2 3.28 14.76 2 12 2z"/></svg>
-      Send på Snapchat
-    </button>
-    <button class="btn btn-primary" onclick="copyInvite()">📋 Kopier invitasjon</button>
-    <div class="join-section">
-      <div class="join-lbl">Har du fått en kode?</div>
-      <div class="join-row">
-        <input class="join-input" id="join-input" placeholder="NÅ-ABC" maxlength="6">
-        <button class="join-btn" onclick="joinCode()">Join!</button>
-      </div>
-    </div>
-    <button class="btn btn-ghost" onclick="show('s-challenge')">← Tilbake</button>
+  <!-- JOIN -->
+  <div class="screen" id="s-join">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;margin-top:20px">Fått en kode? 👯</div>
+    <div style="font-size:14px;color:var(--muted);margin-top:-6px">Skriv inn koden vennen din sendte</div>
+    <input class="join-big-input" id="join-input" placeholder="NÅ-ABC" maxlength="8" type="text" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÆØÅ0-9-]/g,'').substring(0,8)">
+    <button class="btn btn-primary" onclick="joinCode()">Bli med! 🚀</button>
+    <button class="btn btn-ghost" onclick="navTo('s-setup','n0')">← Tilbake</button>
   </div>
 
   <!-- LEADERBOARD -->
@@ -472,57 +819,101 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
           <span class="ptag" id="p-done-tag">0 fullført</span>
           <span class="ptag" id="p-streak-tag">0 streak</span>
           <span class="ptag" id="p-pts-tag">0 pts</span>
+          <span class="ptag" id="p-age-tag">–</span>
         </div>
       </div>
     </div>
     <div class="streak-card" id="streak-card">
       <div>
         <div class="streak-big" id="s-num">0</div>
-        <div class="streak-lbl">Dagers streak</div>
+        <div class="streak-lbl">Dagers streak 🔥</div>
       </div>
       <div>
         <div class="streak-best-num" id="s-best">0</div>
         <div class="streak-best-lbl">Beste streak</div>
-        <div class="streak-record-badge" id="record-badge">🏆 NY REKORD!</div>
+        <div id="record-badge" style="display:none;font-size:11px;font-weight:800;color:var(--yellow);text-align:right;margin-top:3px">🏆 NY REKORD!</div>
       </div>
     </div>
     <div class="history-section">
-      <div class="history-title">📋 Utfordringer du har gjort</div>
+      <div class="history-title">📋 Siste utfordringer</div>
       <div class="history-list" id="history-list"></div>
     </div>
     <div class="badges-title">🏅 BADGES</div>
     <div class="badges-g" id="badges-g"></div>
     <button class="btn btn-ghost" onclick="resetOnboarding()">✏️ Endre profil</button>
   </div>
-</div><!-- /app -->
 
-<!-- NAV -->
+  <!-- FRIENDS -->
+  <div class="screen" id="s-friends">
+    <div class="my-code-card">
+      <div class="my-code-top">
+        <div>
+          <div class="my-code-label">👤 Din vennekode</div>
+          <div class="my-code-sub">Del denne så venner kan legge deg til</div>
+        </div>
+        <div class="my-code-val" id="my-code-val">NÅ-???</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn btn-snap" style="flex:1;padding:13px;font-size:14px" onclick="shareMyCode('snap')">👻 Send på Snap</button>
+        <button class="btn btn-ghost" style="flex:1;padding:13px;font-size:14px" onclick="copyMyCode()">📋 Kopier</button>
+      </div>
+    </div>
+    <div class="add-friend-card">
+      <div class="add-friend-title">➕ Legg til venn</div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <input class="add-friend-input" id="add-friend-input" placeholder="NÅ-ABC..." maxlength="10" type="text"
+          oninput="this.value=this.value.toUpperCase()"
+          onkeydown="if(event.key==='Enter')addFriend()">
+        <button class="add-friend-btn" onclick="addFriend()">Legg til</button>
+      </div>
+      <div class="add-friend-hint" id="add-friend-hint"></div>
+    </div>
+    <div id="pending-section" style="display:none">
+      <div class="friends-section-title">🔥 Venter på deg</div>
+      <div id="pending-list"></div>
+    </div>
+    <div class="friends-section-title">👯 Venneliste</div>
+    <div id="friends-list-empty" style="display:none">
+      <div class="friends-empty">
+        <div style="font-size:48px;margin-bottom:12px">👻</div>
+        <div style="font-size:16px;font-weight:800;margin-bottom:6px">Ingen venner ennå</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.5">Del koden din på Snapchat<br>og legg dem til her!</div>
+      </div>
+    </div>
+    <div id="friends-list"></div>
+  </div>
+
+</div>
+
+<!-- ══ NAV ══ -->
 <nav class="nav" id="main-nav" style="display:none">
   <button class="nav-btn on" id="n0" onclick="navTo('s-setup','n0')"><span class="ni">🎯</span>Utfordring</button>
   <button class="nav-btn" id="n1" onclick="navTo('s-lb','n1')"><span class="ni">🏆</span>Toppen</button>
+  <button class="nav-btn" id="n3" onclick="navTo('s-friends','n3')"><span class="ni">👯</span>Venner<span class="nav-badge" id="nav-badge" style="display:none"></span></button>
   <button class="nav-btn" id="n2" onclick="navTo('s-profile','n2')"><span class="ni">🏅</span>Profil</button>
 </nav>
 
-<!-- SHARE SHEET -->
-<div class="overlay" id="overlay" onclick="closeShare(event)">
-  <div class="share-sheet">
-    <div class="share-handle"></div>
-    <div class="share-preview">
-      <div class="sh-logo">NÅ</div>
-      <div class="sh-challenge" id="sh-txt">–</div>
-      <div class="sh-code-box">
-        <div class="sh-code-lbl">Kode for å joine</div>
-        <div class="sh-code" id="sh-code">NÅ-???</div>
-      </div>
-    </div>
-    <div class="share-sec-lbl">Del utfordringen</div>
-    <div class="share-actions">
-      <button class="btn btn-snap" onclick="doSnap()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M12 2C9.24 2 6.8 3.28 5.23 5.3 4.12 6.7 3.44 8.47 3.44 10.4c0 .36.03.72.08 1.06-.44.17-.9.27-1.37.27-.52 0-.97-.14-1.28-.14-.44 0-.74.24-.74.6 0 .38.27.68.8.9.54.22 1.28.4 1.6 1.1.07.17.1.35.1.54 0 .2-.04.42-.13.63-.5 1.28-1.46 2.22-2.6 2.76-.3.15-.44.36-.44.58 0 .4.44.74 1.3 1.02.3.1.63.18 1 .25.16.03.28.14.33.28.06.15.05.31-.01.46-.06.18-.13.35-.13.52 0 .3.2.52.6.52.2 0 .43-.05.7-.14.6-.2 1.18-.3 1.73-.3.47 0 .92.07 1.34.21.8.53 1.7.83 2.66.87h.2c.96-.04 1.86-.34 2.66-.87.42-.14.87-.21 1.34-.21.55 0 1.13.1 1.73.3.27.09.5.14.7.14.4 0 .6-.22.6-.52 0-.17-.07-.34-.13-.52-.06-.15-.07-.31-.01-.46.05-.14.17-.25.33-.28.37-.07.7-.15 1-.25.86-.28 1.3-.62 1.3-1.02 0-.22-.14-.43-.44-.58-1.14-.54-2.1-1.48-2.6-2.76-.09-.21-.13-.43-.13-.63 0-.19.03-.37.1-.54.32-.7 1.06-.88 1.6-1.1.53-.22.8-.52.8-.9 0-.36-.3-.6-.74-.6-.31 0-.76.14-1.28.14-.47 0-.93-.1-1.37-.27.05-.34.08-.7.08-1.06 0-1.93-.68-3.7-1.79-5.1C17.2 3.28 14.76 2 12 2z"/></svg>
-        Send på Snapchat
-      </button>
-      <button class="btn btn-primary" onclick="copyShare()" style="font-size:15px">📋 Kopier tekst</button>
-      <button class="btn btn-ghost" onclick="closeShare()">Lukk</button>
+<!-- TIMER EXPIRED -->
+<div class="timer-expired" id="timer-expired">
+  <div class="te-card">
+    <span class="te-em">⏰</span>
+    <div class="te-title">TIDEN ER UTE!</div>
+    <div class="te-sub">Du rakk ikke å fullføre i tide.<br>Ingen poeng denne gangen 😬</div>
+    <button class="btn btn-primary" onclick="timerExpiredNext()">Prøv en ny! 🎯</button>
+    <button class="btn btn-ghost" style="margin-top:8px;font-size:13px" onclick="timerExpiredSkip()">Tilbake til start</button>
+  </div>
+</div>
+
+<!-- CHALLENGE FRIEND MODAL -->
+<div class="cf-modal" id="cf-modal">
+  <div class="cf-sheet">
+    <div class="cf-sheet-title" id="cf-modal-title">Utfordre venn 🎯</div>
+    <div class="cf-sheet-sub" id="cf-modal-sub">Velg en utfordring å sende</div>
+    <div class="cf-challenge-preview" id="cf-modal-challenge">–</div>
+    <div class="cf-btns">
+      <button class="btn btn-primary" onclick="sendFriendChallenge('snap')">👻 Send på Snapchat</button>
+      <button class="btn btn-ghost" style="font-size:13px;padding:12px" onclick="rerollFriendChallenge()">🎲 Annen utfordring</button>
+      <button class="btn btn-ghost" style="font-size:13px;padding:12px;color:var(--muted)" onclick="closeCFModal()">Avbryt</button>
     </div>
   </div>
 </div>
@@ -538,86 +929,478 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus J
   </div>
 </div>
 
+<!-- INSTALL OVERLAY -->
+<div class="install-overlay" id="install-overlay">
+  <div class="install-sheet">
+    <div class="install-sheet-title">📱 Legg til på hjemskjerm</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5">Få NÅ som en ekte app – ingen App Store nødvendig!</p>
+    <div class="install-step"><div class="install-step-num">1</div><div class="install-step-txt">Trykk på <strong>Del-ikonet</strong> i Safari (firkant med pil opp) 📤</div></div>
+    <div class="install-step"><div class="install-step-num">2</div><div class="install-step-txt">Scroll ned og trykk <strong>"Legg til på hjemskjerm"</strong> ➕</div></div>
+    <div class="install-step"><div class="install-step-num">3</div><div class="install-step-txt">Trykk <strong>"Legg til"</strong> øverst til høyre ✅</div></div>
+    <button class="btn btn-primary" style="margin-top:20px" onclick="closeInstall()">Forstått! 🚀</button>
+  </div>
+</div>
+
+<!-- CAMERA OVERLAY -->
+<div class="cam-overlay" id="cam-overlay">
+  <video class="cam-video" id="cam-video" autoplay playsinline muted></video>
+  <canvas class="cam-canvas" id="cam-canvas"></canvas>
+  <div class="cam-filter">
+    <!-- TikTok hjørner -->
+    <div class="cam-filter-corner tl"></div>
+    <div class="cam-filter-corner tr"></div>
+    <div class="cam-filter-corner bl"></div>
+    <div class="cam-filter-corner br"></div>
+    <!-- Top -->
+    <div class="cam-filter-top">
+      <div class="cam-filter-logo">NÅ</div>
+      <div class="cam-filter-tag" id="cam-filter-tag">🔥 Utfordring</div>
+    </div>
+    <!-- TikTok-side knapper -->
+    <div class="cam-filter-side">
+      <div class="cam-side-btn">
+        <div class="cam-side-icon">❤️</div>
+        <div class="cam-side-label" id="cam-likes">Del</div>
+      </div>
+      <div class="cam-side-btn">
+        <div class="cam-side-icon">💬</div>
+        <div class="cam-side-label">Svar</div>
+      </div>
+      <div class="cam-side-btn">
+        <div class="cam-side-icon">↗️</div>
+        <div class="cam-side-label">Send</div>
+      </div>
+    </div>
+    <!-- Bunn info -->
+    <div class="cam-filter-bottom">
+      <div class="cam-filter-user" id="cam-filter-user">@–</div>
+      <div class="cam-filter-challenge" id="cam-filter-challenge">–</div>
+      <div class="cam-filter-hashtags">#NåUtfordringen #NåEllerAldri #JegBleUtfordret</div>
+    </div>
+  </div>
+  <!-- Mode toggle: photo / video -->
+  <div class="cam-mode-bar">
+    <button class="cam-mode-btn active" id="mode-photo" onclick="setCamMode('photo')">📸 Bilde</button>
+    <button class="cam-mode-btn" id="mode-video" onclick="setCamMode('video')">🎥 Video</button>
+  </div>
+  <!-- Recording indicator -->
+  <div class="cam-rec" id="cam-rec" style="display:none">
+    <span class="cam-rec-dot"></span> REC <span id="cam-rec-time">0:00</span>
+  </div>
+  <div class="cam-controls">
+    <button class="cam-close" onclick="closeCamera()">✕</button>
+    <button class="cam-shutter" id="cam-shutter" onclick="camShutterPress()"></button>
+    <button class="cam-flip" onclick="flipCamera()">🔄</button>
+  </div>
+</div>
+
+<!-- PHOTO PREVIEW -->
+<div class="cam-preview" id="cam-preview">
+  <img class="cam-preview-img" id="cam-preview-img" src="" alt="">
+  <div class="cam-preview-filter">
+    <div class="cam-filter-top">
+      <div class="cam-filter-logo">NÅ</div>
+      <div class="cam-filter-tag">Jeg ble utfordret!</div>
+    </div>
+    <div class="cam-filter-bottom">
+      <div class="cam-filter-challenge" id="prev-filter-challenge">–</div>
+      <div class="cam-filter-user" id="prev-filter-user">–</div>
+      <div class="cam-filter-hashtags">#NåAppen #NåUtfordringen #JegBleUtfordret</div>
+    </div>
+  </div>
+  <div class="cam-preview-actions">
+    <div class="cam-preview-title">Del bildet 🔥</div>
+    <button class="btn btn-snap" onclick="sharePhoto('snap')">👻 Del på Snapchat</button>
+    <button class="btn btn-insta" onclick="sharePhoto('insta')">📸 Del på Instagram</button>
+    <button class="btn btn-tiktok" onclick="sharePhoto('tiktok')">🎵 Del på TikTok</button>
+    <button class="btn btn-ghost" style="font-size:13px;padding:12px" onclick="retakePhoto()">↩ Ta nytt bilde</button>
+  </div>
+</div>
+
+<!-- VIDEO PREVIEW -->
+<div class="cam-preview" id="vid-preview">
+  <video class="cam-preview-img" id="vid-preview-video" controls playsinline style="object-fit:cover;width:100%;height:100%"></video>
+  <div class="cam-preview-filter" style="pointer-events:none">
+    <div class="cam-filter-top">
+      <div class="cam-filter-logo">NÅ</div>
+      <div class="cam-filter-tag">Jeg ble utfordret!</div>
+    </div>
+    <div class="cam-filter-bottom">
+      <div class="cam-filter-challenge" id="vid-filter-challenge">–</div>
+      <div class="cam-filter-user" id="vid-filter-user">–</div>
+      <div class="cam-filter-hashtags">#NåAppen #NåUtfordringen #JegBleUtfordret</div>
+    </div>
+  </div>
+  <div class="cam-preview-actions">
+    <div class="cam-preview-title">Del videoen 🔥</div>
+    <button class="btn btn-tiktok" onclick="shareVideo('tiktok')">🎵 Del på TikTok</button>
+    <button class="btn btn-insta" onclick="shareVideo('insta')">📸 Del på Reels</button>
+    <button class="btn btn-snap" onclick="shareVideo('snap')">👻 Del på Snapchat</button>
+    <button class="btn btn-ghost" style="font-size:13px;padding:12px" onclick="retakeVideo()">↩ Ta ny video</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 <div class="cf" id="cf"></div>
 
 <script>
-// ══════════════════════════════
-// STATE & PERSISTENCE
-// ══════════════════════════════
-const S={mood:null,time:null,players:null,age:'13-15',challenge:null,punishment:null,code:null,wizStep:0};
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+const S={mood:null,time:null,players:null,challenge:null,punishment:null,code:null,wizStep:0,needsCamera:false};
+let PL={name:'',emoji:'🔥',age:'16-19',pts:0,streak:0,best:0,done:0,history:[],earnedBadges:[],dailyDone:false,dailyDate:''};
+let selectedEmoji='🔥';
+let selectedAge='16-19';
+let camStream=null;
+let facingMode='user';
+let camMode='photo';
+let mediaRecorder=null;
+let recordedChunks=[];
+let recInterval=null;
+let recSeconds=0;
+let videoBlob=null;
 
-let PL={name:'',emoji:'🔥',pts:0,streak:0,best:0,done:0,history:[],earnedBadges:[],dailyDone:false,dailyDate:''};
+// ══════════════════════════════════════════
+// SUPABASE
+// ══════════════════════════════════════════
+const SB_URL='https://suppeutufgauakfycfjf.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1cHBldXR1ZmdhdWFrZnljZmpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjA3NjcsImV4cCI6MjA4ODkzNjc2N30.T1UzGToL2_SMmiXKj52iEi3SvfpfB3HDknFOlJo-IMc';
 
-function saveData(){try{localStorage.setItem('na_player',JSON.stringify(PL))}catch(e){}}
-function loadData(){
+async async function sbFetch(path,method='GET',body=null){
+  const opts={
+    method,
+    headers:{
+      'apikey':SB_KEY,
+      'Authorization':'Bearer '+SB_KEY,
+      'Content-Type':'application/json',
+      'Prefer': method==='POST'?'return=representation':''
+    }
+  };
+  if(body)opts.body=JSON.stringify(body);
   try{
-    const d=localStorage.getItem('na_player');
-    if(d){PL={...PL,...JSON.parse(d)};}
-  }catch(e){}
-  // Reset daily if new day
+    const r=await fetch(SB_URL+path,opts);
+    if(!r.ok){const e=await r.text();console.warn('SB error',r.status,e);return null;}
+    const txt=await r.text();
+    return txt?JSON.parse(txt):null;
+  }catch(e){console.warn('SB fetch failed',e);return null;}
+}
+
+// ── Profiles ──
+async async function sbSaveProfile(){
+  if(!PL.name)return;
+  const code=getMyCode();
+  const data={
+    friend_code:code,
+    name:PL.name,
+    emoji:PL.emoji,
+    pts:PL.pts,
+    streak:PL.streak,
+    best_streak:PL.best,
+    done:PL.done,
+    last_seen:new Date().toISOString()
+  };
+  // Upsert by friend_code
+  await sbFetch('/rest/v1/profiles?friend_code=eq.'+encodeURIComponent(code),'DELETE');
+  await sbFetch('/rest/v1/profiles','POST',data);
+}
+
+async function sbLookupFriend(code){
+  const res=await sbFetch('/rest/v1/profiles?friend_code=eq.'+encodeURIComponent(code)+'&select=*');
+  return(res&&res.length>0)?res[0]:null;
+}
+
+// ── Challenge codes ──
+async function sbSaveChallenge(code,text){
+  const data={
+    code,
+    challenge_text:text,
+    created_by:PL.name,
+    created_emoji:PL.emoji,
+    completed_by:[]
+  };
+  const res=await sbFetch('/rest/v1/challenges','POST',data);
+  return res;
+}
+
+async function sbFetchChallenge(code){
+  const res=await sbFetch('/rest/v1/challenges?code=eq.'+encodeURIComponent(code)+'&select=*');
+  return(res&&res.length>0)?res[0]:null;
+}
+
+async function sbMarkCompleted(code){
+  // Add current user to completed_by array
+  const existing=await sbFetchChallenge(code);
+  if(!existing)return;
+  const arr=[...(existing.completed_by||[])];
+  if(!arr.includes(PL.name))arr.push(PL.name);
+  await sbFetch('/rest/v1/challenges?code=eq.'+encodeURIComponent(code),'PATCH',{completed_by:arr});
+}
+
+// ── Leaderboard from Supabase ──
+aasync function sbFetchLeaderboard(){
+  const res=await sbFetch('/rest/v1/profiles?select=name,emoji,pts,streak&order=pts.desc&limit=10');
+  return res||[];
+}
+
+function saveData(){try{localStorage.setItem('na_v3',JSON.stringify(PL))}catch(e){}}
+function loadData(){
+  try{const d=localStorage.getItem('na_v3');if(d)PL={...PL,...JSON.parse(d)};}catch(e){}
+  // Migrate old save key
+  try{if(!localStorage.getItem('na_v3')&&localStorage.getItem('na_v2')){const d=localStorage.getItem('na_v2');if(d){PL={...PL,...JSON.parse(d)};saveData();}}}catch(e){}
   const today=new Date().toDateString();
   if(PL.dailyDate!==today){PL.dailyDone=false;PL.dailyDate=today;saveData();}
 }
 
-let selectedEmoji='🔥';
+// ══════════════════════════════════════════
+// SOUND
+// ══════════════════════════════════════════
+function playSound(type){
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    const o=ctx.createOscillator();const g=ctx.createGain();
+    o.connect(g);g.connect(ctx.destination);
+    if(type==='complete'){
+      o.frequency.setValueAtTime(440,ctx.currentTime);
+      o.frequency.setValueAtTime(554,ctx.currentTime+.1);
+      o.frequency.setValueAtTime(659,ctx.currentTime+.2);
+      g.gain.setValueAtTime(.15,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.55);
+      o.start(ctx.currentTime);o.stop(ctx.currentTime+.55);
+    }else if(type==='pop'){
+      o.frequency.setValueAtTime(280,ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(560,ctx.currentTime+.09);
+      g.gain.setValueAtTime(.1,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.12);
+      o.start(ctx.currentTime);o.stop(ctx.currentTime+.12);
+    }
+  }catch(e){}
+}
 
-// ══════════════════════════════
-// CHALLENGES
-// ══════════════════════════════
+// ══════════════════════════════════════════
+// CHALLENGES DATABASE
+// ══════════════════════════════════════════
+// Tags: 📸 = needs camera, 🎥 = needs video
 const DB={
   easy:{
     solo:[
       {text:"Lag et selvportrett med bare emojis og send til en venn 🎨",cat:"kreativ"},
-      {text:"Finn det mest dramatiske du kan fotografere i rommet ditt akkurat nå 📸",cat:"kreativ"},
+      {text:"Finn det mest dramatiske du kan fotografere i rommet ditt akkurat nå 📸",cat:"kreativ",cam:true},
       {text:"Skriv en 4-linjes rap om det kjedeligste objektet du ser 🎤",cat:"kreativ"},
       {text:"Ring noen du ikke har snakket med på lenge, bare for å si hei 📞",cat:"sosial"},
-      {text:"Lag verdens rareste sandwich og ta et dramatisk bilde av den 🥪",cat:"kreativ"},
-      {text:"Dans alene til første sang på shuffle i 60 sekunder – gjør det skikkelig! 🕺",cat:"fysisk"},
-      {text:"Tegn et portrett av favorittpersonen din uten å løfte pennen ✏️",cat:"kreativ"},
+      {text:"Lag verdens rareste sandwich og ta et dramatisk bilde av den 🥪",cat:"kreativ",cam:true},
+      {text:"Dans alene til første sang på shuffle i 60 sekunder – gjør det skikkelig! 🕺",cat:"fysisk",cam:true},
+      {text:"Tegn et portrett av favorittpersonen din uten å løfte pennen ✏️",cat:"kreativ",cam:true},
       {text:"Send en overdrevet kompliment til noen akkurat nå 💌",cat:"sosial"},
-      {text:"Finn noe i rommet som ligner et kjent ansikt og ta bilde av det 🔍",cat:"kreativ"},
+      {text:"Finn noe i rommet som ligner et kjent ansikt og ta bilde av det 🔍",cat:"kreativ",cam:true},
       {text:"Gjør 20 push-ups mens du synger favorittlåten din høyt 💪",cat:"fysisk"},
+      {text:"Gå ut og finn det vakreste bladet eller steinen du kan. Ta et kunstnerisk bilde 🍂",cat:"fysisk",cam:true},
+      {text:"Lag et kunstverk av det som er i søppelbøtten akkurat nå 🗑️",cat:"kreativ",cam:true},
+      {text:"Skriv et dikt om værmeldingen for i dag 🌦️",cat:"kreativ"},
+      {text:"Ta et bilde av skyggen din i en morsom positur 🕶️",cat:"fysisk",cam:true},
+      {text:"Send en melding til mamma eller pappa kun med emojis og se hva de svarer 📱",cat:"sosial"},
+      {text:"Finn tre ting i rommet som starter på samme bokstav og ta bilde av dem 🔤",cat:"kreativ",cam:true},
+      {text:"Gjør ti hopp på ett bein mens du holder balanse så lenge du kan ⚖️",cat:"fysisk"},
+      {text:"Tegn ansiktet ditt med feil hånd og post resultatet 🖐️",cat:"kreativ",cam:true},
+      {text:"Legg deg på gulvet og ta et bilde rett opp i taket 📷",cat:"kreativ",cam:true},
+      {text:"Skriv ned fem rare ting du har gjort denne uken 📝",cat:"kreativ"},
     ],
     group:[
-      {text:"Alle lager et ansikt av maten sin – send bilde til gjengen. Beste vinner! 🍽️",cat:"kreativ",p:"Taperen sender et pinlig selfie til hele gjengen 😬"},
-      {text:"Hvem holder rett ansikt lengst mens de andre lager grimaser? Film det! 😐",cat:"sosial",p:"Taperen poster et cringe-selfie på story i 10 minutter 📸"},
-      {text:"Alle skriver en 4-linjes rap om personen til høyre og leser dem høyt 🎤",cat:"kreativ",p:"Dårligste rapper synger sin rap på voice memo til hele gjengen 🎵"},
-      {text:"Hvem finner den rareste tingen i lommen sin? Alle viser frem! 👜",cat:"sosial",p:"Den med kjedeligst gjenstand bærer den som halskjede i 30 min 😄"},
-      {text:"Alle tegner hverandre – 60 sekunder per portrett. Vis frem og stem! 🖼️",cat:"kreativ",p:"Dårligste kunstner bruker bildet som profilbilde i 24 timer 😂"},
+      {text:"Alle lager et ansikt av maten sin – send bilde til gjengen. Beste vinner! 🍽️",cat:"kreativ",cam:true,p:"Taperen gjør en kylling-dans og filmer det 🐔"},
+      {text:"Hvem holder rett ansikt lengst mens de andre lager grimaser? 😐",cat:"sosial",cam:true,p:"Taperen gjør sin beste kylling-dans foran alle 🐔"},
+      {text:"Alle skriver en 4-linjes rap om personen til høyre og leser høyt 🎤",cat:"kreativ",p:"Dårligste rapper synger sin rap som voice memo til alle 🎵"},
+      {text:"Hvem finner den rareste tingen i lommen sin? Alle viser frem! 👜",cat:"sosial",cam:true,p:"Den med kjedeligst gjenstand bærer den som halskjede i 30 min 😄"},
+      {text:"Alle tegner hverandre – 60 sekunder per portrett. Vis frem og stem! 🖼️",cat:"kreativ",cam:true,p:"Dårligste kunstner bruker bildet som profilbilde i 24 timer 😂"},
+      {text:"Alle poserer som en kjent statue i 30 sekunder – hvem er best? 🗿",cat:"kreativ",cam:true,p:"Taperen er DJ resten av kvelden 🎵"},
+      {text:"Synkroniser et hopp og ta bilde akkurat idet alle er i luften 🦘",cat:"fysisk",cam:true,p:"Den som ikke hopper høyt nok gjør 10 squats 🏋️"},
+      {text:"Alle lager verdens beste grimase – stem på vinneren 😜",cat:"sosial",cam:true,p:"Den med kjedeligst grimase gjør en kylling-dans 🐔"},
+      {text:"Alle skriver ned en morsom fakta om seg selv på papir, blander og leser opp 🤫",cat:"sosial",p:"Alle gjetter hvem som eier hvilken fakta 🕵️"},
+      {text:"Hvem kan balansere flest ting på hodet? Film det! 🎩",cat:"fysisk",cam:true,p:"Taperen bærer én ting på hodet i 10 minutter 😂"},
     ]
   },
   medium:{
     solo:[
-      {text:"Hold en helt seriøs 1-minutts tale foran speilet om hvorfor du er Norges beste kokk 🗣️",cat:"kreativ"},
+      {text:"Hold en helt seriøs 1-minutts tale om hvorfor du er Norges beste kokk 🗣️",cat:"kreativ",cam:true},
       {text:"Send en overdramatisk poetisk unnskyldning til noen for noe helt uviktig 📜",cat:"sosial"},
-      {text:"Gå ut og finn noe blått innen 5 minutter – ta et kunstnerisk bilde 🔵",cat:"fysisk"},
-      {text:"Bytt profilbilde til det mest dramatiske selfiet du kan ta, hold det i 24 timer 📷",cat:"sosial"},
+      {text:"Gå ut og finn noe blått innen 5 minutter – ta et kunstnerisk bilde 🔵",cat:"fysisk",cam:true},
+      {text:"Bytt profilbilde til det mest dramatiske selfiet du kan ta – hold det 24 timer 📷",cat:"sosial",cam:true},
       {text:"Skriv og send en 10-setnings novelle om naboen din på 5 minutter 📖",cat:"kreativ"},
-      {text:"Lær deg en dans-move fra YouTube på 10 minutter og film resultatet 💃",cat:"fysisk"},
+      {text:"Lær deg en dans-move fra YouTube på 10 minutter og film resultatet 💃",cat:"fysisk",cam:true},
+      {text:"Lag en 15-sekunders reklame for gjenstanden nærmest deg akkurat nå 📹",cat:"kreativ",cam:true},
+      {text:"Gå en tur ute og hils på ti fremmede med overdreven entusiasme 👋",cat:"fysisk"},
+      {text:"Ta bilde av fem ting ute som alle er samme farge 🎨",cat:"fysisk",cam:true},
+      {text:"Finn en offentlig benk og hold en stumfilm-monolog på 30 sekunder 🎭",cat:"kreativ",cam:true},
+      {text:"Sprint til nærmeste lykt og tilbake – ta tid og forsøk å slå den 🏃",cat:"fysisk"},
+      {text:"Lag en skulptur av det du finner ute på 5 minutter 🌿",cat:"kreativ",cam:true},
+      {text:"Klatr opp noe trygt og ta et bilde fra fugleperspektiv 🦅",cat:"fysisk",cam:true},
+      {text:"Tegn et kart over nabolaget ditt fra hukommelsen – så detaljert du klarer 🗺️",cat:"kreativ",cam:true},
+      {text:"Lag et portrett av en venn kun med emojier på 2 minutter og send det 🎨",cat:"kreativ"},
+      {text:"Finn tre tilfeldige gjenstander og lag en kunstinstallasjon – ta bilde 🖼️",cat:"kreativ",cam:true},
+      {text:"Skriv en anmeldelse av vann. Gi den en karakter og begrunn 💧",cat:"kreativ"},
+      {text:"Gå baklengs fra et rom til et annet uten å slå borti noe 🚶",cat:"fysisk"},
+      {text:"Send en melding til noen du ikke har snakket med på over ett år 💌",cat:"sosial"},
+      {text:"Lag verdens minste sandwich – ta et episk bilde av den 🥪",cat:"kreativ",cam:true},
+      {text:"Sitt i lotusstilling i 2 minutter og meditere – ingen tanker tillatt 🧘",cat:"fysisk"},
+      {text:"Skriv en takketale til stolen du sitter på akkurat nå 🪑",cat:"kreativ"},
+      {text:"Ta et panoramabilde av utsikten der du er akkurat nå 🌅",cat:"fysisk",cam:true},
+      {text:"Finn den kjedeligste hverdagsgjenstanden du eier og lag en dramatisk kunstfoto av den 📸",cat:"kreativ",cam:true},
     ],
     group:[
-      {text:"En person ringer en butikk og spør med alvorlig stemme om de har usynlig tape 📞",cat:"sosial",p:"Taperen ringer en ny butikk med et enda rimeligere spørsmål 😂"},
-      {text:"Alle lager en 15-sekunders stumfilm med det rundt dere. Stem på den beste! 🎬",cat:"kreativ",p:"Dårligste regissør spiller statist i gjengens neste film 🎭"},
+      {text:"En person ringer en butikk og spør seriøst om de har usynlig tape 📞",cat:"sosial",p:"Taperen ringer ny butikk med enda rimeligere spørsmål 😂"},
+      {text:"Alle lager en 15-sekunders stumfilm med det rundt dere. Stem på beste! 🎬",cat:"kreativ",cam:true,p:"Dårligste regissør spiller statist i neste film 🎭"},
       {text:"Send til den 7. i kontaktlisten: 'Du vet hva du har gjort.' Vent på svar 😂",cat:"sosial",p:"Den som ler først sender samme melding til to nye kontakter 💀"},
-      {text:"Alle bytter telefon i 3 minutter og sender én melding til en tilfeldig kontakt 📱",cat:"kaos",p:"Den som sender noe kjedelig avslører den pinligste sangen i spillelisten 🎵"},
-      {text:"Gjengen lager verdens beste salg-pitch for et hverdagsobjekt på 5 min – stem! 💼",cat:"kreativ",p:"Dårligste selger bruker objektet som hatt hele kvelden 🎩"},
+      {text:"Alle bytter telefon i 3 minutter og sender én melding til tilfeldig kontakt 📱",cat:"kaos",p:"Den som sender noe kjedelig velger neste utfordring 🎯"},
+      {text:"Gjengen lager salg-pitch for et hverdagsobjekt på 5 min – stem! 💼",cat:"kreativ",cam:true,p:"Dårligste selger bruker objektet som hatt hele kvelden 🎩"},
+      {text:"Alle finner et objekt ute og lager en felles skulptur av det 🌿",cat:"kreativ",cam:true,p:"Den som bidrar minst vasker opp etter kvelden 🧹"},
+      {text:"Alle springer til et mål 50 meter unna – siste er taper 🏃",cat:"fysisk",p:"Taperen gjør 20 jumping jacks foran alle 😅"},
+      {text:"Lag en menneskepyramide og ta bilde – holder dere i 5 sekunder? 🏋️",cat:"fysisk",cam:true,p:"Pyramiden må holdes dobbelt så lenge neste forsøk 💪"},
+      {text:"Alle finner en pinne ute og lager et kunstverk i bakken 🌾",cat:"kreativ",cam:true,p:"Det morsomste kunstverket velger neste utfordring 🎨"},
+      {text:"Synkronisert løping rundt en blokk – alle må holde samme tempo 🏃",cat:"fysisk",p:"Den som henger etter velger neste utfordring 🎯"},
+      {text:"Alle setter seg på huk og beveger seg som krabber fra A til B 🦀",cat:"fysisk",cam:true,p:"Tregeste krabben gjør det om igjen – dobbel distanse 😂"},
+      {text:"Lag en tegneserie på fire ruter der dere forteller kvelden til nå 📖",cat:"kreativ",cam:true,p:"Dårligste tegner leser tegneserien høyt for alle 😄"},
+      {text:"Finn tre tilfeldige ting ute og lag et felles kunstverk – gi det en tittel 🎨",cat:"kreativ",cam:true,p:"Den som bidrar minst navngir verket og må forsvare tittelen 🖼️"},
+      {text:"Alle velger en tilfeldig dans-stil og danser til samme sang – ingen stopp! 💃",cat:"fysisk",cam:true,p:"Den som stopper danser solo én ekstra runde 🕺"},
     ]
   },
   wild:{
     solo:[
-      {text:"Gå inn i en tilfeldig butikk og spør med alvorlig ansikt om de har energikrystaller til hunden din 🔮",cat:"sosial"},
-      {text:"Bestill på en kafé med en falsk aksent du holder hele bestillingen. Ingen latter! 🎭",cat:"sosial"},
-      {text:"Gå bort til en fremmed og si at du er stor fan av arbeidet deres 🌟",cat:"sosial"},
-      {text:"Ring noen og si kun 'Du vet hva du har gjort' og legg på. Svar ikke 📞",cat:"kaos"},
-      {text:"Ta en spontan selfie med den første fremmede som sier ja på gaten 🤳",cat:"sosial"},
+      {text:"Gå inn i en tilfeldig butikk og spør seriøst om de har energikrystaller til hunden din 🔮",cat:"sosial",cam:true},
+      {text:"Bestill på en kafé med en falsk aksent du holder hele bestillingen 🎭",cat:"sosial",cam:true},
+      {text:"Gå bort til en fremmed og si at du er stor fan av arbeidet deres 🌟",cat:"sosial",cam:true},
+      {text:"Ring noen og si kun 'Du vet hva du har gjort' og legg på 📞",cat:"kaos"},
+      {text:"Ta en spontan selfie med den første fremmede som sier ja på gaten 🤳",cat:"sosial",cam:true},
+      {text:"Gå inn i en butikk og spør om de har 'retroaktiv pizza'. Film reaksjonen 🎥",cat:"kaos",cam:true},
+      {text:"Snakk kun i spørsmål til neste person du møter i 5 minutter 🤔",cat:"sosial"},
+      {text:"Gå bort til en fremmed og si at du har mistet hunden din – beskriv en imaginær hund 🐕",cat:"kaos"},
+      {text:"Sit down on a random bench and pretend to wait for someone very important 🕴️",cat:"sosial"},
+      {text:"Gå inn i en butikk og spør om de tar betalt i vitser 🤗",cat:"kaos"},
+      {text:"Presenter deg selv med et falskt navn og yrke til neste fremmed du møter 🕵️",cat:"sosial"},
+      {text:"Ring en pizza-restaurant og spør om de leverer til månen 🌕",cat:"kaos"},
     ],
     group:[
-      {text:"En i gjengen er berømt – resten er fans. Dere møtes tilfeldig ute. Spill det ut i 3 min! 🌟",cat:"kaos",p:"Den som bryter karakter bærer tittelen 'Amatørskuespiller' resten av dagen 🎭"},
-      {text:"Alle lager en synkronisert dans til tilfeldig sang. 5 min å øve – film og post! 💃",cat:"kaos",p:"Den med dårligst timing ber gjengen om tilgivelse på overdramatisk vis 😂"},
-      {text:"En person er 'ja-personen' – sier ja til alt de andre foreslår i 10 minutter! 😈",cat:"kaos",p:"Nekter ja-personen dobles varigheten og alle bytter roller! 😂"},
-      {text:"Gjengen gjennomfører en hemmelig koordinert aksjon i butikken. Ingen kommunikasjon! 🕵️",cat:"kaos",p:"Den som kommuniserer utenfor planen betaler en runde brus 🥤"},
-      {text:"Alle bytter personlighet med personen til høyre i 15 minutter. Inn i karakter NÅ! 🎭",cat:"kaos",p:"Den som bryter ut av karakteren raskest betaler kaffe neste gang ☕"},
+      {text:"En i gjengen er berømt – resten er fans. Dere møtes tilfeldig ute. Spill det ut! 🌟",cat:"kaos",cam:true,p:"Den som bryter karakter bærer tittelen 'Amatørskuespiller' resten av dagen 🎭"},
+      {text:"Alle lager synkronisert dans til tilfeldig sang. 5 min å øve – film og post! 💃",cat:"kaos",cam:true,p:"Den med dårligst timing ber gjengen om tilgivelse overdramatisk 😂"},
+      {text:"En person er 'ja-personen' – sier ja til alt de andre foreslår i 10 minutter! 😈",cat:"kaos",p:"Nekter ja-personen dobles varigheten og alle bytter roller 😂"},
+      {text:"Gjengen gjennomfører en hemmelig koordinert aksjon i butikken 🕵️",cat:"kaos",p:"Den som kommuniserer utenfor planen velger neste utfordring 🎯"},
+      {text:"Alle bytter personlighet med personen til høyre i 15 minutter. Inn i karakter NÅ! 🎭",cat:"kaos",cam:true,p:"Den som bryter ut av karakteren raskest velger neste utfordring 🎯"},
+      {text:"Gjengen deler seg i to og improviserer en telenovela-scene på 3 minutter 🎬",cat:"kaos",cam:true,p:"Dårligste skuespiller synger avslutningssangen alene 🎵"},
+      {text:"En er guide, resten er turister – gå gjennom nabolaget og presenter alt overdramatisk 🗺️",cat:"kaos",cam:true,p:"Dårligste turist bærer en imaginær koffert resten av turen 🧳"},
+      {text:"Alle bytter sko med hverandre og går til nærmeste lykt og tilbake 👟",cat:"kaos",cam:true,p:"Den som nekter går barfot i stedet 😂"},
+      {text:"Gjengen bestemmer et hemmelig ord – den som sier det mister et poeng i 20 min 🤫",cat:"kaos",p:"Den med flest poeng bestemmer neste destinasjon 📍"},
+      {text:"Flash mob! Alle fryser på signal i et offentlig rom i 30 sekunder 🧊",cat:"kaos",cam:true,p:"Den som beveger seg velger neste utfordring 🎯"},
+      {text:"Gjengen lager en spontan fotoutstilling – finn fem kunstverk ute og presenter dem 🖼️",cat:"kreativ",cam:true,p:"Dårligste kurator forklarer alle verkene med kun lyder 😂"},
+      {text:"Alle velger et dyr å være – hold karakteren gjennom neste aktivitet 🦁",cat:"kaos",p:"Den som bryter karakteren raskest gjør tre triks som hund 🐕"},
+    ]
+  },
+  safe:{
+    solo:[
+      {text:"Tegn selvportrett på 60 sekunder – vis det frem! 🎨",cat:"kreativ",cam:true},
+      {text:"Finn 5 blå gjenstander hjemme og lag en kreativ oppstilling 🔵",cat:"kreativ",cam:true},
+      {text:"Send en morsom GIF til en kompis akkurat nå 😄",cat:"sosial"},
+      {text:"Lag en 30-sekunders reklame for favorittmaten din 📺",cat:"kreativ",cam:true},
+      {text:"Dans til favorittlåten din i 1 minutt – ingen stopp! 🕺",cat:"fysisk",cam:true},
+      {text:"Finn noe hjemme som ligner et dyr og ta et kunstnerisk bilde 🐾",cat:"kreativ",cam:true},
+      {text:"Skriv en sang om skoledagen på fire linjer 🎵",cat:"kreativ"},
+      {text:"Balanser en ting på hodet og gå fra ett rom til et annet 🎩",cat:"fysisk"},
+    ],
+    group:[
+      {text:"Alle lager det morsomste ansiktet de kan. Stem på hvem som vinner! 😜",cat:"sosial",cam:true,p:"Kjedeligste ansikt gjør en kylling-dans 🐔"},
+      {text:"Lag en synkronisert dans på 30 sekunder – film det! 💃",cat:"kreativ",cam:true,p:"Den med dårligst timing velger neste utfordring 😅"},
+      {text:"Alle poserer som berømte statuer – hvem er best? 🗿",cat:"kreativ",cam:true,p:"Taperen er DJ resten av kvelden 🎵"},
+      {text:"Lag en menneskekjede og gå ti skritt uten å miste grepet 🤝",cat:"fysisk",p:"Den som slipper velger neste utfordring 🎯"},
+      {text:"Alle skriker favorittlåten sin samtidig i 10 sekunder 🎤",cat:"sosial",cam:true,p:"Den med lavest volum synger alene etterpå 🎵"},
+    ]
+  },
+
+  // ── TIKTOK/SNAP VIRAL VIDEO CHALLENGES ──
+  tiktok:{
+    // ── TRYGGE VIDEO-UTFORDRINGER (13-15 år) ──
+    safe_solo:[
+      {text:"Sett kamera på deg selv og dans til tilfeldig sang på shuffle. Full innsats fra første sekund – ikke stopp! 🎵",cat:"video",cam:true},
+      {text:"Film deg selv mens du lip syncer til favorittlåten din med FULL kropp – ansikt, armer, alt! 🎤",cat:"video",cam:true},
+      {text:"Lag en 30-sekunders 'dag i livet'-video av de neste 30 sekundene. Kommenter ALT som om det er ekstremt spennende 🎬",cat:"video",cam:true},
+      {text:"Film deg selv mens du forklarer favorittfilmen din på 20 sekunder – med overdramatisk ansikt hele veien 🎭",cat:"video",cam:true},
+      {text:"Bytt aksent hvert 10. sekund mens du forteller hva du gjorde i dag. Norsk, britisk, amerikansk. Kamera på! 🌍",cat:"video",cam:true},
+      {text:"Imiter lyden av 5 forskjellige dyr på rad mens du holder helt rett ansikt. Ingen smiling tillatt 🐄",cat:"video",cam:true},
+      {text:"Film en 'outfit of the day' med den rareste kombinasjonen av klær du finner. Full selvtillit! 👗",cat:"video",cam:true},
+      {text:"Lag en 20-sekunders matanmeldelse av det siste du spiste – med Gordon Ramsay-energi 👨‍🍳",cat:"video",cam:true},
+      {text:"Random dance! En venn roper en sang – du har 1 sekund på å begynne å danse. Ingen pause! 🎵",cat:"video",cam:true},
+      {text:"Film deg selv mens du forklarer hva du gjør akkurat nå som om du er på en naturvitenskapsdokumentar 🦁",cat:"video",cam:true},
+    ],
+    safe_group:[
+      {text:"Alle har vann i munnen 💧 Én person gjør sin beste hest-imitasjon i 30 sekunder. Kamera på alle ansikter!",cat:"video",cam:true,p:"Taperen velger neste dyr 🐴"},
+      {text:"Alle har vann i munnen 💧 Én person synger 'Bæ bæ lille lam' med operastemme. Hold deg!",cat:"video",cam:true,p:"Taperen synger neste barnesang alene 🎵"},
+      {text:"Alle has vann i munnen 💧 Én spiller den rareste TikTok-lyden de finner på maks volum!",cat:"video",cam:true,p:"Taperen velger neste lyd 🔊"},
+      {text:"To personer stirrer på hverandre rett i kamera – ingen blunking, ingen smiling. Første som gir seg taper! 👁️",cat:"video",cam:true,p:"Taperen gjør kylling-dans på kamera 🐔"},
+      {text:"Person A gjør tilfeldige bevegelser – Person B er speilet og MÅ kopiere umiddelbart. Film begge! 🔄",cat:"video",cam:true,p:"Den som henger etter kopierer dobbelt så fort 😂"},
+      {text:"Alle fryser på signal midt i det dere gjør – hold posisjonen i 20 sekunder mens kamera filmer alle ❄️",cat:"video",cam:true,p:"Den som beveger seg velger neste utfordring"},
+      {text:"Random dance challenge: én velger sang, alle andre har 2 sekunder på å begynne å danse. Kamera på alle! 🎵",cat:"video",cam:true,p:"Dårligst reaksjonstid danser alene til neste sang 💃"},
+      {text:"Alle lip syncer til samme sang – men ingen vet hvilken sang som kommer. Én holder telefonen skjult og trykker play 🎤",cat:"video",cam:true,p:"Den med minst bevegelse synger den ordentlig etterpå 😂"},
+    ],
+    solo:[
+      {text:"Sett på shuffle, trykk play – dans som om du VISSTE hvilken sang som kom. Full innsats fra første sekund, ikke stopp uansett! 🎵",cat:"video",cam:true},
+      {text:"Film ansiktet ditt mens du åpner den seneste meldingen fra mamma og les den høyt med dramatisk stemme 📱",cat:"video",cam:true},
+      {text:"Hold kamera på ansiktet – velg en tilfeldig følelse og lag en 15-sekunders monolog om ingenting med den følelsen på MAKS 🎭",cat:"video",cam:true},
+      {text:"Still inn kamera, les opp den mest absurde nyheten du finner – med helt alvorlig nyhetsoppleserstemme. Ingen smiling 📰",cat:"video",cam:true},
+      {text:"Film deg selv mens du prøver å si 'Norsk er et morsomt språk' på 5 forskjellige aksenter uten å le 🌍",cat:"video",cam:true},
+      {text:"Sett telefonen mot veggen og film deg selv mens du prøver å lære deg en TikTok-dans på 3 minutter. Post prosessen 💃",cat:"video",cam:true},
+      {text:"Film en 'dag i livet'-video av de neste 60 sekundene – kommenter ALT du gjør som om det er ekstremt spennende 🎬",cat:"video",cam:true},
+      {text:"Lag en 30-sekunders matanmeldelse av det siste du spiste – med Gordon Ramsay-energi 👨‍🍳",cat:"video",cam:true},
+      {text:"Film ansiktet ditt mens du leser de siste 5 søkene i nettleseren din høyt. Ingen sletting tillatt 👀",cat:"video",cam:true},
+      {text:"Sett kamera på deg selv og prøv å synge med i en sang du bare halvt kan – alle feil tekster må med 🎤",cat:"video",cam:true},
+      {text:"Lag en 20-sekunders film-trailer om dagen din. Dramatisk musikk, cliffhanger og alt 🎬",cat:"video",cam:true},
+      {text:"Film deg selv mens du forklarer hva du gjør akkurat nå som om du er på en naturvitenskapsdokumentar 🦁",cat:"video",cam:true},
+      {text:"Ta på deg den rareste kombinasjonen av klær du finner og film en 'outfit of the day' med full selvtillit 👗",cat:"video",cam:true},
+      {text:"Film ansiktet ditt tett mens en venn velger en sang du hater og spiller den. Hold rett ansikt i 30 sekunder 😐",cat:"video",cam:true},
+      {text:"Lag en 'morning routine' video av de neste 2 minuttene – uansett hva du gjør. Gjør det episk 🌅",cat:"video",cam:true},
+      {text:"Random dance! En venn roper en tilfeldig sang – du har 1 sekund på å begynne å danse. Ingen pause, ingen nøling. Kamera ruller! 🎵",cat:"video",cam:true},
+      {text:"Lip sync battle: velg den mest dramatiske sangen du finner og lip sync den med FULL kropp – ansikt, armer, alt. 60 sekunder 🎤",cat:"video",cam:true},
+      {text:"Bytt aksent hvert 10. sekund mens du forteller om dagen din. Norsk, britisk, amerikansk, fransk. Kamera på ansiktet hele tiden 🌍",cat:"video",cam:true},
+      {text:"'Get ready with me' – film deg selv de neste 90 sekundene akkurat som du er. Kommenter HVERT steg som om det er glamourøst 💅",cat:"video",cam:true},
+      {text:"Imiter lyden av 5 forskjellige dyr på rad mens du holder helt rett ansikt. Kamera tett på. Ingen smiling tillatt 🐄",cat:"video",cam:true},
+    ],
+    group:[
+      {text:"To personer stirrer på hverandre rett i kamera. Den som smiler, blunker eller beveger seg TAPER. Film ansiktene tett 😐",cat:"video",cam:true,p:"Taperen gjør kylling-dans på kamera og poster det 🐔"},
+      {text:"En person roper et tilfeldig yrke – du har 3 sekunder på å gå INN i karakteren og holde den i 30 sekunder. Ingen forberedelse 🎭",cat:"video",cam:true,p:"Den som bryter karakteren gjør det om igjen som et dyr 🐾"},
+      {text:"Person A gjør tilfeldige bevegelser – Person B er speilet og MÅ kopiere umiddelbart. Film begge tett. Bytt etter 30 sek 🔄",cat:"video",cam:true,p:"Den som henger etter bytter og må kopiere dobbelt så fort 😂"},
+      {text:"Alle fryser på signal midt i det dere gjør – hold posisjonen i 20 sekunder mens kamera går sakte rundt og filmer alle ❄️",cat:"video",cam:true,p:"Den som beveger seg velger neste utfordring og MÅ filme den"},
+      {text:"Film ansiktet til en venn mens du viser dem et bilde de ikke har sett. Ikke vis bildet – bare reaksjonen. La seerne gjette 👀",cat:"video",cam:true,p:"Den med kjedeligst reaksjon må se et enda verre bilde 😬"},
+      {text:"En er reporter, en er kjendis. Reporter stiller de villeste spørsmål mulig – kjendis må svare seriøst 🎤",cat:"video",cam:true,p:"Dårligste intervju-objekt blir reporter i neste runde"},
+      {text:"Alle velger en lydeffekt på telefonen – spill dem i tur og orden mens dere holder rett ansikt. First to laugh loses 🔊",cat:"video",cam:true,p:"Den som ler først må lage sin egen lydeffekt live 😂"},
+      {text:"En person er regissør og gir instruksjoner hvert 5. sekund – resten må følge dem LIVE på kamera 🎬",cat:"video",cam:true,p:"Dårligste skuespiller blir regissør neste gang"},
+      {text:"Lag verdens raskeste makeover – 60 sekunder, det dere finner i nærheten. Film prosessen og resultatet 💄",cat:"video",cam:true,p:"Dårligste makeover beholder looken i 30 minutter 😂"},
+
+      // ── VANN I MUNNEN ──
+      {text:"Alle har vann i munnen 💧 Én person leser høyt fra et tilfeldig Wikipedia-innlegg. Kamera på ansiktene – første som spruter taper!",cat:"video",cam:true,p:"Taperen har dobbelt vann neste runde 😂"},
+      {text:"Alle har vann i munnen 💧 Én person gjør sin beste hest-imitasjon. Ingen stopp før 30 sekunder er gått!",cat:"video",cam:true,p:"Taperen velger neste dyr som skal imiteres 🐴"},
+      {text:"Alle har vann i munnen 💧 Én person prøver å fortelle en vits de finner på stedet. Kamera fanger ALLE reaksjoner!",cat:"video",cam:true,p:"Den som sprutet velger neste person som skal fortelle vits 😂"},
+      {text:"Alle har vann i munnen 💧 Én spiller den rareste TikTok-lyden de finner på maks volum. Hold deg!",cat:"video",cam:true,p:"Taperen velger neste lyd og MÅ holde rett ansikt dobbelt så lenge 🔊"},
+      {text:"Alle har vann i munnen 💧 En person viser bare emojier på telefonen – resten prøver å gjette høyt mens de holder seg!",cat:"video",cam:true,p:"Den som sprutet velger neste emoji-serie 📱"},
+      {text:"Alle har vann i munnen 💧 Én person synger barnesangen 'Bæ bæ lille lam' med operastemme. Kamera på alle ansikter!",cat:"video",cam:true,p:"Taperen synger neste barnesang alene 🎵"},
+      {text:"Alle har vann i munnen 💧 Én person beskriver hvordan de lager mat – men erstatter alle ord med 'dings'. Hold deg!",cat:"video",cam:true,p:"Taperen beskriver hjemveien sin med bare 'dings' 😂"},
+
+      // ── EN GJØR NOE ABSURD, RESTEN PRØVER Å HOLDE SEG ──
+      {text:"Én person velger et tilfeldig ord og bruker det i ALLE svar i 3 minutter uansett hva som blir sagt. Kamera på alle 🎭",cat:"video",cam:true,p:"Taperen bruker to ord resten av kvelden 😂"},
+      {text:"Én person forklarer hvordan man lager kaffe – men later som det er den farligste operasjonen i verden. Full alvor, kamera på resten 😰",cat:"video",cam:true,p:"Taperen forklarer neste hverdagsaktivitet med livsfare 😂"},
+      {text:"Én person kommenterer det som skjer akkurat nå som sportskommentator på TV. Kamera på ansiktene til resten 🎙️",cat:"video",cam:true,p:"Taperen overtar kommentatorjobben i 2 minutter 🏆"},
+      {text:"Én person skal overbevise resten om at en tilfeldig gjenstand er det kuleste som finnes. Full reklame-energi. Kamera på reaksjonene 📺",cat:"video",cam:true,p:"Taperen overtar reklame-monologen for neste gjenstand 😂"},
+      {text:"Én person leser opp værmeldingen for i dag som om det er dommedagsprofeti. Kamera på resten – ingen latter tillatt ⛈️",cat:"video",cam:true,p:"Taperen framfører morgendagens værmelding på samme vis 🌪️"},
+      {text:"Én person intervjuer en tilfeldig gjenstand i rommet som om den er en kjendis. Resten holder rett ansikt. Kamera på alle 🎤",cat:"video",cam:true,p:"Taperen takker gjenstanden i en rørende tale 😂"},
+      {text:"Én person forklarer reglene for et sport de ikke kan – med full selvtillit og masse feil. Resten holder rett ansikt ⚽",cat:"video",cam:true,p:"Taperen er dommer neste gang de faktisk spiller sporten 🏆"},
+
+      // ── TO PERSONER, KAMERA MELLOM ──
+      {text:"To personer stirrer på hverandre rett i kamera. Ingen blunking, ingen smiling, ingen bevegelse. Første som gir seg TAPER 👁️",cat:"video",cam:true,p:"Taperen gjør kylling-dans på kamera og poster det 🐔"},
+      {text:"To personer sier det samme ordet frem og tilbake – men bytt tonefall hver gang. Trist, sint, forelsket, redd. Ingen latter! 🎭",cat:"video",cam:true,p:"Taperen sier ordet med 5 nye toneleier alene på kamera 😂"},
+      {text:"To personer forsøker å synge samme sang – men én synger 5 sekunder forsinket. Kamera fanger begge. Ikke stopp! 🎵",cat:"video",cam:true,p:"Taperen synger begge stemmene alene 🎤"},
+      {text:"To personer har full krangel om noe helt ubetydelig – hvem som la igjen toalettpapiret tomt. FULL drama. Kamera ruller 🧻",cat:"video",cam:true,p:"Taperen av krangelen skaffer nytt toalettpapir til alle 😂"},
+      {text:"Flip the Switch! To personer bytter plass og kroppsspråk på signal – ALT av bevegelser og måten å snakke på. Kamera ruller hele tiden 🔄",cat:"video",cam:true,p:"Den som bytter dårligst beholder den andres stil i 10 min 😂"},
+      {text:"Random dance challenge: én velger sang, alle andre har 2 sekunder på å begynne å danse. Ingen unntak, kamera på alle 🎵",cat:"video",cam:true,p:"Den med dårligst reaksjonstid danser alene til neste sang 💃"},
+      {text:"Alle lip syncer til samme sang – men ingen vet hvilken sang som kommer. Én holder telefonen skjult og trykker play 🎤",cat:"video",cam:true,p:"Den med minst bevegelse synger den ordentlig etterpå 😂"},
+      {text:"Synkronisert dans challenge: dere har 3 minutter på å lage en synkronisert dans til en tilfeldig sang. Film og post resultatet! 💃",cat:"video",cam:true,p:"Den som er mest ute av synk velger neste sang 🎵"},
+      {text:"Blinking challenge: alle fixer blikket i kamera – ingen blunking tillatt. Kamera filmer alle ansiktene. Siste som blunker vinner 👁️",cat:"video",cam:true,p:"Taperen blunker 50 ganger med vilje på kamera som straff 😂"},
+      {text:"Én person velger en tilfeldig TikTok-lyd og spiller den – alle andre MÅ umiddelbart lage en dans til den. Ingen forberedelse 📱",cat:"video",cam:true,p:"Den med dårligste improvisasjon velger neste lyd 😂"},
+      {text:"Alle gjør det samme bevegelsesmønsteret – men én person er 3 sekunder forsinket uten å vite det. Kamera fanger alt 🔄",cat:"video",cam:true,p:"Den som oppdaget det sist er forsinket dobbelt neste gang 😂"},
+      {text:"To personer bytter telefon og sender én melding til en tilfeldig kontakt som om de er den andre personen. Kamera på reaksjonene 📱",cat:"video",cam:true,p:"Den med den morsomste meldingen velger neste utfordring 🎯"},
+      {text:"Alle sier det samme ordet samtidig – men prøver å si det i akkurat samme rytme og toneleie. Film forsøkene. Første gang alle treffer vinner 🎵",cat:"video",cam:true,p:"Mest off-tune person velger neste ord 😂"},
     ]
   }
 };
@@ -625,17 +1408,24 @@ const DB={
 const SPECIAL={
   wed:{tag:'🔮 Onsdagsmagic',title:'Ukens galeste utfordring!',cls:'wed',
     list:[
-      {text:"Ring en tilfeldig kontakt og si du ringer fra fremtiden med en viktig beskjed 🔮",cat:"kaos",lv:"wild"},
+      {text:"Ring en tilfeldig kontakt og si du ringer fra fremtiden med en viktig beskjed 🔮",cat:"kaos",lv:"wild",cam:true},
       {text:"Kommuniser kun via GIF-er med vennene dine i 2 timer 📱",cat:"sosial",lv:"medium"},
-      {text:"Bytt Instagram-bio med en venn i 24 timer. Ingen forklaring til følgerne 😈",cat:"sosial",lv:"wild"},
+      {text:"Bytt profilbilde med en venn i 1 time. Ingen forklaring til følgerne 😈",cat:"sosial",lv:"wild"},
+      {text:"Gå ut og ta bilde av noe som ser ut som et kjent kunstverk 🖼️",cat:"kreativ",lv:"medium",cam:true},
+      {text:"Skriv en formell søknad om å bli verdens beste kompis – send den 📜",cat:"kreativ",lv:"medium"},
+      {text:"Hold en TED-talk på 60 sekunder om hvorfor katten er overlegent dyret 🐱",cat:"kreativ",lv:"medium",cam:true},
+      {text:"Finn noe ute du aldri har lagt merke til før og ta et dramatisk nærbilde 🔍",cat:"fysisk",lv:"easy",cam:true},
     ]
   },
   wknd:{tag:'🎉 Helgekaos',title:'Det er helg – gjør noe minneverdig!',cls:'wknd',
     list:[
-      {text:"Dere har 1 time og 100 kr. Finn på det morsomste dere kan gjøre. GO! ⏱️",cat:"kaos",lv:"wild",p:"Den med kjedeligst forslag bærer tittelen 'Festivalkiller' hele helgen 😂"},
-      {text:"Alle poster et totalt upassende 'god morgen'-bilde klokken 12 på story 🌅",cat:"sosial",lv:"medium"},
-      {text:"Gjengen lager en 60-sekunders kortfilm med manus og skuespill. Post den! 🎬",cat:"kreativ",lv:"medium",p:"Dårligste skuespiller regisserer neste gang 🎭"},
+      {text:"Dere har 1 time. Finn på det morsomste dere kan gjøre uten å bruke penger. GO! ⏱️",cat:"kaos",lv:"wild",cam:true,p:"Den med kjedeligst forslag danser kylling-dans 🐔"},
+      {text:"Alle poster et totalt upassende 'god morgen'-bilde klokken 12 på story 🌅",cat:"sosial",lv:"medium",cam:true},
+      {text:"Gjengen lager en 60-sekunders kortfilm med manus og skuespill. Post den! 🎬",cat:"kreativ",lv:"medium",cam:true,p:"Dårligste skuespiller regisserer neste gang 🎭"},
       {text:"En person velger destinasjon hemmelig – alle møter opp uten å vite hvor 🗺️",cat:"kaos",lv:"wild"},
+      {text:"Gjengen lager et pop-up galleri ute med ting dere finner. Inviter fremmede 🖼️",cat:"kreativ",lv:"medium",cam:true},
+      {text:"Alle skriver ned ett sted de aldri har vært i nærheten – dere drar dit nå! 🚀",cat:"fysisk",lv:"wild",p:"Den som velger kjedeligst sted er guide for hele turen 🗺️"},
+      {text:"Lag verdens raskeste musikkvideo til en sang dere alle kan – film og post! 🎵",cat:"kreativ",lv:"wild",cam:true,p:"Dårligste synkronisering velger neste sang 🎵"},
     ]
   }
 };
@@ -644,7 +1434,7 @@ const DAILY_POOL=[
   {text:"Send en melding til noen du ikke har snakket med på lenge 💬",em:"💌"},
   {text:"Gjør noe du aldri har gjort før i dag – stort eller lite 🌟",em:"🌟"},
   {text:"Lær deg én ny ting på 10 minutter og del det med noen 🧠",em:"🧠"},
-  {text:"Ta én selfie et sted du aldri har tatt selfie før 📸",em:"📸"},
+  {text:"Ta én selfie et sted du aldri har tatt selfie før 📸",em:"📸",cam:true},
   {text:"Gi noen et genuint kompliment ansikt til ansikt 😊",em:"😊"},
   {text:"Gå en tur uten telefon i 15 minutter og observer omgivelsene 🚶",em:"🚶"},
   {text:"Skriv ned tre ting du er takknemlig for i dag ✍️",em:"✍️"},
@@ -656,7 +1446,7 @@ const BADGES=[
   {em:'💫',nm:'Ukekriger',ds:'7 dager på rad',ok:p=>p.best>=7},
   {em:'💪',nm:'10-klubben',ds:'Fullfør 10 utfordringer',ok:p=>p.done>=10},
   {em:'🤪',nm:'Kaos-agent',ds:'Fullfør 5 utfordringer',ok:p=>p.done>=5},
-  {em:'👯',nm:'Sosial sommerfugl',ds:'Del med en venn',ok:p=>p.pts>=20},
+  {em:'👯',nm:'Sosial sommerfugl',ds:'Del med en venn (20 pts)',ok:p=>p.pts>=20},
   {em:'🏆',nm:'Poeng-mester',ds:'Samle 50 poeng',ok:p=>p.pts>=50},
   {em:'👑',nm:'Legenden',ds:'Samle 100 poeng',ok:p=>p.pts>=100},
 ];
@@ -664,16 +1454,30 @@ const BADGES=[
 const LB=[
   {name:'Deg',em:'🔥',pts:0,streak:0,me:true},
   {name:'Marcus',em:'😎',pts:47,streak:5,me:false},
-  {name:'Sara',em:'😄',pts:31,streak:2,me:false},
+  {name:'Sara',em:'😈',pts:31,streak:2,me:false},
   {name:'Lise',em:'🦋',pts:28,streak:1,me:false},
   {name:'Tobias',em:'⚡',pts:19,streak:0,me:false},
 ];
 
-const LOAD_TEXTS=['Finner noe gøyalt...','Tenker på noe genialt...','Vent litt, dette blir bra...','Sjekker hva som passer...','Generer noe kult...'];
+const LOAD_TEXTS=['Finner noe gøyalt...','Tenker på noe genialt...','Vent litt, dette blir bra...','Sjekker hva som passer...','Henter en utfordring til deg...'];
 
-// ══════════════════════════════
+// ══════════════════════════════════════════
 // ONBOARDING
-// ══════════════════════════════
+// ══════════════════════════════════════════
+function obGoToAge(){
+  const n=document.getElementById('ob-name').value.trim();
+  if(!n){
+    document.getElementById('ob-name').style.borderColor='var(--red)';
+    document.getElementById('ob-name').placeholder='Skriv et navn først! 👆';
+    setTimeout(()=>{
+      document.getElementById('ob-name').style.borderColor='';
+      document.getElementById('ob-name').placeholder='Skriv navnet ditt...';
+    },1800);
+    return;
+  }
+  obNext(2);
+}
+
 function obNext(step){
   document.querySelectorAll('.ob-screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('ob'+step).classList.add('active');
@@ -681,20 +1485,36 @@ function obNext(step){
 }
 
 function pickEmoji(btn,em){
-  document.querySelectorAll('.ob-emoji-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');selectedEmoji=em;
+  document.querySelectorAll('.ob-emoji-btn').forEach(b=>b.classList.remove('on','pop'));
+  btn.classList.add('on');
+  selectedEmoji=em;
+  void btn.offsetWidth;
+  btn.classList.add('pop');
+  setTimeout(()=>btn.classList.remove('pop'),650);
+  playSound('pop');
+}
+
+function pickAge(btn,age){
+  document.querySelectorAll('.ob-age-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  selectedAge=age;
+  setTimeout(()=>finishOnboarding(),300);
 }
 
 function finishOnboarding(){
   const n=document.getElementById('ob-name').value.trim();
-  PL.name=n||'Spiller';PL.emoji=selectedEmoji;
+  PL.name=n||'Spiller';
+  PL.emoji=selectedEmoji;
+  PL.age=selectedAge;
   LB[0].name=PL.name;LB[0].em=PL.emoji;
   saveData();
+  sbSaveProfile(); // Register in Supabase
   document.querySelectorAll('.ob-screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('main-app').style.display='flex';
   document.getElementById('main-nav').style.display='flex';
-  updateHeader();renderSpecialBanner();renderDaily();renderProfile();renderLB();
+  updateHeader();renderInstallBanner();renderSpecialBanner();renderDaily();renderProfile();renderLB();
   window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(()=>showInstallHint(),4000);
 }
 
 function resetOnboarding(){
@@ -710,189 +1530,837 @@ function updateHeader(){
   document.getElementById('hdr-pts').textContent=PL.pts+' pts';
 }
 
-// ══════════════════════════════
-// DAILY CHALLENGE
-// ══════════════════════════════
+// ══════════════════════════════════════════
+// INSTALL
+// ══════════════════════════════════════════
+function renderInstallBanner(){
+  const el=document.getElementById('install-wrap');
+  if(window.navigator.standalone||localStorage.getItem('na_installed')){el.innerHTML='';return;}
+  el.innerHTML=`<div class="install-banner" onclick="showInstallOverlay()">
+    <div class="install-icon">📱</div>
+    <div><div class="install-title">Legg til som app!</div><div class="install-sub">Få NÅ på hjemskjermen – ingen App Store nødvendig</div></div>
+    <div class="install-arrow">›</div>
+  </div>`;
+}
+function showInstallOverlay(){document.getElementById('install-overlay').classList.add('on')}
+function closeInstall(){
+  document.getElementById('install-overlay').classList.remove('on');
+  localStorage.setItem('na_installed','1');
+  renderInstallBanner();
+}
+function showInstallHint(){
+  if(!window.navigator.standalone&&!localStorage.getItem('na_installed'))
+    toast('💡 Tips: Legg til NÅ på hjemskjermen!');
+}
+
+// ══════════════════════════════════════════
+// DAILY
+// ══════════════════════════════════════════
 function getDailyChallenge(){
   const dayNum=Math.floor(Date.now()/86400000);
   return DAILY_POOL[dayNum%DAILY_POOL.length];
 }
-
 function getCountdown(){
-  const now=new Date();
-  const midnight=new Date(now);
+  const now=new Date(),midnight=new Date(now);
   midnight.setHours(24,0,0,0);
   const diff=midnight-now;
-  const h=Math.floor(diff/3600000);
-  const m=Math.floor((diff%3600000)/60000);
-  return h+'t '+m+'m';
+  return Math.floor(diff/3600000)+'t '+Math.floor((diff%3600000)/60000)+'m';
 }
-
 function renderDaily(){
   const el=document.getElementById('daily-wrap');
   const d=getDailyChallenge();
   if(PL.dailyDone){
-    el.innerHTML=`<div class="daily-card">
-      <div class="daily-top"><div class="daily-lbl">📅 Dagens utfordring</div><div class="daily-countdown">Neste om ${getCountdown()}</div></div>
-      <div class="daily-txt">${d.em} ${d.text}</div>
-      <div class="daily-done">✅ Fullført i dag! +10 pts</div>
-    </div>`;
-  } else {
-    el.innerHTML=`<div class="daily-card">
-      <div class="daily-top"><div class="daily-lbl">📅 Dagens utfordring</div><div class="daily-countdown">Utløper om ${getCountdown()}</div></div>
-      <div class="daily-txt">${d.em} ${d.text}</div>
-      <button class="daily-btn" onclick="completeDaily()">Gjort det! +10 pts ✓</button>
-    </div>`;
+    el.innerHTML=`<div class="daily-card"><div class="daily-top"><div class="daily-lbl">📅 Dagens utfordring</div><div class="daily-countdown">Neste om ${getCountdown()}</div></div><div class="daily-txt">${d.em} ${d.text}</div><div class="daily-done">✅ Fullført i dag! +10 pts</div></div>`;
+  }else{
+    el.innerHTML=`<div class="daily-card"><div class="daily-top"><div class="daily-lbl">📅 Dagens utfordring</div><div class="daily-countdown">Utløper om ${getCountdown()}</div></div><div class="daily-txt">${d.em} ${d.text}</div><button class="daily-btn" onclick="completeDaily()">Gjort det! +10 pts ✓</button></div>`;
   }
 }
-
 function completeDaily(){
   if(PL.dailyDone)return;
   PL.dailyDone=true;
-  addPoints(10,'Dagens utfordring fullført! 📅 +10 pts');
+  PL.pts+=10;PL.done++;PL.streak++;
+  if(PL.streak>PL.best)PL.best=PL.streak;
   addToHistory(getDailyChallenge().text,'easy');
-  renderDaily();
-  confetti();vibrate();
+  LB[0].pts=PL.pts;LB[0].streak=PL.streak;
+  updateHeader();saveData();renderDaily();
+  confetti();vibrate();playSound('complete');
+  toast('📅 +10 poeng! Streak: '+PL.streak+' 🔥');
+  checkBadges();
 }
 
-// ══════════════════════════════
-// WIZARD – remembers selections
-// ══════════════════════════════
+// ══════════════════════════════════════════
+// SPECIAL DAYS
+// ══════════════════════════════════════════
+function getSpecialDay(){const d=new Date().getDay();return d===3?'wed':(d>=5||d===0)?'wknd':null}
+function renderSpecialBanner(){
+  const sp=getSpecialDay();
+  const el=document.getElementById('special-banner');
+  if(!sp){el.innerHTML='';return;}
+  const s=SPECIAL[sp];
+  el.innerHTML=`<div class="special ${s.cls}" onclick="useSpecial()"><div class="spec-shine"></div><div class="spec-icon">${sp==='wed'?'🔮':'🎉'}</div><div><div class="spec-pill">${s.tag}</div><div class="spec-title">${s.title}</div><div class="spec-hint">Trykk for spesialutfordring →</div></div></div>`;
+}
+function useSpecial(){
+  const sp=getSpecialDay();if(!sp)return;
+  const c=SPECIAL[sp].list[Math.floor(Math.random()*SPECIAL[sp].list.length)];
+  S.mood=S.mood||'Klar for galskap';S.time=S.time||'Hele kvelden';S.players=S.players||2;
+  show('s-load');
+  setTimeout(()=>showChallenge({...c,level:c.lv,special:sp}),600);
+}
+
+// ══════════════════════════════════════════
+// WIZARD
+// ══════════════════════════════════════════
 function wizPick(step,btn,key,val){
-  btn.closest('.g2,.g3,.g4').querySelectorAll('.chip').forEach(b=>b.classList.remove('sel'));
+  btn.closest('.g2').querySelectorAll('.chip').forEach(b=>b.classList.remove('sel'));
   btn.classList.add('sel');
   S[key]=val;S.wizStep=step;
-  setTimeout(()=>wizNext(step+1),240);
+  playSound('pop');
+  ripple(btn);
+  if(step===2){setTimeout(()=>start(),320);}
+  else{setTimeout(()=>wizNext(step+1),320);}
 }
-
-function wizAge(btn,val){
-  btn.closest('.g3').querySelectorAll('.chip').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');
-  S.age=val;
-  setTimeout(()=>start(),240);
+function ripple(el){
+  const r=document.createElement('span');
+  r.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,.22);width:80px;height:80px;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);animation:rippleAnim .5s ease-out forwards;pointer-events:none;z-index:10';
+  el.appendChild(r);setTimeout(()=>r.remove(),500);
 }
-
 function wizNext(step){
-  for(let i=0;i<4;i++){
-    const w=document.getElementById('ws'+i);
+  for(let i=0;i<3;i++){
+    const w=document.getElementById('ws'+i);if(!w)continue;
     w.classList.remove('on','done');
     if(i<step)w.classList.add('done');
     if(i===step)w.classList.add('on');
   }
   document.querySelectorAll('.wiz-panel').forEach(p=>p.classList.remove('active'));
   const panel=document.getElementById('wp'+step);
-  if(panel){
-    panel.classList.add('active');
-    // Restore previous selections visually
-    restoreChipSelections(step);
-  }
+  if(panel){panel.classList.add('active');restoreSelections(step);}
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
-function restoreChipSelections(step){
-  const maps={
-    0:[['mood',['Energisk','Avslappet','Lei og rastløs','Klar for galskap'],['chip-mood-0','chip-mood-1','chip-mood-2','chip-mood-3']]],
-    1:[['time',['10 min','30 min','1 time','Hele kvelden'],['chip-time-0','chip-time-1','chip-time-2','chip-time-3']]],
-    2:[['players',[1,2,3,'4+'],['chip-players-0','chip-players-1','chip-players-2','chip-players-3']]],
-    3:[['age',['13-15','16-19','20+'],['chip-age-0','chip-age-1','chip-age-2']]],
+function restoreSelections(step){
+  const map={
+    0:[['mood',['Energisk','Avslappet','Lei og rastløs','Klar for galskap'],['cm0','cm1','cm2','cm3']]],
+    1:[['time',['10 min','30 min','1 time','Hele kvelden'],['ct0','ct1','ct2','ct3']]],
+    2:[['players',[1,2,3,'4+'],['cp0','cp1','cp2','cp3']]],
   };
-  const m=maps[step];if(!m)return;
-  m.forEach(([key,vals,ids])=>{
-    ids.forEach((id,i)=>{
-      const el=document.getElementById(id);
-      if(el){el.classList.toggle('sel',S[key]===vals[i]);}
-    });
-  });
+  const m=map[step];if(!m)return;
+  m.forEach(([key,vals,ids])=>ids.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el)el.classList.toggle('sel',S[key]===vals[i]);
+  }));
 }
-
 function wizBack(step){wizNext(step-1);}
-
 function backToSetup(){
-  show('s-setup');
-  navTo('s-setup','n0');
-  // Go back to step where user was, or step 0
-  wizNext(S.wizStep||0);
+  stopTimer();
+  S.mood=null;S.time=null;S.players=null;S.wizStep=0;
+  navTo('s-setup','n0');wizNext(0);
 }
 
-// ══════════════════════════════
-// CHALLENGE
-// ══════════════════════════════
+// ══════════════════════════════════════════
+// CHALLENGE LOGIC
+// ══════════════════════════════════════════
 function getChallenge(){
+  const age=PL.age||'16-19';
   const isGroup=S.players!==1;
-  const isWild=S.age!=='13-15'&&S.mood==='Klar for galskap';
+
+  // Age 13-15: safe content + trygge video-utfordringer
+  if(age==='13-15'){
+    const safeTik=isGroup?DB.tiktok.safe_group:DB.tiktok.safe_solo;
+    const safeBase=isGroup?[...DB.easy.group,...DB.safe.group]:[...DB.easy.solo,...DB.safe.solo];
+    // 40% sjanse for video-utfordring også for 13-15
+    if(Math.random()<0.40&&safeTik&&safeTik.length>0){
+      const c=safeTik[Math.floor(Math.random()*safeTik.length)];
+      return{...c,level:'easy'};
+    }
+    return{...safeBase[Math.floor(Math.random()*safeBase.length)],level:'easy'};
+  }
+
+  // 16+: 40% sjanse for TikTok/video-utfordring
+  if(Math.random()<0.40){
+    const tikPool=isGroup?DB.tiktok.group:DB.tiktok.solo;
+    const c=tikPool[Math.floor(Math.random()*tikPool.length)];
+    return{...c,level:'medium'};
+  }
+
+  // Resten: normal logikk
+  const isWild=S.mood==='Klar for galskap'||(age==='20+'&&S.mood==='Energisk');
   const isMed=S.mood==='Energisk'||S.mood==='Lei og rastløs'||['1 time','Hele kvelden'].includes(S.time);
   let pool,level;
-  if(isWild){pool=isGroup?DB.wild.group:DB.wild.solo;level='wild'}
-  else if(isMed){pool=isGroup?DB.medium.group:DB.medium.solo;level='medium'}
-  else{pool=isGroup?DB.easy.group:DB.easy.solo;level='easy'}
+  if(isWild){
+    const tikPool=isGroup?DB.tiktok.group:DB.tiktok.solo;
+    pool=isGroup?[...DB.wild.group,...tikPool]:[...DB.wild.solo,...tikPool];
+    level='wild';
+  }
+  else if(isMed){pool=isGroup?DB.medium.group:DB.medium.solo;level='medium';}
+  else{pool=isGroup?DB.easy.group:DB.easy.solo;level='easy';}
   return{...pool[Math.floor(Math.random()*pool.length)],level};
 }
 
 function showChallenge(c){
-  S.challenge=c.text;S.punishment=c.p||null;
+  S.challenge=c.text;S.punishment=c.p||null;S.needsCamera=!!c.cam;
   const cfgs={easy:['🟢 LETT','lv-easy'],medium:['🟡 MEDIUM','lv-med'],wild:['🔴 KAOS!','lv-wild']};
   const[lbl,cls]=cfgs[c.level]||cfgs.easy;
   const lv=document.getElementById('c-level');
   lv.textContent=lbl;lv.className='c-level '+cls;
   document.getElementById('c-text').textContent=c.text;
   const extra=c.special?(c.special==='wed'?'<span class="c-tag">🔮 Onsdag</span>':'<span class="c-tag">🎉 Helg</span>'):'';
-  document.getElementById('c-tags').innerHTML=
-    `<span class="c-tag">🎯 ${c.cat}</span><span class="c-tag">⏱ ${S.time||'–'}</span><span class="c-tag">👥 ${S.players===1?'Solo':S.players+' pers.'}</span>${extra}`;
+  document.getElementById('c-tags').innerHTML=`<span class="c-tag">🎯 ${c.cat}</span><span class="c-tag">⏱ ${S.time||'–'}</span><span class="c-tag">👥 ${S.players===1?'Solo':S.players+' pers.'}</span>${extra}`;
+
+  // Camera button
+  const cb=document.getElementById('camera-btn');
+  cb.classList.toggle('show',!!c.cam);
+
+  // Friend code
   const isGroup=S.players!==1;
+  const fb=document.getElementById('friend-box');
+  if(isGroup){
+    S.code='NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase();
+    document.getElementById('friend-code').textContent=S.code;
+    fb.classList.add('show');
+  }else fb.classList.remove('show');
+
+  // Punishment
   const pu=document.getElementById('punish');
-  if(S.punishment&&isGroup){document.getElementById('punish-txt').textContent=S.punishment;pu.style.display='block'}
+  if(S.punishment&&isGroup){document.getElementById('punish-txt').textContent=S.punishment;pu.style.display='block';}
   else pu.style.display='none';
-  document.getElementById('btn-invite').style.display=isGroup?'block':'none';
-  // Reset complete tick
-  const tick=document.getElementById('complete-tick');
-  const bar=document.getElementById('complete-bar');
-  tick.classList.remove('done');
-  tick.onclick=()=>completeChallenge();
-  bar.classList.add('show');
-  show('s-challenge');confetti();vibrate();
+
+  // Reset proof bar
+  resetProofBar();
+  document.getElementById('complete-bar').classList.add('show');
+  document.getElementById('skip-bar').style.display='flex';
+  document.getElementById('result-card').classList.remove('show');
+
+  // Start timer
+  startTimer(S.time||'10 min');
+
+  show('s-challenge');
+  confetti();vibrate();playSound('pop');
 }
 
 function start(){
-  document.getElementById('load-txt').textContent=LOAD_TEXTS[Math.floor(Math.random()*LOAD_TEXTS.length)];
-  show('s-load');
-  setTimeout(()=>showChallenge(getChallenge()),700);
+  if(!S.mood||!S.time||!S.players)return;
+  S.pendingChallenge=getChallenge();
+  const moodEmoji={Energisk:'⚡',Avslappet:'😌','Lei og rastløs':'😒','Klar for galskap':'🔥'};
+  const playersLabel=S.players===1?'👤 Solo':'👥 '+S.players+' pers.';
+  document.getElementById('reveal-tags').innerHTML=
+    '<span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);">'+moodEmoji[S.mood]+' '+S.mood+'</span>'+
+    '<span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);">⏱ '+S.time+'</span>'+
+    '<span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);">'+playersLabel+'</span>';
+  show('s-reveal');
 }
 
-function nextChallenge(){
-  document.getElementById('load-txt').textContent=LOAD_TEXTS[Math.floor(Math.random()*LOAD_TEXTS.length)];
-  show('s-load');
-  setTimeout(()=>showChallenge(getChallenge()),600);
+function startRevealCountdown(){
+  const flipper=document.getElementById('card-flipper');
+  flipper.style.transition='none';
+  flipper.style.transform='rotateY(0deg)';
+  const fa=document.getElementById('flip-actions');
+  fa.style.opacity='0';fa.style.transform='translateY(10px)';
+  void flipper.offsetWidth;
+  flipper.style.transition='transform 0.7s cubic-bezier(0.4,0,0.2,1)';
+  show('s-count');
+  let n=3;
+  const el=document.getElementById('count-num');
+  function tick(){
+    el.style.animation='none';
+    void el.offsetWidth;
+    el.style.color=n===1?'var(--red)':'var(--text)';
+    el.style.animation='countPop .4s cubic-bezier(.34,1.56,.64,1)';
+    el.textContent=n;
+    if(n===0){setTimeout(showFlipReveal,300);return;}
+    n--;setTimeout(tick,900);
+  }
+  tick();
 }
 
-// Complete challenge directly from challenge screen
+function showFlipReveal(){
+  const c=S.pendingChallenge;
+  if(!c){show('s-reveal');return;}
+  const cfgs={easy:['🟢 LETT','lv-easy'],medium:['🟡 MEDIUM','lv-med'],wild:['🔴 KAOS!','lv-wild']};
+  const[lbl,cls]=cfgs[c.level]||cfgs.easy;
+  const badge=document.getElementById('flip-badge');
+  badge.textContent=lbl;badge.className='c-level '+cls;
+  document.getElementById('flip-text').textContent=c.text;
+  document.getElementById('flip-timer').textContent=S.time||'–';
+  document.getElementById('flip-cam').style.display=c.cam?'block':'none';
+  show('s-flip');
+  setTimeout(()=>{
+    document.getElementById('card-flipper').style.transform='rotateY(180deg)';
+    setTimeout(()=>{
+      const fa=document.getElementById('flip-actions');
+      fa.style.opacity='1';fa.style.transform='translateY(0)';
+    },500);
+  },200);
+}
+
+async function goToChallenge(){
+  showChallenge(S.pendingChallenge);
+}
+
+async function nextChallenge(){
+  if(!S.mood||!S.time||!S.players){navTo('s-setup','n0');wizNext(0);return;}
+  start();
+}
+
+async function joinCode(){
+  const v=document.getElementById('join-input').value.trim().toUpperCase();
+  const clean=v.replace(/[^A-ZÆØÅ0-9]/g,'');
+  if(clean.length<5){toast('Skriv inn koden du fikk fra vennen din 🤔');return;}
+
+  // Show loading
+  document.getElementById('load-txt').textContent='Henter utfordringen...';
+  show('s-load');
+
+  // Try Supabase first
+  const row=await sbFetchChallenge(v);
+  if(row){
+    // Got real challenge from DB!
+    if(!S.mood)S.mood='Avslappet';
+    if(!S.time)S.time='30 min';
+    if(!S.players)S.players=2;
+    S.code=v;
+    confetti();vibrate();playSound('complete');
+    const c={text:row.challenge_text,level:'medium',cat:'sosial',p:null};
+    // Show who created it
+    toast('🔥 Utfordring fra '+row.created_emoji+' '+row.created_by+'!');
+    setTimeout(()=>showChallenge(c),600);
+  } else {
+    // Fallback: random challenge (no server entry found)
+    toast('Kode ikke funnet – gir deg en tilfeldig! 🎲');
+    if(!S.mood)S.mood='Avslappet';
+    if(!S.time)S.time='30 min';
+    if(!S.players)S.players=2;
+    setTimeout(()=>showChallenge(getChallenge()),600);
+  }
+}
+
+// ══════════════════════════════════════════
+// TIMER SYSTEM
+// ══════════════════════════════════════════
+let timerInterval=null;
+let timerSecondsLeft=0;
+let timerTotal=0;
+let timerExpiredFlag=false;
+
+function getTimerSeconds(timeStr){
+  const map={'10 min':600,'30 min':1800,'1 time':3600,'Hele kvelden':7200};
+  return map[timeStr]||600;
+}
+
+function startTimer(timeStr){
+  stopTimer();
+  timerExpiredFlag=false;
+  timerTotal=getTimerSeconds(timeStr);
+  timerSecondsLeft=timerTotal;
+  const bar=document.getElementById('timer-bar');
+  bar.classList.add('show');bar.classList.remove('urgent');
+  updateTimerUI();
+  timerInterval=setInterval(()=>{
+    timerSecondsLeft--;
+    updateTimerUI();
+    if(timerSecondsLeft<=0){stopTimer();onTimerExpired();}
+  },1000);
+}
+
+function stopTimer(){
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+  const bar=document.getElementById('timer-bar');
+  if(bar){bar.classList.remove('show','urgent');}
+}
+
+function updateTimerUI(){
+  const m=Math.floor(timerSecondsLeft/60);
+  const s=timerSecondsLeft%60;
+  const digits=document.getElementById('timer-digits');
+  const fill=document.getElementById('timer-fill');
+  if(!digits||!fill)return;
+  digits.textContent=m+':'+(s<10?'0':'')+s;
+  const pct=Math.max(0,(timerSecondsLeft/timerTotal)*100);
+  fill.style.width=pct+'%';
+  const bar=document.getElementById('timer-bar');
+  // Colour states
+  if(pct>50){
+    digits.className='timer-digits ok';fill.className='timer-fill';bar.classList.remove('urgent');
+  } else if(pct>20){
+    digits.className='timer-digits warn';fill.className='timer-fill warn';bar.classList.remove('urgent');
+  } else {
+    digits.className='timer-digits urgent';fill.className='timer-fill urgent';bar.classList.add('urgent');
+    if(timerSecondsLeft===30)toast('⏰ 30 sekunder igjen!');
+    if(timerSecondsLeft===10)vibrate();
+  }
+}
+
+function onTimerExpired(){
+  timerExpiredFlag=true;
+  // Only show expired if challenge still active (not already completed)
+  if(document.getElementById('result-card').classList.contains('show'))return;
+  vibrate();playSound('pop');
+  document.getElementById('timer-expired').classList.add('on');
+}
+
+function timerExpiredNext(){
+  document.getElementById('timer-expired').classList.remove('on');
+  nextChallenge();
+}
+function timerExpiredSkip(){
+  document.getElementById('timer-expired').classList.remove('on');
+  backToSetup();
+}
+
+// ══════════════════════════════════════════
+// PROOF SYSTEM (photo required before complete)
+// ══════════════════════════════════════════
+let proofPhotoTaken=false;
+
+function resetProofBar(){
+  proofPhotoTaken=false;
+  // Step 1: active, Step 2: locked
+  document.getElementById('cs-num-1').className='cs-num';
+  document.getElementById('cs-num-2').className='cs-num locked';
+  document.getElementById('cs-done-title').textContent='Marker fullført ✓';
+  document.getElementById('cs-done-sub').textContent='Ta bilde først';
+  document.getElementById('proof-photo-btn').style.opacity='1';
+  document.getElementById('proof-photo-btn').style.pointerEvents='auto';
+  document.getElementById('proof-done-btn').style.opacity='.35';
+  document.getElementById('proof-done-btn').style.pointerEvents='none';
+}
+
+function openProofCamera(){
+  // Opens camera — on return, if photo taken, unlocks done button
+  S.proofMode=true;
+  openCamera();
+}
+
+function unlockDoneButton(){
+  // Called after proof photo is taken
+  proofPhotoTaken=true;
+  document.getElementById('cs-num-1').className='cs-num done';
+  document.getElementById('cs-num-1').textContent='✓';
+  document.getElementById('cs-num-2').className='cs-num';
+  document.getElementById('cs-done-title').textContent='Marker fullført! 💪';
+  document.getElementById('cs-done-sub').textContent='Poeng og streak venter!';
+  document.getElementById('proof-photo-btn').style.opacity='.5';
+  document.getElementById('proof-photo-btn').textContent='📸 Nytt bilde';
+  document.getElementById('proof-done-btn').style.opacity='1';
+  document.getElementById('proof-done-btn').style.pointerEvents='auto';
+  toast('✅ Bilde tatt! Trykk Fullført for å få poeng 🔥');
+  playSound('pop');
+}
+
+// ══════════════════════════════════════════
+// COMPLETE / SKIP
+// ══════════════════════════════════════════
 function completeChallenge(){
-  const tick=document.getElementById('complete-tick');
-  const bar=document.getElementById('complete-bar');
-  if(tick.classList.contains('done'))return;
-  tick.classList.add('done');
-  tick.onclick=null;
-  // Hide bar after short delay so user sees the tick animation
-  setTimeout(()=>bar.classList.remove('show'),1200);
-  addPoints(10,'🔥 +10 poeng! Streak: '+(PL.streak+1)+' dager!');
-  PL.done++;PL.streak++;
+  if(!proofPhotoTaken){
+    toast('📸 Ta bevisbildet først! 👆');
+    // Shake the photo button
+    const btn=document.getElementById('proof-photo-btn');
+    btn.style.transform='translateX(-6px)';
+    setTimeout(()=>btn.style.transform='translateX(6px)',100);
+    setTimeout(()=>btn.style.transform='translateX(0)',200);
+    return;
+  }
+  if(timerExpiredFlag){
+    toast('⏰ Tiden gikk ut – ingen poeng denne gangen!');
+    return;
+  }
+  stopTimer();
+  document.getElementById('skip-bar').style.display='none';
+  document.getElementById('complete-bar').classList.remove('show');
+
+  // Bonus points for speed
+  const pct=timerSecondsLeft/timerTotal;
+  const bonus=pct>0.7?5:pct>0.4?2:0;
+  const pts=10+bonus;
+
+  PL.pts+=pts;PL.done++;
+  // Streak: kun én gang per dag
+  const today=new Date().toDateString();
+  const yesterday=new Date(Date.now()-86400000).toDateString();
+  if(PL.streakDate===today){
+    // Allerede talt i dag — ikke øk streak
+  } else if(PL.streakDate===yesterday){
+    // Spilte i går — streak fortsetter
+    PL.streak++;PL.streakDate=today;
+  } else {
+    // Ny streak fra dag 1
+    PL.streak=1;PL.streakDate=today;
+  }
   if(PL.streak>PL.best)PL.best=PL.streak;
   addToHistory(S.challenge,S.punishment?'wild':'medium');
   LB[0].pts=PL.pts;LB[0].streak=PL.streak;
   updateHeader();saveData();
-  confetti();vibrate();
+  confetti();vibrate();playSound('complete');
   checkBadges();
+
+  // Save to Supabase
+  sbSaveProfile();
+  if(S.code)sbMarkCompleted(S.code);
+
+  if(bonus>0)toast('⚡ Rask! +'+pts+' poeng ('+bonus+' bonuspoeng)!');
+  setTimeout(()=>showResult(pts),900);
 }
 
-// ══════════════════════════════
-// POINTS & HISTORY
-// ══════════════════════════════
-function addPoints(n,msg){
-  PL.pts+=n;
-  updateHeader();
-  toast(msg||'+'+n+' poeng! 🔥');
-  saveData();
+function skipChallenge(){
+  if(document.getElementById('result-card').classList.contains('show'))return;
+  stopTimer();
+  const lost=Math.min(5,PL.pts);
+  PL.pts=Math.max(0,PL.pts-5);
+  LB[0].pts=PL.pts;
+  updateHeader();saveData();
+  toast(lost>0?'⏭ Hoppet over – −'+lost+' poeng 😬':'⏭ Hoppet over 😅');
+  vibrate();
+  setTimeout(()=>nextChallenge(),700);
 }
 
+function showResult(pts){
+  const rc=document.getElementById('result-card');
+  document.getElementById('result-challenge-txt').textContent=S.challenge||'';
+  document.getElementById('result-pts').textContent=PL.pts+' pts';
+  rc.classList.add('show');
+  setTimeout(()=>{if(rc.classList.contains('show'))toast('👇 Klar for neste?');},4000);
+}
+
+// ══════════════════════════════════════════
+// SHARING
+// ══════════════════════════════════════════
+// ── QUICK SHARE — 1 tap: lagrer video/bilde + åpner app ──
+function quickShare(platform){
+  const appUrls={tiktok:'tiktok://',snap:'snapchat://',insta:'instagram://story-camera'};
+  const names={tiktok:'TikTok 🎵',snap:'Snapchat 👻',insta:'Instagram 📸'};
+
+  // Hvis vi har en video fra kamera — del den
+  if(videoBlob){
+    try{
+      const url=URL.createObjectURL(videoBlob);
+      const a=document.createElement('a');
+      a.href=url;a.download='nå-utfordring.mp4';a.click();
+      setTimeout(()=>{window.location.href=appUrls[platform]||appUrls.tiktok;},800);
+      toast('Video lagret! Åpner '+names[platform]+'... 📲');
+      return;
+    }catch(e){}
+  }
+
+  // Hvis vi har et bilde fra kamera — del det
+  const canvas=document.getElementById('cam-canvas');
+  if(canvas&&canvas.width>0){
+    try{
+      canvas.toBlob(blob=>{
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');
+        a.href=url;a.download='nå-utfordring.jpg';a.click();
+        URL.revokeObjectURL(url);
+        setTimeout(()=>{window.location.href=appUrls[platform]||appUrls.snap;},800);
+        toast('Bilde lagret! Åpner '+names[platform]+'... 📲');
+      },'image/jpeg',0.92);
+      return;
+    }catch(e){}
+  }
+
+  // Ingen video/bilde ennå — åpner kamera automatisk, husker hvilken platform
+  S.pendingSharePlatform=platform;
+  toast('Film utfordringen din først! 🎥');
+  setTimeout(()=>openCameraFromResult(),600);
+}
+
+function openCameraFromResult(){
+  S.proofMode=false; // ikke proof-modus, bare del-modus
+  S.shareAfterCamera=true;
+  openCamera();
+}
+
+// Kalt etter at bilde/video er tatt fra result-kortet
+function afterCameraShare(){
+  if(S.shareAfterCamera&&S.pendingSharePlatform){
+    S.shareAfterCamera=false;
+    const p=S.pendingSharePlatform;
+    S.pendingSharePlatform=null;
+    setTimeout(()=>quickShare(p),400);
+  }
+}
+
+// ── INVITER VENN — sender utfordringen direkte ──
+function inviteFriend(method){
+  const code=S.code||PL.friendCode||'NÅ-???';
+  const challenge=S.challenge||'en morsom utfordring';
+  const url='tsandvik2.github.io/naa-app2?c='+encodeURIComponent(code);
+  const txt=`👋 Jeg utfordrer deg på NÅ-appen!\n\n"${challenge}"\n\nKlarer du det? Trykk her:\n${url}\n\n#NåAppen`;
+
+  // Lagre utfordringen i Supabase så venn får SAMME
+  sbSaveChallenge(code, challenge);
+
+  if(method==='sms'){
+    window.location.href='sms:?&body='+encodeURIComponent(txt);
+    toast('Åpner Meldinger... 💬');
+  } else if(method==='snap'){
+    navigator.clipboard.writeText(txt).catch(()=>{});
+    setTimeout(()=>{window.location.href='snapchat://';},300);
+    toast('Kopiert! Åpner Snapchat 👻');
+  }
+}
+
+function shareResult(platform){
+  quickShare(platform);
+}
+
+function snapChallenge(){
+  inviteFriend('snap');
+}
+
+function sendToApp(txt,platform){
+  navigator.clipboard.writeText(txt).catch(()=>{});
+  const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const urls={snap:'snapchat://',insta:'instagram://story-camera',tiktok:'tiktok://'};
+  const names={snap:'Snapchat 👻',insta:'Instagram 📸',tiktok:'TikTok 🎵'};
+  toast('Kopiert! Åpner '+names[platform]+'...');
+  if(mob)setTimeout(()=>{window.location.href=urls[platform]||urls.snap;},500);
+}
+
+// ══════════════════════════════════════════
+// CAMERA
+// ══════════════════════════════════════════
+async function openCamera(){
+  const overlay=document.getElementById('cam-overlay');
+  overlay.classList.add('on');
+  document.getElementById('cam-filter-challenge').textContent=S.challenge||'NÅ-utfordring';
+  document.getElementById('cam-filter-user').textContent='@'+PL.name+' • 🔥'+PL.streak+' streak';
+  setCamMode(S.needsCamera?'video':'photo');
+  await startCamStream();
+}
+
+function setCamMode(mode){
+  camMode=mode;
+  document.getElementById('mode-photo').classList.toggle('active',mode==='photo');
+  document.getElementById('mode-video').classList.toggle('active',mode==='video');
+  const tag=document.getElementById('cam-filter-tag');
+  if(tag)tag.textContent=mode==='video'?'🎥 Utfordring pågår!':'Jeg ble utfordret!';
+}
+
+function camShutterPress(){
+  if(camMode==='photo'){takePhoto();}
+  else if(!mediaRecorder||mediaRecorder.state!=='recording'){startRecording();}
+  else{stopRecording();}
+}
+
+function startRecording(){
+  if(!camStream)return;
+  recordedChunks=[];
+  const opts=typeof MediaRecorder!=='undefined'&&MediaRecorder.isTypeSupported('video/webm')
+    ?{mimeType:'video/webm'}:{};
+  try{
+    mediaRecorder=new MediaRecorder(camStream,opts);
+    mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)recordedChunks.push(e.data);};
+    mediaRecorder.onstop=onRecordingStop;
+    mediaRecorder.start(100);
+    document.getElementById('cam-rec').style.display='flex';
+    document.getElementById('cam-shutter').classList.add('recording');
+    recSeconds=0;
+    recInterval=setInterval(()=>{
+      recSeconds++;
+      const m=Math.floor(recSeconds/60),s=recSeconds%60;
+      document.getElementById('cam-rec-time').textContent=m+':'+(s<10?'0':'')+s;
+      if(recSeconds>=60)stopRecording();
+    },1000);
+  }catch(e){toast('Video støttes ikke i denne nettleseren 😬');}
+}
+
+function stopRecording(){
+  if(recInterval){clearInterval(recInterval);recInterval=null;}
+  if(mediaRecorder&&mediaRecorder.state==='recording')mediaRecorder.stop();
+  document.getElementById('cam-rec').style.display='none';
+  document.getElementById('cam-shutter').classList.remove('recording');
+}
+
+async function onRecordingStop(){
+  const mimeType=(recordedChunks[0]&&recordedChunks[0].type)||'video/webm';
+  videoBlob=new Blob(recordedChunks,{type:mimeType});
+  const url=URL.createObjectURL(videoBlob);
+  const vidEl=document.getElementById('vid-preview-video');
+  vidEl.src=url;
+  document.getElementById('vid-filter-challenge').textContent=S.challenge||'NÅ-utfordring';
+  document.getElementById('vid-filter-user').textContent=PL.name+' • '+PL.pts+' pts';
+  closeCamera();
+  document.getElementById('vid-preview').classList.add('on');
+  playSound('complete');vibrate();
+  if(S.proofMode){S.proofMode=false;unlockDoneButton();}
+  afterCameraShare();
+}
+
+async function startCamStream(){
+  try{
+    if(camStream){camStream.getTracks().forEach(t=>t.stop());}
+    camStream=await navigator.mediaDevices.getUserMedia({
+      video:{facingMode,width:{ideal:1280},height:{ideal:720}},audio:false
+    });
+    const video=document.getElementById('cam-video');
+    video.srcObject=camStream;
+  }catch(e){
+    toast('Kan ikke åpne kamera. Sjekk tillatelser 📷');
+    closeCamera();
+  }
+}
+
+function flipCamera(){
+  facingMode=facingMode==='user'?'environment':'user';
+  startCamStream();
+}
+
+function closeCamera(){
+  if(mediaRecorder&&mediaRecorder.state==='recording')mediaRecorder.stop();
+  if(recInterval){clearInterval(recInterval);recInterval=null;}
+  if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
+  document.getElementById('cam-overlay').classList.remove('on');
+  const rec=document.getElementById('cam-rec');
+  if(rec)rec.style.display='none';
+  const sh=document.getElementById('cam-shutter');
+  if(sh)sh.classList.remove('recording');
+}
+
+function takePhoto(){
+  const video=document.getElementById('cam-video');
+  const canvas=document.getElementById('cam-canvas');
+  canvas.width=video.videoWidth||1280;
+  canvas.height=video.videoHeight||720;
+  const ctx=canvas.getContext('2d');
+
+  // Flip if front camera
+  if(facingMode==='user'){ctx.translate(canvas.width,0);ctx.scale(-1,1);}
+  ctx.drawImage(video,0,0,canvas.width,canvas.height);
+  if(facingMode==='user'){ctx.setTransform(1,0,0,1,0,0);}
+
+  // Draw filter overlay on canvas
+  const w=canvas.width,h=canvas.height;
+
+  // Top gradient
+  const topGrad=ctx.createLinearGradient(0,0,0,h*0.22);
+  topGrad.addColorStop(0,'rgba(0,0,0,0.72)');
+  topGrad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=topGrad;ctx.fillRect(0,0,w,h*0.22);
+
+  // Bottom gradient — taller to give room for text
+  const botGrad=ctx.createLinearGradient(0,h*0.5,0,h);
+  botGrad.addColorStop(0,'rgba(0,0,0,0)');
+  botGrad.addColorStop(1,'rgba(0,0,0,0.9)');
+  ctx.fillStyle=botGrad;ctx.fillRect(0,h*0.5,w,h*0.5);
+
+  // Logo top left
+  ctx.font=`bold ${w*0.09}px 'Arial Black', sans-serif`;
+  ctx.fillStyle='#ff2d55';ctx.fillText('NÅ',w*0.06,w*0.1);
+
+  // Tag pill
+  ctx.fillStyle='rgba(255,45,85,0.7)';
+  ctx.roundRect(w*0.22,w*0.05,w*0.4,w*0.068,w*0.02);ctx.fill();
+  ctx.font=`bold ${w*0.034}px Arial`;
+  ctx.fillStyle='#fff';ctx.fillText('Jeg ble utfordret! 🔥',w*0.24,w*0.092);
+
+  // Challenge text — start at 68% height, line height tighter, max 3 lines
+  const chalText=S.challenge||'NÅ-utfordring';
+  const lineH=w*0.048;
+  const maxLines=3;
+  ctx.font=`bold ${w*0.04}px Arial`;
+  ctx.fillStyle='#fff';
+  const chalY=h*0.68;
+  wrapTextMaxLines(ctx,chalText,w*0.06,chalY,w*0.88,lineH,maxLines);
+
+  // User info — fixed position below challenge area
+  ctx.font=`${w*0.032}px Arial`;
+  ctx.fillStyle='rgba(255,255,255,0.75)';
+  ctx.fillText(`${PL.name} • ${PL.pts} pts 🔥 ${PL.streak} streak`,w*0.06,h*0.88);
+
+  // Hashtags
+  ctx.font=`${w*0.027}px Arial`;
+  ctx.fillStyle='rgba(255,255,255,0.48)';
+  ctx.fillText('#NåAppen #NåUtfordringen #JegBleUtfordret',w*0.06,h*0.945);
+
+  // Show preview
+  const imgData=canvas.toDataURL('image/jpeg',0.92);
+  const prevImg=document.getElementById('cam-preview-img');
+  prevImg.src=imgData;
+  document.getElementById('prev-filter-challenge').textContent=S.challenge||'NÅ-utfordring';
+  document.getElementById('prev-filter-user').textContent=PL.name+' • '+PL.pts+' pts';
+
+  closeCamera();
+  document.getElementById('cam-preview').classList.add('on');
+  playSound('complete');vibrate();
+  // If opened from proof system, unlock done button
+  if(S.proofMode){S.proofMode=false;unlockDoneButton();}
+  afterCameraShare();
+}
+
+function wrapTextMaxLines(ctx,text,x,y,maxW,lineH,maxLines){
+  const words=text.split(' ');let line='';let lineCount=0;
+  for(let i=0;i<words.length;i++){
+    const test=line+words[i]+' ';
+    if(ctx.measureText(test).width>maxW&&i>0){
+      ctx.fillText(line.trimEnd(),x,y);
+      line=words[i]+' ';y+=lineH;lineCount++;
+      if(lineCount>=maxLines-1){
+        // Truncate remaining into last line
+        const remaining=words.slice(i+1).join(' ');
+        let lastLine=words[i]+' '+remaining;
+        while(ctx.measureText(lastLine+'…').width>maxW&&lastLine.length>3)
+          lastLine=lastLine.slice(0,lastLine.lastIndexOf(' '));
+        ctx.fillText(lastLine.trimEnd()+(words.length>i+2?'…':''),x,y);
+        return;
+      }
+    }else line=test;
+  }
+  ctx.fillText(line.trimEnd(),x,y);
+}
+
+// Legacy alias
+function wrapText(ctx,text,x,y,maxW,lineH){wrapTextMaxLines(ctx,text,x,y,maxW,lineH,99);}
+
+function retakePhoto(){
+  document.getElementById('cam-preview').classList.remove('on');
+  openCamera();
+}
+
+function retakeVideo(){
+  document.getElementById('vid-preview').classList.remove('on');
+  videoBlob=null;
+  openCamera();
+}
+
+function shareVideo(platform){
+  if(!videoBlob){toast('Ingen video å dele 🤔');return;}
+  try{
+    const url=URL.createObjectURL(videoBlob);
+    const a=document.createElement('a');
+    a.href=url;a.download='nå-utfordring.mp4';a.click();
+    setTimeout(()=>{
+      const urls={snap:'snapchat://',insta:'instagram://story-camera',tiktok:'tiktok://'};
+      window.location.href=urls[platform]||urls.snap;
+    },800);
+    toast('Video lagret! Åpner '+platform+'... 📲');
+  }catch(e){
+    const txt=`🔥 Fullførte NÅ-utfordringen!\n\n"${S.challenge}"\n\ntsandvik2.github.io/naa-app2\n\n#NåAppen`;
+    sendToApp(txt,platform);
+  }
+}
+
+function sharePhoto(platform){
+  const canvas=document.getElementById('cam-canvas');
+  // Try to save image and open app
+  try{
+    canvas.toBlob(blob=>{
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;a.download='nå-utfordring.jpg';a.click();
+      URL.revokeObjectURL(url);
+      setTimeout(()=>{
+        const urls={snap:'snapchat://',insta:'instagram://story-camera',tiktok:'tiktok://'};
+        window.location.href=urls[platform]||urls.snap;
+      },800);
+      toast('Bilde lagret! Åpner appen... 📲');
+    },'image/jpeg',0.92);
+  }catch(e){
+    const txt=`🔥 Fullførte NÅ-utfordringen!\n\n"${S.challenge}"\n\ntsandvik2.github.io/naa-app2\n\n#NåAppen`;
+    sendToApp(txt,platform);
+  }
+}
+
+// ══════════════════════════════════════════
+// HISTORY
+// ══════════════════════════════════════════
 function addToHistory(txt,level){
   if(!txt)return;
   PL.history.unshift({txt,level,date:new Date().toLocaleDateString('no')});
@@ -900,159 +2368,117 @@ function addToHistory(txt,level){
   saveData();
 }
 
-// ══════════════════════════════
+// ══════════════════════════════════════════
 // BADGES
-// ══════════════════════════════
+// ══════════════════════════════════════════
 function checkBadges(){
   BADGES.forEach(b=>{
     if(!PL.earnedBadges.includes(b.nm)&&b.ok(PL)){
       PL.earnedBadges.push(b.nm);saveData();
-      setTimeout(()=>showBadgeUnlock(b),800);
+      setTimeout(()=>showBadgeUnlock(b),1000);
     }
   });
 }
-
 function showBadgeUnlock(b){
   document.getElementById('bu-em').textContent=b.em;
   document.getElementById('bu-name').textContent=b.nm;
   document.getElementById('bu-desc').textContent=b.ds;
   document.getElementById('badge-unlock').classList.add('on');
-  confetti();vibrate();
+  confetti();vibrate();playSound('complete');
 }
+function closeBadgeUnlock(){document.getElementById('badge-unlock').classList.remove('on');}
 
-function closeBadgeUnlock(){
-  document.getElementById('badge-unlock').classList.remove('on');
-}
-
-// ══════════════════════════════
-// SPECIAL
-// ══════════════════════════════
-function getSpecialDay(){const d=new Date().getDay();if(d===3)return'wed';if(d>=5||d===0)return'wknd';return null}
-
-function renderSpecialBanner(){
-  const sp=getSpecialDay();
-  const el=document.getElementById('special-banner');
-  if(!sp){el.innerHTML='';return}
-  const s=SPECIAL[sp];
-  el.innerHTML=`<div class="special ${s.cls}" onclick="useSpecial()">
-    <div class="spec-shine"></div>
-    <div class="spec-icon">${sp==='wed'?'🔮':'🎉'}</div>
-    <div><div class="spec-pill">${s.tag}</div><div class="spec-title">${s.title}</div><div class="spec-hint">Trykk for spesialutfordring →</div></div>
-  </div>`;
-}
-
-function useSpecial(){
-  const sp=getSpecialDay();if(!sp)return;
-  const list=SPECIAL[sp].list;
-  const c=list[Math.floor(Math.random()*list.length)];
-  S.mood=S.mood||'Klar for galskap';S.time=S.time||'Hele kvelden';S.players=S.players||2;
-  show('s-load');
-  setTimeout(()=>showChallenge({...c,level:c.lv,special:sp}),600);
-}
-
-// ══════════════════════════════
-// SHARING
-// ══════════════════════════════
-function goInvite(){
-  S.code='NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase();
-  document.getElementById('inv-code').textContent=S.code;
-  show('s-invite');
-}
-function getCode(){if(!S.code)S.code='NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase();return S.code}
-function shareText(){return`🔥 NÅ-utfordring!\n\n"${S.challenge}"\n\nKode: ${getCode()} – tør du? 😏\n\nÅpne NÅ-appen og skriv inn koden!`}
-function openShare(){
-  document.getElementById('sh-txt').textContent=S.challenge||'–';
-  document.getElementById('sh-code').textContent=getCode();
-  document.getElementById('overlay').classList.add('on');
-}
-function closeShare(e){if(!e||e.target===document.getElementById('overlay'))document.getElementById('overlay').classList.remove('on')}
-function doSnap(){sendSnap(shareText())}
-function snapInvite(){sendSnap(`👯 Jeg utfordrer deg på NÅ-appen!\n\nKode: ${getCode()}\n\nSame utfordring – taperen får straffen! 😈`)}
-function sendSnap(txt){
-  navigator.clipboard.writeText(txt).catch(()=>{});
-  const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  if(mob){toast('Kopiert! Snapchat åpnes 👻');setTimeout(()=>{window.location.href='snapchat://'},500)}
-  else toast('Kopiert! Lim inn i Snapchat 👻');
-  document.getElementById('overlay').classList.remove('on');
-}
-function copyShare(){navigator.clipboard.writeText(shareText()).then(()=>toast('Kopiert! 📋'));document.getElementById('overlay').classList.remove('on')}
-function copyChallenge(){navigator.clipboard.writeText(shareText()).then(()=>toast('Kopiert! 📋'))}
-function copyInvite(){navigator.clipboard.writeText(`👯 NÅ-kode: ${getCode()} – same utfordring, taperen får straffen! 😈`).then(()=>toast('Kopiert! 🚀'))}
-function joinCode(){
-  const v=document.getElementById('join-input').value.trim().toUpperCase();
-  if(v.length>=5){toast('Funnet! Gjør utfordringen! 💪');confetti();vibrate();}
-  else toast('Sjekk koden og prøv igjen 🤔');
-}
-
-// ══════════════════════════════
+// ══════════════════════════════════════════
 // NAV
-// ══════════════════════════════
+// ══════════════════════════════════════════
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  const el=document.getElementById(id);
+  if(el)el.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function navTo(sid,nid){
   show(sid);
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
-  document.getElementById(nid).classList.add('on');
+  const nb=document.getElementById(nid);
+  if(nb)nb.classList.add('on');
   if(sid==='s-lb')renderLB();
   if(sid==='s-profile')renderProfile();
-  if(sid==='s-setup')renderDaily();
+  if(sid==='s-setup'){renderDaily();renderInstallBanner();}
+  if(sid==='s-friends')renderFriends();
 }
 
-// ══════════════════════════════
+// ══════════════════════════════════════════
 // LEADERBOARD
-// ══════════════════════════════
-function lbTab(btn){document.querySelectorAll('.lb-tab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderLB();}
-function renderLB(){
+// ══════════════════════════════════════════
+async function lbTab(btn){
+  document.querySelectorAll('.lb-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');renderLB();
+}
+async function renderLB(){
+  // Show local data instantly while fetching
   LB[0].pts=PL.pts;LB[0].em=PL.emoji;LB[0].name=PL.name;LB[0].streak=PL.streak;
-  const sorted=[...LB].sort((a,b)=>b.pts-a.pts);
-  // Podium needs 3
+  drawLB(LB);
+
+  // Fetch real data from Supabase
+  const remote=await sbFetchLeaderboard();
+  if(remote&&remote.length>0){
+    // Merge: map remote to LB format, mark current user
+    const rows=remote.map(r=>({
+      name:r.name,
+      em:r.emoji||'🔥',
+      pts:r.pts||0,
+      streak:r.streak||0,
+      me:r.name===PL.name&&r.friend_code===getMyCode()
+    }));
+    // Ensure current user always in list
+    if(!rows.find(r=>r.me)){
+      rows.push({name:PL.name,em:PL.emoji,pts:PL.pts,streak:PL.streak,me:true});
+    }
+    drawLB(rows);
+  }
+}
+function drawLB(data){
+  const sorted=[...data].sort((a,b)=>b.pts-a.pts);
   const top3=[sorted[1]||{name:'–',em:'👤',pts:0},sorted[0]||{name:'–',em:'👤',pts:0},sorted[2]||{name:'–',em:'👤',pts:0}];
   const barH=[60,90,45];
   const barC=['rgba(192,192,192,.14)','rgba(255,214,10,.14)','rgba(205,127,50,.12)'];
   document.getElementById('podium').innerHTML=top3.map((p,i)=>`
     <div class="pod">
       <div style="font-size:18px">${i===1?'🥇':i===0?'🥈':'🥉'}</div>
-      <div class="pod-av" style="background:${barC[i]}">${p.em}</div>
+      <div class="pod-av" style="background:${barC[i]}">${p.em||p.emoji||'👤'}</div>
       <div class="pod-name">${p.name}</div>
       <div class="pod-pts">${p.pts} pts</div>
       <div class="pod-bar" style="height:${barH[i]}px;background:${barC[i]}"></div>
     </div>`).join('');
   document.getElementById('lb-list').innerHTML=sorted.map((p,i)=>`
-    <div class="lb-row ${p.me?'me':''}">
+    <div class="lb-row${p.me?' me':''}">
       <div class="lb-pos">${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1}</div>
-      <div class="lb-av">${p.em}</div>
+      <div class="lb-av">${p.em||p.emoji||'👤'}</div>
       <div class="lb-info"><div class="lb-name">${p.name}${p.me?' (deg)':''}</div><div class="lb-detail">🔥 ${p.streak} streak</div></div>
       <div class="lb-pts">${p.pts}</div>
     </div>`).join('');
 }
 
-// ══════════════════════════════
+// ══════════════════════════════════════════
 // PROFILE
-// ══════════════════════════════
+// ══════════════════════════════════════════
 function renderProfile(){
   document.getElementById('p-av').textContent=PL.emoji;
   document.getElementById('p-name').textContent=PL.name;
   document.getElementById('p-done-tag').textContent=PL.done+' fullført';
   document.getElementById('p-streak-tag').textContent=PL.streak+' streak';
   document.getElementById('p-pts-tag').textContent=PL.pts+' pts';
-  const sn=document.getElementById('s-num');
-  const sb=document.getElementById('s-best');
-  sn.textContent=PL.streak;sb.textContent=PL.best;
-  // Record badge
+  document.getElementById('p-age-tag').textContent=(PL.age||'16-19')+' år';
+  document.getElementById('s-num').textContent=PL.streak;
+  document.getElementById('s-best').textContent=PL.best;
   const rb=document.getElementById('record-badge');
-  if(PL.streak>0&&PL.streak===PL.best&&PL.streak>1){
-    rb.style.display='block';
-    document.getElementById('streak-card').classList.add('record');
-    setTimeout(()=>document.getElementById('streak-card').classList.remove('record'),3500);
-  } else rb.style.display='none';
-  // History
+  rb.style.display=(PL.streak>0&&PL.streak===PL.best&&PL.streak>1)?'block':'none';
+
   const hl=document.getElementById('history-list');
   if(!PL.history||PL.history.length===0){
     hl.innerHTML='<div class="history-empty">Ingen utfordringer ennå – gjør en nå! 🎯</div>';
-  } else {
+  }else{
     const lvEm={easy:'🟢',medium:'🟡',wild:'🔴'};
     hl.innerHTML=PL.history.slice(0,8).map(h=>`
       <div class="history-item">
@@ -1060,7 +2486,6 @@ function renderProfile(){
         <div><div class="history-txt">${h.txt}</div><div class="history-date">${h.date}</div></div>
       </div>`).join('');
   }
-  // Badges
   document.getElementById('badges-g').innerHTML=BADGES.map(b=>{
     const ok=PL.earnedBadges.includes(b.nm);
     return`<div class="badge-card ${ok?'earned':'locked'}">
@@ -1072,46 +2497,303 @@ function renderProfile(){
   }).join('');
 }
 
-// ══════════════════════════════
-// VIBRATE
-// ══════════════════════════════
+// ══════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════
 function vibrate(){try{if(navigator.vibrate)navigator.vibrate([40,20,40]);}catch(e){}}
 
-// ══════════════════════════════
-// TOAST
-// ══════════════════════════════
 function toast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('on');
-  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2800);
+  t.textContent=msg;
+  t.classList.remove('on');
+  clearTimeout(t._t);
+  void t.offsetWidth;
+  t.classList.add('on');
+  t._t=setTimeout(()=>t.classList.remove('on'),2800);
 }
 
-// ══════════════════════════════
-// CONFETTI
-// ══════════════════════════════
 function confetti(){
   const c=document.getElementById('cf');c.innerHTML='';
-  const cols=['#ff2d55','#ffd60a','#00c7ff','#ff6b00','#bf5af2','#30d158'];
-  for(let i=0;i<55;i++){
+  const cols=['#ff2d55','#ffd60a','#00c7ff','#ff6b00','#bf5af2','#30d158','#fff'];
+  for(let i=0;i<60;i++){
     const p=document.createElement('div');p.className='cp';
-    const s=6+Math.random()*7;
-    p.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.5?'50%':'3px'};animation-delay:${Math.random()*.5}s;animation-duration:${1.8+Math.random()*.9}s;`;
+    const s=5+Math.random()*8;
+    p.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.5?'50%':'3px'};animation-delay:${Math.random()*.6}s;animation-duration:${1.8+Math.random()*.8}s;`;
     c.appendChild(p);
   }
   setTimeout(()=>c.innerHTML='',3500);
 }
 
-// ══════════════════════════════
-// INIT
-// ══════════════════════════════
+// Polyfill for roundRect on older browsers
+if(!CanvasRenderingContext2D.prototype.roundRect){
+  CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){
+    this.beginPath();this.moveTo(x+r,y);this.lineTo(x+w-r,y);
+    this.quadraticCurveTo(x+w,y,x+w,y+r);this.lineTo(x+w,y+h-r);
+    this.quadraticCurveTo(x+w,y+h,x+w-r,y+h);this.lineTo(x+r,y+h);
+    this.quadraticCurveTo(x,y+h,x,y+h-r);this.lineTo(x,y+r);
+    this.quadraticCurveTo(x,y,x+r,y);this.closePath();
+    return this;
+  };
+}
+
+// Stop camera when user leaves the page (prevents camera indicator staying on)
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden&&camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
+});
+
+// ══════════════════════════════════════════
+// FRIENDS SYSTEM
+// ══════════════════════════════════════════
+// Friends stored in PL.friends = [{name, emoji, code, pts, streak, addedDate}]
+// Pending challenges stored in PL.pending = [{from, fromEmoji, challenge, code, date}]
+
+function getMyCode(){
+  // Generate deterministic code from name — same name always same code
+  if(!PL.myCode){
+    const base=(PL.name||'USER').toUpperCase().replace(/[^A-Z]/g,'').substring(0,3).padEnd(3,'X');
+    const num=Math.floor(Math.random()*900)+100;
+    PL.myCode='NÅ-'+base+num;
+    saveData();
+  }
+  return PL.myCode;
+}
+
+function renderFriends(){
+  const code=getMyCode();
+  document.getElementById('my-code-val').textContent=code;
+
+  // Pending challenges
+  const pending=PL.pending||[];
+  const ps=document.getElementById('pending-section');
+  const pl=document.getElementById('pending-list');
+  if(pending.length>0){
+    ps.style.display='block';
+    pl.innerHTML=pending.map((p,i)=>`
+      <div class="pending-card">
+        <div class="pending-av">${p.fromEmoji||'👤'}</div>
+        <div class="pending-info">
+          <div class="pending-from">${p.from} utfordret deg! 🔥</div>
+          <div class="pending-txt">${p.challenge}</div>
+        </div>
+        <button class="pending-accept" onclick="acceptPending(${i})">Ta den! 💪</button>
+      </div>`).join('');
+    // Show nav badge
+    const nb=document.getElementById('nav-badge');
+    nb.style.display='flex';nb.textContent=pending.length;
+  } else {
+    ps.style.display='none';
+    document.getElementById('nav-badge').style.display='none';
+  }
+
+  // Friends list
+  const friends=PL.friends||[];
+  const fl=document.getElementById('friends-list');
+  const fe=document.getElementById('friends-list-empty');
+  if(friends.length===0){
+    fe.style.display='block';fl.innerHTML='';
+  } else {
+    fe.style.display='none';
+    fl.innerHTML=friends.map((f,i)=>`
+      <div class="friend-card">
+        <div class="friend-av">${f.emoji||'👤'}</div>
+        <div class="friend-info">
+          <div class="friend-name">${f.name}</div>
+          <div class="friend-stats">${f.pts||0} pts &nbsp;·&nbsp; <span class="friend-streak">🔥 ${f.streak||0}</span> streak</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px">${f.code}</div>
+        </div>
+        <div class="friend-actions">
+          <button class="friend-challenge-btn" onclick="openChallengeModal(${i})">Utfordre 🎯</button>
+          <button class="friend-remove-btn" onclick="removeFriend(${i})" title="Fjern venn">×</button>
+        </div>
+      </div>`).join('');
+  }
+}
+
+async function addFriend(){
+  const input=document.getElementById('add-friend-input');
+  const hint=document.getElementById('add-friend-hint');
+  const val=input.value.trim().toUpperCase();
+  const clean=val.replace(/[^A-ZÆØÅ0-9]/g,'');
+
+  hint.className='add-friend-hint';
+  if(clean.length<4){
+    hint.className='add-friend-hint err';
+    hint.textContent='For kort kode – prøv igjen 🤔';
+    return;
+  }
+  if(val===getMyCode()){
+    hint.className='add-friend-hint err';
+    hint.textContent='Det er jo din egen kode 😄';
+    return;
+  }
+  if(!PL.friends)PL.friends=[];
+  if(PL.friends.some(f=>f.code===val)){
+    hint.className='add-friend-hint err';
+    hint.textContent='Du har allerede lagt til denne vennen!';
+    return;
+  }
+
+  // Try Supabase lookup first
+  hint.className='add-friend-hint';
+  hint.textContent='Leter etter vennen din...';
+  const profile=await sbLookupFriend(val);
+
+  let newFriend;
+  if(profile){
+    // Real user found!
+    newFriend={
+      name:profile.name,
+      emoji:profile.emoji||'🔥',
+      code:val,
+      pts:profile.pts||0,
+      streak:profile.streak||0,
+      addedDate:new Date().toLocaleDateString('no'),
+      real:true
+    };
+    hint.textContent='';
+  } else {
+    // Not in DB yet — add anyway with placeholder
+    const emojis=['😎','😈','🤙','💀','👾','⚡','🌊','🎭','🦋','🌙','🐉','🥷'];
+    let friendName=val;
+    const match=val.match(/NÅ-([A-ZÆØÅ]{2,4})\d*/);
+    if(match)friendName=match[1].charAt(0)+match[1].slice(1).toLowerCase();
+    newFriend={
+      name:friendName,
+      emoji:emojis[Math.floor(Math.random()*emojis.length)],
+      code:val,
+      pts:0,streak:0,
+      addedDate:new Date().toLocaleDateString('no'),
+      real:false
+    };
+  }
+
+  PL.friends.push(newFriend);
+  saveData();
+  input.value='';
+  hint.className='add-friend-hint ok';
+  hint.textContent=(newFriend.real?'✅ '+newFriend.name+' funnet og lagt til! 🎉':'✅ '+newFriend.name+' lagt til!');
+  setTimeout(()=>{hint.textContent='';hint.className='add-friend-hint';},3000);
+  playSound('complete');confetti();
+  renderFriends();
+}
+
+function removeFriend(i){
+  if(!PL.friends)return;
+  const name=PL.friends[i]?.name||'Venn';
+  PL.friends.splice(i,1);
+  saveData();renderFriends();
+  toast('👋 '+name+' fjernet');
+}
+
+// ── Challenge a friend ──
+let cfTarget=null; // current friend being challenged
+let cfChallenge=null;
+
+function openChallengeModal(i){
+  cfTarget=PL.friends[i];
+  cfChallenge=getRandomChallenge();
+  document.getElementById('cf-modal-title').textContent='Utfordre '+cfTarget.name+' 🎯';
+  document.getElementById('cf-modal-sub').textContent='Send denne utfordringen på Snapchat';
+  document.getElementById('cf-modal-challenge').textContent=cfChallenge;
+  document.getElementById('cf-modal').classList.add('on');
+}
+
+function rerollFriendChallenge(){
+  cfChallenge=getRandomChallenge();
+  document.getElementById('cf-modal-challenge').textContent=cfChallenge;
+  playSound('pop');
+}
+
+function getRandomChallenge(){
+  const all=[
+    ...DB.easy.solo,...DB.easy.group,
+    ...DB.medium.solo,...DB.medium.group,
+    ...DB.tiktok.solo,...DB.tiktok.group
+  ];
+  return all[Math.floor(Math.random()*all.length)].text;
+}
+
+function sendFriendChallenge(platform){
+  if(!cfTarget||!cfChallenge)return;
+  const code='NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase();
+  const txt=`🔥 ${PL.name} utfordrer deg!\n\n"${cfChallenge}"\n\nSkriv inn koden ${code} på:\ntsandvik2.github.io/naa-app2\n\n#NåAppen`;
+  // Also store as pending for demo purposes
+  if(!PL.pending)PL.pending=[];
+  // (In real app this would go to server — here we simulate receiving it back)
+  closeCFModal();
+  sendToApp(txt,platform);
+  toast('Utfordring sendt til '+cfTarget.name+'! 💪');
+}
+
+function closeCFModal(){
+  document.getElementById('cf-modal').classList.remove('on');
+  cfTarget=null;cfChallenge=null;
+}
+
+function acceptPending(i){
+  const p=PL.pending[i];
+  if(!p)return;
+  S.challenge=p.challenge;
+  S.mood=S.mood||'Energisk';S.time=S.time||'30 min';S.players=S.players||2;
+  PL.pending.splice(i,1);
+  saveData();
+  closeCFModal();
+  document.getElementById('cf-modal').classList.remove('on');
+  navTo('s-setup','n0');
+  show('s-load');
+  document.getElementById('load-txt').textContent='Laster utfordringen...';
+  setTimeout(()=>showChallenge({text:p.challenge,level:'medium',cat:'sosial'}),700);
+  toast('🔥 Utfordringen er hentet!');
+}
+
+function copyMyCode(){
+  const code=getMyCode();
+  navigator.clipboard.writeText(code).then(()=>toast('📋 Kode kopiert: '+code)).catch(()=>toast('Din kode: '+code));
+}
+
+function shareMyCode(platform){
+  const code=getMyCode();
+  const txt=`👋 Legg meg til som venn i NÅ-appen!\n\nKoden min: ${code}\n\nÅpne: tsandvik2.github.io/naa-app2\n\n#NåAppen`;
+  sendToApp(txt,platform);
+}
+
+// ── Add demo friends for new users so it doesn't look empty ──
+function addDemoFriendsIfEmpty(){
+  if(!PL.friends||PL.friends.length===0){
+    PL.friends=[
+      {name:'Marcus',emoji:'😎',code:'NÅ-MAR847',pts:47,streak:5,addedDate:'demo'},
+      {name:'Sara',emoji:'😈',code:'NÅ-SAR312',pts:31,streak:2,addedDate:'demo'},
+    ];
+    saveData();
+  }
+}
+
+
 loadData();
 if(PL.name&&PL.name!==''){
-  // Returning user – skip onboarding
   document.querySelectorAll('.ob-screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('main-app').style.display='flex';
   document.getElementById('main-nav').style.display='flex';
   LB[0].name=PL.name;LB[0].em=PL.emoji;LB[0].pts=PL.pts;LB[0].streak=PL.streak;
-  updateHeader();renderSpecialBanner();renderDaily();renderProfile();renderLB();
+  addDemoFriendsIfEmpty();
+  updateHeader();renderInstallBanner();renderSpecialBanner();renderDaily();renderProfile();renderLB();
+  const pending=PL.pending||[];
+  if(pending.length>0){const nb=document.getElementById('nav-badge');if(nb){nb.style.display='flex';nb.textContent=pending.length;}}
+
+  // Handle friend invite via URL: ?c=NÅ-ABC
+  const urlParams=new URLSearchParams(window.location.search);
+  const inviteCode=urlParams.get('c');
+  if(inviteCode){
+    toast('👯 Venn har utfordret deg! Henter utfordring...');
+    setTimeout(async()=>{
+      S.mood='Klar for galskap';S.time='30 min';S.players=1;
+      const c=await joinCode(inviteCode);
+      if(c)showChallenge(c);
+      else{const ch=getChallenge();showChallenge(ch);}
+      // Clean URL
+      window.history.replaceState({},'',window.location.pathname);
+    },1200);
+  }
 }
 </script>
 </body>

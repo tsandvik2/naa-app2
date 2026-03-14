@@ -505,6 +505,7 @@ export function HomeClient({ userId }: HomeClientProps) {
                       if (opt.value === 1) {
                         startChallenge();
                       } else {
+                        toast.info("Velger venner...");
                         setShowFriendSelector(true);
                       }
                     }}

@@ -501,10 +501,11 @@ export function HomeClient({ userId }: HomeClientProps) {
                       setWizardPlayers(opt.value);
                       if (opt.value === 1) {
                         // Solo: go straight to challenge
-                        setTimeout(startChallenge, 300);
+                        // Zustand set() is synchronous so getState() sees players immediately
+                        startChallenge();
                       } else {
-                        // Group: go to friend selector (step 3)
-                        setTimeout(() => setWizardStep(3), 300);
+                        // Group: show friend selector
+                        setWizardStep(3);
                       }
                     }}
                     animationDelay={`${i * 0.4}s`}

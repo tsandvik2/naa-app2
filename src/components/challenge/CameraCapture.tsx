@@ -168,12 +168,12 @@ export function CameraCapture({
 
         {/* Actions */}
         <div
-          className="absolute bottom-0 left-0 right-0 flex flex-col gap-2.5 px-5 pb-8 pt-10"
-          style={{ background: "linear-gradient(0deg, rgba(0,0,0,.95), transparent)" }}
+          className="absolute bottom-0 left-0 right-0 flex flex-col gap-2.5 px-5 pt-10"
+          style={{
+            background: "linear-gradient(0deg, rgba(0,0,0,.95), transparent)",
+            paddingBottom: "max(32px, env(safe-area-inset-bottom))",
+          }}
         >
-          <div className="text-[13px] font-extrabold uppercase tracking-widest text-center text-white/60 mb-1">
-            Del bildet 🔥
-          </div>
           <button
             onClick={confirmPhoto}
             className="w-full py-[17px] rounded-2xl font-extrabold text-base active:scale-[0.97] transition-all"
@@ -186,6 +186,12 @@ export function CameraCapture({
             className="w-full py-3 rounded-2xl font-bold text-[13px] text-[#55556a] border border-white/10 active:scale-[0.97]"
           >
             ↩ Ta nytt bilde
+          </button>
+          <button
+            onClick={onClose}
+            className="w-full py-3 rounded-2xl font-bold text-[13px] text-[#55556a] active:scale-[0.97]"
+          >
+            ✕ Avbryt
           </button>
         </div>
       </div>
@@ -202,6 +208,15 @@ export function CameraCapture({
         muted
       />
       <canvas ref={canvasRef} className="hidden" />
+
+      {/* Back button – top left, always visible */}
+      <button
+        onClick={onClose}
+        className="absolute top-0 left-0 z-20 flex items-center gap-1.5 text-white font-bold text-sm px-4 py-3 active:opacity-60"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 16px) + 12px)", textShadow: "0 1px 4px rgba(0,0,0,.8)" }}
+      >
+        ← Avbryt
+      </button>
 
       {/* Filter overlay */}
       <div

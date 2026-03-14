@@ -682,7 +682,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
         </div>
       </div>
     </div>
-    <!-- Camera button - shown when challenge needs photo/video -->
+    <!-- Camera button -->
     <div class="camera-btn" id="camera-btn" onclick="openCamera()">
       <div class="camera-btn-icon">📸</div>
       <div>
@@ -691,16 +691,10 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
       </div>
       <span style="font-size:20px;color:var(--cyan);margin-left:auto">›</span>
     </div>
+    <!-- STRAFF — rett under utfordringen -->
     <div class="punish" id="punish" style="display:none">
       <div class="punish-lbl">😈 Straff for taperen</div>
       <div class="punish-txt" id="punish-txt"></div>
-    </div>
-    <div class="friend-box" id="friend-box">
-      <div class="friend-box-top">
-        <div><div class="friend-box-title">👯 Spill med venn</div><div class="friend-box-sub">Send koden – dere gjør samme utfordring</div></div>
-        <div class="friend-code" id="friend-code">NÅ-???</div>
-      </div>
-      <button class="btn btn-snap" onclick="snapChallenge()">👻 Send kode på Snapchat</button>
     </div>
     <!-- TIMER BAR -->
     <div class="timer-bar" id="timer-bar">
@@ -781,6 +775,14 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
       </div>
 
       <button class="btn btn-primary" style="margin-top:16px" onclick="nextChallenge()">Neste utfordring 🎯</button>
+    </div>
+    <!-- SPILL MED VENN — nederst -->
+    <div class="friend-box" id="friend-box">
+      <div class="friend-box-top">
+        <div><div class="friend-box-title">👯 Spill med venn</div><div class="friend-box-sub">Send koden – dere gjør samme utfordring</div></div>
+        <div class="friend-code" id="friend-code">NÅ-???</div>
+      </div>
+      <button class="btn btn-snap" onclick="snapChallenge()">👻 Send kode på Snapchat</button>
     </div>
     <div class="skip-bar" id="skip-bar">
       <button class="btn btn-ghost skip-btn" onclick="skipChallenge()">⏭ Hopp over <span class="skip-cost">−5 pts</span></button>

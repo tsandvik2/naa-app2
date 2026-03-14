@@ -522,22 +522,6 @@ export function HomeClient({ userId }: HomeClientProps) {
             </div>
           )}
 
-          {/* Step 3: Friend selector (group only) */}
-          {showFriendSelector && (
-            <FriendSelector
-              userId={userId}
-              selectedFriends={wizard.selectedFriends}
-              onSelect={setSelectedFriends}
-              onConfirm={() => {
-                setShowFriendSelector(false);
-                startChallenge();
-              }}
-              onBack={() => {
-                setShowFriendSelector(false);
-                setWizardStep(2);
-              }}
-            />
-          )}
 
           {/* Join pill */}
           {!showFriendSelector && currentStep < 3 && (
@@ -1097,6 +1081,23 @@ export function HomeClient({ userId }: HomeClientProps) {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Friend selector – full-screen overlay so it's always visible */}
+      {showFriendSelector && (
+        <FriendSelector
+          userId={userId}
+          selectedFriends={wizard.selectedFriends}
+          onSelect={setSelectedFriends}
+          onConfirm={() => {
+            setShowFriendSelector(false);
+            startChallenge();
+          }}
+          onBack={() => {
+            setShowFriendSelector(false);
+            setWizardStep(2);
+          }}
+        />
       )}
     </div>
   );

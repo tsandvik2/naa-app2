@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { LoadingDots } from "@/components/shared/LoadingDots";
 import type { SelectedFriend } from "@/store/app-store";
@@ -21,6 +22,7 @@ interface FriendRow {
 }
 
 export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, onBack }: FriendSelectorProps) {
+  const router = useRouter();
   const [friends, setFriends] = useState<FriendRow[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -78,14 +80,21 @@ export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, o
 
       {friends.length === 0 ? (
         <div
-          className="rounded-[18px] py-8 px-5 text-center"
+          className="rounded-[18px] py-6 px-5 text-center"
           style={{ background: "#111118", border: "1.5px solid rgba(255,255,255,0.063)" }}
         >
-          <div className="text-[48px] mb-3">👻</div>
-          <div className="text-base font-extrabold mb-1.5">Ingen venner ennå</div>
-          <div className="text-sm text-[#55556a] leading-relaxed">
-            Legg til venner i Venner-fanen først!
+          <div className="text-[40px] mb-2">👻</div>
+          <div className="text-base font-extrabold mb-1">Ingen venner ennå</div>
+          <div className="text-sm text-[#55556a] leading-relaxed mb-4">
+            Legg til venner med vennekode – så dukker de opp her neste gang!
           </div>
+          <button
+            onClick={() => router.push("/friends")}
+            className="w-full py-3 rounded-2xl font-bold text-sm text-white active:scale-[0.97] transition-all"
+            style={{ background: "linear-gradient(135deg, #ff2d55, #ff6b00)" }}
+          >
+            ➕ Legg til venner nå
+          </button>
         </div>
       ) : (
         <div className="flex flex-col gap-2">

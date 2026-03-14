@@ -150,18 +150,18 @@ export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, o
           boxShadow: "0 8px 32px rgba(255,45,85,0.45)",
         }}
       >
-        {friends.length === 0 ? "Start uten venner i appen" : "Start utfordring 🔥"}
+        {selectedFriends.length > 0
+          ? `Start med ${selectedFriends.length} venn${selectedFriends.length > 1 ? "er" : ""} 🔥`
+          : "Start utfordring 🔥"}
       </button>
 
-      {friends.length === 0 && (
-        <button
-          onClick={onConfirm}
-          className="w-full mt-2 py-3 rounded-2xl font-bold text-sm text-[#55556a] active:scale-[0.97] transition-all"
-          style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.063)" }}
-        >
-          Spiller med folk uten appen
-        </button>
-      )}
+      <button
+        onClick={onConfirm}
+        className="w-full mt-2 py-3 rounded-2xl font-bold text-sm text-[#55556a] active:scale-[0.97] transition-all"
+        style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.063)" }}
+      >
+        Fortsett uten venner i appen
+      </button>
 
       <button
         onClick={onBack}

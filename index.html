@@ -841,6 +841,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     <div class="badges-title">🏅 BADGES</div>
     <div class="badges-g" id="badges-g"></div>
     <button class="btn btn-ghost" onclick="resetOnboarding()">✏️ Endre profil</button>
+    <button class="btn btn-ghost" style="color:var(--red);border-color:rgba(255,45,85,.2);margin-top:4px;" onclick="if(confirm('Nullstill alt og se startsiden?')){localStorage.clear();location.reload();}">🔄 Se startside igjen</button>
   </div>
 
   <!-- FRIENDS -->

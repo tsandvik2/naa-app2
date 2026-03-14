@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NÅ – Hva gjør vi nå?
 
-## Getting Started
+> Slutt å scrolle. Begynn å leve.
 
-First, run the development server:
+A mobile-first Next.js web app for challenge-based social interaction. Users get random challenges matched to their mood and situation, capture proof with the camera, earn points, and compete on the leaderboard.
+
+## Stack
+
+- **Framework**: Next.js 14+ (App Router)
+- **Backend**: Supabase (auth, database, storage)
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Language**: TypeScript (strict, no `any`)
+- **State**: Zustand with local persistence
+- **Fonts**: Bebas Neue + Plus Jakarta Sans
+
+## Features
+
+- 🎯 Challenge wizard (mood → time → players → personalized challenge)
+- 📸 Camera capture with TikTok-style NÅ filter overlay
+- 🔥 Streak tracking and points system
+- 🏆 Leaderboard from Supabase
+- 👯 Friends system with shareable friend codes
+- 📱 PWA-ready, mobile-first design (max-width 430px)
+- 🌙 Dark mode by default
+- 📲 Deep-link sharing to Snapchat, Instagram, TikTok, SMS
+- 🎯 Daily challenge with reset logic
+
+## Setup
+
+### 1. Clone and install
+
+```bash
+git clone <repo>
+cd naa-app2
+npm install
+```
+
+### 2. Set up Supabase
+
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Run the migration in `supabase/migrations/001_initial_schema.sql` via the SQL editor in your Supabase dashboard
+3. Enable **Email** authentication under Authentication → Providers
+4. The storage bucket `proofs` is created automatically by the migration
+
+### 3. Configure environment variables
+
+```bash
+cp .env.local.example .env.local
+```
+
+Edit `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+```
+
+Find these values in your Supabase project under Settings → API.
+
+### 4. Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/
+    (auth)/
+      login/          ← Login page
+      signup/         ← Signup page
+    (app)/
+      home/           ← Challenge wizard + full challenge flow
+      today/          ← Daily challenge + weekly stats
+      leaderboard/    ← Points leaderboard
+      friends/        ← Friends management (add by code, pending requests)
+      profile/        ← User profile, streak, history, badges, logout
+  components/
+    challenge/        ← Onboarding, WizardChip, ChallengeCard, CameraCapture, ShareSheet
+    layout/           ← AppHeader, BottomNav
+    shared/           ← LoadingDots, MeshBackground
+    ui/               ← shadcn primitives (button, input, card, sonner)
+  lib/
+    supabase/         ← client.ts, server.ts, middleware.ts
+    challenges/       ← Challenge data, picker logic, avatar list
+    types/            ← database.ts (typed Supabase schema)
+  store/
+    app-store.ts      ← Zustand store (profile, wizard, challenge state)
+supabase/
+  migrations/
+    001_initial_schema.sql   ← Full schema + RLS policies + storage bucket
+```
 
-## Learn More
+## Database Schema
 
-To learn more about Next.js, take a look at the following resources:
+```sql
+profiles     -- id (auth.users FK), username, avatar_url, age_group,
+             -- friend_code (unique), pts, streak, best_streak, done_count,
+             -- daily_done, daily_date, last_seen, created_at
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+challenges   -- id, title, description, category, difficulty,
+             -- requires_camera, punishment, is_group, min_players, created_at
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+completions  -- id, user_id (FK), challenge_id (FK nullable), challenge_text,
+             -- photo_url, pts_earned, completed_at
 
-## Deploy on Vercel
+friendships  -- id, from_user_id (FK), to_user_id (FK),
+             -- status (pending|accepted), created_at
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Row Level Security
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **profiles**: Public read, own write only
+- **challenges**: Public read
+- **completions**: Own read/write (users can only insert their own)
+- **friendships**: Users can only read/create their own; accept only when recipient
+- **storage (proofs)**: Public read, authenticated write
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/public API key |
+
+## Deployment
+
+```bash
+npx vercel --prod
+```
+
+Add environment variables in the Vercel dashboard under Settings → Environment Variables.

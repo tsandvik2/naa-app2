@@ -87,17 +87,22 @@ export function HomeClient({ userId }: HomeClientProps) {
     return () => clearTimeout(id);
   }, [timerActive, timerSeconds]);
 
-  const startChallenge = useCallback(() => {
-    if (!wizard.mood || !wizard.time || !wizard.players) {
+  function startChallenge() {
+    // Use getState() to always get fresh wizard values
+    const state = useAppStore.getState();
+    const w = state.wizard;
+    const age = state.profile.ageGroup;
+
+    if (!w.mood || !w.time || !w.players) {
       toast.error("Velg alle alternativene først");
       return;
     }
 
     const challenge = pickChallenge({
-      mood: wizard.mood,
-      time: wizard.time,
-      players: wizard.players,
-      ageGroup: profile.ageGroup,
+      mood: w.mood,
+      time: w.time,
+      players: w.players,
+      ageGroup: age,
     });
     setCurrentChallenge(challenge);
     setHasProof(false);
@@ -116,7 +121,7 @@ export function HomeClient({ userId }: HomeClientProps) {
       clearInterval(msgInterval);
       setScreen("reveal");
     }, 2000);
-  }, [wizard, profile.ageGroup, setCurrentChallenge, setProofPhotoUrl, setHasShared]);
+  }
 
   function startRevealCountdown() {
     setScreen("countdown");
@@ -153,23 +158,50 @@ export function HomeClient({ userId }: HomeClientProps) {
     toast.success("Bevis tatt! 📸");
   }
 
-  async function handleShareToSocial(platform: "snap" | "insta") {
+  async function handleShareToSocial(platform: "snap" | "insta" | "native") {
     const text = `Jeg fullførte NÅ-utfordringen: "${currentChallenge?.text}" 🔥 Last ned NÅ-appen!`;
-    await navigator.clipboard?.writeText(text).catch(() => {});
 
-    if (platform === "snap") {
-      window.location.href = "snapchat://";
-    } else {
-      window.location.href = "instagram://camera";
+    // Try native share with image first (works great on mobile)
+    if (platform === "native" || (navigator.share && proofPhotoUrl)) {
+      try {
+        const shareData: ShareData = {
+          title: "NÅ – Utfordring fullført!",
+          text,
+        };
+
+        // Try to share image file if we have proof
+        if (proofPhotoUrl) {
+          try {
+            const blob = await fetch(proofPhotoUrl).then((r) => r.blob());
+            const file = new File([blob], "na-bevis.jpg", { type: "image/jpeg" });
+            if (navigator.canShare?.({ files: [file] })) {
+              shareData.files = [file];
+            }
+          } catch {
+            // Image share not supported, share text only
+          }
+        }
+
+        await navigator.share(shareData);
+        setHasShared(true);
+        toast.success("Delt! Marker som fullført 🎉");
+        return;
+      } catch {
+        // User cancelled or share failed, fall through to deep link
+      }
     }
 
-    // Mark as shared after attempting to open app
+    // Fallback: copy text + open app
+    await navigator.clipboard?.writeText(text).catch(() => {});
     setHasShared(true);
-    setTimeout(() => {
-      if (!document.hidden) {
-        toast.info(`Åpner ${platform === "snap" ? "Snapchat" : "Instagram"} — lim inn teksten!`);
-      }
-    }, 1000);
+
+    if (platform === "snap") {
+      window.open("snapchat://", "_blank");
+    } else if (platform === "insta") {
+      window.open("instagram://camera", "_blank");
+    }
+
+    toast.success("Tekst kopiert! Del det i appen 📲");
   }
 
   async function handleComplete() {
@@ -520,6 +552,13 @@ export function HomeClient({ userId }: HomeClientProps) {
       {screen === "loading" && (
         <div className="mt-3.5">
           <LoadingDots text={loadMsg} />
+          <button
+            onClick={backToSetup}
+            className="w-full mt-6 py-3 rounded-2xl font-bold text-[13px] text-[#55556a] active:scale-[0.97] transition-all"
+            style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.063)" }}
+          >
+            ← Avbryt
+          </button>
         </div>
       )}
 
@@ -691,6 +730,13 @@ export function HomeClient({ userId }: HomeClientProps) {
             >
               Til utfordringen →
             </button>
+            <button
+              onClick={backToSetup}
+              className="w-full py-3 rounded-2xl font-bold text-[13px] text-[#55556a] active:scale-[0.97] transition-all"
+              style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.063)" }}
+            >
+              ← Tilbake
+            </button>
           </div>
         </div>
       )}
@@ -857,21 +903,34 @@ export function HomeClient({ userId }: HomeClientProps) {
 
               {/* Share buttons (required for solo) */}
               {(!currentChallenge.cam || hasProof) && !hasShared && (
-                <div className="flex gap-2 mb-2">
+                <div className="flex flex-col gap-2 mb-2">
                   <button
-                    onClick={() => handleShareToSocial("snap")}
-                    className="flex-1 py-3.5 rounded-2xl text-sm font-extrabold active:scale-[0.93] transition-all flex items-center justify-center gap-2"
-                    style={{ background: "linear-gradient(135deg,#fffc00,#ffd000)", color: "#000" }}
+                    onClick={() => handleShareToSocial("native")}
+                    className="w-full py-4 rounded-2xl text-base font-extrabold active:scale-[0.97] transition-all flex items-center justify-center gap-2"
+                    style={{
+                      background: "linear-gradient(135deg, #ff2d55, #ff6b00)",
+                      color: "#fff",
+                      boxShadow: "0 8px 32px rgba(255,45,85,0.35)",
+                    }}
                   >
-                    👻 Snap
+                    📲 Del bevis (Snap / Insta / annet)
                   </button>
-                  <button
-                    onClick={() => handleShareToSocial("insta")}
-                    className="flex-1 py-3.5 rounded-2xl text-sm font-extrabold active:scale-[0.93] transition-all flex items-center justify-center gap-2"
-                    style={{ background: "linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)", color: "#fff" }}
-                  >
-                    📸 Insta
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleShareToSocial("snap")}
+                      className="flex-1 py-3 rounded-2xl text-sm font-extrabold active:scale-[0.93] transition-all flex items-center justify-center gap-2"
+                      style={{ background: "linear-gradient(135deg,#fffc00,#ffd000)", color: "#000" }}
+                    >
+                      👻 Snap
+                    </button>
+                    <button
+                      onClick={() => handleShareToSocial("insta")}
+                      className="flex-1 py-3 rounded-2xl text-sm font-extrabold active:scale-[0.93] transition-all flex items-center justify-center gap-2"
+                      style={{ background: "linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)", color: "#fff" }}
+                    >
+                      📸 Insta
+                    </button>
+                  </div>
                 </div>
               )}
 

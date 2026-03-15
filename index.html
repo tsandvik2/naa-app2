@@ -2597,6 +2597,9 @@ function startRecording(){
 
   // Start canvas stream
   const canvasStream=canvas.captureStream(30);
+  // Legg til lydspor fra kamera
+  const audioTracks=camStream.getAudioTracks();
+  if(audioTracks.length>0)canvasStream.addTrack(audioTracks[0]);
   const mimeType=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':
                  MediaRecorder.isTypeSupported('video/webm')?'video/webm':'';
   try{
@@ -2659,7 +2662,7 @@ async function startCamStream(){
   try{
     if(camStream){camStream.getTracks().forEach(t=>t.stop());}
     camStream=await navigator.mediaDevices.getUserMedia({
-      video:{facingMode,width:{ideal:1280},height:{ideal:720}},audio:false
+      video:{facingMode,width:{ideal:1280},height:{ideal:720}},audio:true
     });
     const video=document.getElementById('cam-video');
     video.srcObject=camStream;

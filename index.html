@@ -786,6 +786,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
         <div class="friend-code" id="friend-code">NÅ-???</div>
       </div>
       <button class="btn btn-snap" onclick="snapChallenge()">👻 Send kode på Snapchat</button>
+      <button class="btn btn-ghost" style="font-size:13px;padding:10px;margin-top:6px;" onclick="document.getElementById('friend-box').classList.remove('show')">✕ Avbryt</button>
     </div>
     <div class="skip-bar" id="skip-bar">
       <button class="btn btn-ghost skip-btn" onclick="skipChallenge()">⏭ Hopp over <span class="skip-cost">−5 pts</span></button>
@@ -1939,6 +1940,12 @@ function getChallenge(){
   }
   else if(isMed){pool=isGroup?DB.medium.group:DB.medium.solo;level='medium';}
   else{pool=isGroup?DB.easy.group:DB.easy.solo;level='easy';}
+  // Filtrer bort gruppe-ord i solo-pool
+  if(!isGroup){
+    const groupWords=['alle ','gjengen','dere ','hverandre','resten','synkroniser','menneskepyramide'];
+    const filtered=pool.filter(c=>!groupWords.some(w=>c.text.toLowerCase().includes(w)));
+    if(filtered.length>0)pool=filtered;
+  }
   return{...pool[Math.floor(Math.random()*pool.length)],level};
 }
 

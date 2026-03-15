@@ -1841,11 +1841,9 @@ function completeDaily(){
 // ══════════════════════════════════════════
 function getSpecialDay(){const d=new Date().getDay();return d===3?'wed':(d>=5||d===0)?'wknd':null}
 function renderSpecialBanner(){
-  const sp=getSpecialDay();
+  // Skjult — reservert for premium-funksjoner
   const el=document.getElementById('special-banner');
-  if(!sp){el.innerHTML='';return;}
-  const s=SPECIAL[sp];
-  el.innerHTML=`<div class="special ${s.cls}" onclick="useSpecial()"><div class="spec-shine"></div><div class="spec-icon">${sp==='wed'?'🔮':'🎉'}</div><div><div class="spec-pill">${s.tag}</div><div class="spec-title">${s.title}</div><div class="spec-hint">Trykk for spesialutfordring →</div></div></div>`;
+  if(el)el.innerHTML='';
 }
 function useSpecial(){
   const sp=getSpecialDay();if(!sp)return;

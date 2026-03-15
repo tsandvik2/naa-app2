@@ -38,8 +38,11 @@ export function ShareSheet({ challengeText, username, photoUrl, pts, onNext }: S
     }
   }
 
-  async function quickShare(platform: "snap" | "insta" | "tiktok" | "sms") {
-    const text = `Jeg fullførte NÅ-utfordringen: "${challengeText}" 🔥 Last ned NÅ-appen!`;
+  async function quickShare(platform: "snap" | "insta" | "tiktok" | "sms", mode: "complete" | "invite" = "complete") {
+    const appUrl = typeof window !== "undefined" ? window.location.origin : "https://naa-app2.vercel.app";
+    const text = mode === "invite"
+      ? `Jeg utfordrer deg: "${challengeText}" 🔥 Klarer du det? Last ned NÅ-appen: ${appUrl}`
+      : `Jeg fullførte NÅ-utfordringen: "${challengeText}" 🔥 Last ned NÅ-appen: ${appUrl}`;
 
     await navigator.clipboard?.writeText(text).catch(() => {});
 
@@ -73,19 +76,20 @@ export function ShareSheet({ challengeText, username, photoUrl, pts, onNext }: S
   }
 
   async function handleNativeShare() {
+    const appUrl = typeof window !== "undefined" ? window.location.origin : "https://naa-app2.vercel.app";
     if (navigator.share) {
       try {
         await navigator.share({
           title: "NÅ – Utfordring fullført!",
           text: `Jeg fullførte: "${challengeText}" 🔥`,
-          url: window.location.origin,
+          url: appUrl,
         });
       } catch {
         // User cancelled
       }
     } else {
       await navigator.clipboard?.writeText(
-        `Jeg fullførte NÅ-utfordringen: "${challengeText}" 🔥`
+        `Jeg fullførte NÅ-utfordringen: "${challengeText}" 🔥 ${appUrl}`
       );
       toast.success("Kopiert til utklippstavle!");
     }
@@ -182,24 +186,24 @@ export function ShareSheet({ challengeText, username, photoUrl, pts, onNext }: S
       </div>
 
       <div className="text-sm font-extrabold text-white mb-1">👯 Utfordre en venn!</div>
-      <div className="text-xs text-[#55556a] mb-3">Send utfordringen direkte</div>
+      <div className="text-xs text-[#55556a] mb-3">Send utfordringen og se om de klarer det</div>
 
       <div className="flex gap-2.5 justify-center mb-4">
         <button
-          onClick={() => quickShare("snap")}
+          onClick={() => quickShare("snap", "invite")}
           className="flex-1 flex flex-col items-center gap-1.5 py-3.5 rounded-2xl border-none cursor-pointer transition-all active:scale-[0.93]"
           style={{ background: "linear-gradient(135deg,#fffc00,#ffd000)" }}
         >
           <span className="text-[26px]">👻</span>
-          <span className="text-[11px] font-extrabold text-black">Send på Snap</span>
+          <span className="text-[11px] font-extrabold text-black">Utfordre på Snap</span>
         </button>
         <button
-          onClick={() => quickShare("sms")}
+          onClick={() => quickShare("sms", "invite")}
           className="flex-1 flex flex-col items-center gap-1.5 py-3.5 rounded-2xl border-none cursor-pointer transition-all active:scale-[0.93]"
           style={{ background: "linear-gradient(135deg,#30d158,#00a86b)" }}
         >
           <span className="text-[26px]">💬</span>
-          <span className="text-[11px] font-extrabold text-white">Send SMS</span>
+          <span className="text-[11px] font-extrabold text-white">Utfordre via SMS</span>
         </button>
       </div>
 

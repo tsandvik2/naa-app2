@@ -98,8 +98,8 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 .install-arrow{font-size:20px;color:var(--cyan);flex-shrink:0;margin-left:auto}
 
 /* ══ HEADER ══ */
-.header{padding:48px 0 6px;display:flex;align-items:flex-end;justify-content:space-between}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:62px;line-height:.9;letter-spacing:2px;background:linear-gradient(135deg,#fff,#ffffff70);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(255,45,85,.6))}
+.header{padding:56px 0 6px;display:flex;align-items:flex-end;justify-content:space-between}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:62px;line-height:1.1;letter-spacing:2px;overflow:visible;background:linear-gradient(135deg,#fff,#ffffff70);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(255,45,85,.6))}
 .logo-sub{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .user-pill{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px 6px 8px;cursor:pointer;transition:all .15s}
 .user-pill:active{transform:scale(.95)}
@@ -350,7 +350,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 .cam-video{width:100%;flex:1;object-fit:cover;background:#000}
 .cam-canvas{display:none}
 /* Filter overlay on video */
-.cam-filter{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:env(safe-area-inset-top,20px) 0 0}
+.cam-filter{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:env(safe-area-inset-top,20px) 0 0;z-index:5}
 /* TikTok-stil filter */
 .cam-filter-top{background:linear-gradient(180deg,rgba(0,0,0,.7),transparent);padding:16px 20px 32px;display:flex;align-items:center;justify-content:space-between}
 .cam-filter-logo{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;color:#fff;text-shadow:0 0 16px rgba(255,45,85,.9)}
@@ -373,7 +373,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 .cam-filter-corner.bl{bottom:6px;left:6px;border-width:0 0 2.5px 2.5px;border-radius:0 0 0 4px}
 .cam-filter-corner.br{bottom:6px;right:6px;border-width:0 2.5px 2.5px 0;border-radius:0 0 4px 0}
 /* Camera controls */
-.cam-controls{position:absolute;bottom:0;left:0;right:0;padding:20px 24px max(32px,env(safe-area-inset-bottom));background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.cam-controls{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:20px 24px max(32px,env(safe-area-inset-bottom));background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);display:flex;align-items:center;justify-content:space-between;gap:16px}
 .cam-close{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .cam-shutter{width:72px;height:72px;border-radius:50%;background:#fff;border:4px solid rgba(255,255,255,.4);cursor:pointer;transition:all .15s;flex-shrink:0}
 .cam-shutter:active{transform:scale(.88)}
@@ -442,10 +442,10 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 .te-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;margin-bottom:8px;color:var(--red)}
 .te-sub{font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:24px}
 /* ══ CAM MODE BAR ══ */
-.cam-mode-bar{position:absolute;bottom:110px;left:50%;transform:translateX(-50%);display:flex;gap:8px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border-radius:100px;padding:6px 8px;z-index:10}
+.cam-mode-bar{position:absolute;bottom:110px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border-radius:100px;padding:6px 8px;z-index:10}
 .cam-mode-btn{padding:8px 20px;border-radius:100px;border:none;background:transparent;color:rgba(255,255,255,.6);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
 .cam-mode-btn.active{background:#fff;color:#000}
-.cam-rec{position:absolute;top:20px;left:50%;transform:translateX(-50%);background:rgba(255,45,85,.9);color:#fff;font-size:13px;font-weight:800;padding:6px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;z-index:10}
+.cam-rec{position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:10;background:rgba(255,45,85,.9);color:#fff;font-size:13px;font-weight:800;padding:6px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;z-index:10}
 .cam-rec-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:recBlink 1s ease-in-out infinite}
 @keyframes recBlink{0%,100%{opacity:1}50%{opacity:0}}
 .cam-shutter.recording{background:var(--red);transform:scale(.8);border-radius:8px}
@@ -522,7 +522,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 
 <!-- ══ ONBOARDING ══ -->
 <div class="ob-screen active" id="ob0">
-  <div class="ob-logo">NÅ</div>
+  <div class="ob-logo">N<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;background:inherit;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Å</span></div>
   <div class="ob-tagline">Slutt å scrolle.<br>Begynn å leve.</div>
   <div class="ob-features">
     <div class="ob-feat"><div class="ob-feat-icon">🎯</div><div><div class="ob-feat-title">Utfordringer tilpasset deg</div><div class="ob-feat-desc">Basert på humør, tid og antall</div></div></div>
@@ -560,7 +560,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 <!-- ══ MAIN APP ══ -->
 <div class="app" id="main-app" style="display:none">
   <div class="header">
-    <div><div class="logo">NÅ</div><div class="logo-sub">Hva gjør vi nå?</div></div>
+    <div><div class="logo">N<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;">Å</span></div><div class="logo-sub">Hva gjør vi nå?</div></div>
     <div class="user-pill" onclick="navTo('s-profile','n2')">
       <span class="user-em" id="hdr-em">🔥</span>
       <div><div class="user-name" id="hdr-name">–</div><div class="user-pts" id="hdr-pts">0 pts</div></div>
@@ -618,15 +618,35 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     </div>
   </div>
 
+  <!-- GRUPPE VELGER -->
+  <div class="screen" id="s-group" style="flex-direction:column;gap:14px;padding-top:48px;">
+    <div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:1px;">HVEM ER MED? 👥</div>
+      <div style="font-size:13px;color:var(--muted);font-weight:600;margin-top:4px;">Velg hvem som spiller — de får poeng også!</div>
+    </div>
+    <div id="group-friends-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div style="background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:14px 16px;">
+      <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;">➕ Legg til noen som ikke er på listen</div>
+      <div style="display:flex;gap:8px;">
+        <input id="group-manual-input" placeholder="Navn..." style="flex:1;padding:11px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;outline:none;" oninput="" onkeydown="if(event.key==='Enter')addGroupManual()">
+        <button onclick="addGroupManual()" style="padding:11px 16px;background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;border:none;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;cursor:pointer;">Legg til</button>
+      </div>
+    </div>
+    <div id="group-selected-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+    <button class="btn btn-primary" style="font-size:16px;padding:17px;" onclick="confirmGroup()">Klar! Start utfordring 🚀</button>
+    <button class="btn btn-ghost" style="font-size:13px;padding:12px;" onclick="show('s-setup');wizNext(2);">← Endre antall</button>
+  </div>
+
   <!-- REVEAL -->
   <div class="screen" id="s-reveal" style="flex-direction:column;align-items:center;padding:40px 0 20px;gap:0;">
     <div style="text-align:center;margin-bottom:32px;">
       <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;" id="reveal-summary-label">Klar til å starte?</div>
       <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;" id="reveal-tags"></div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:88px;letter-spacing:6px;color:var(--text);line-height:1;margin-bottom:6px;filter:drop-shadow(0 0 24px rgba(255,45,85,.5));">NÅ</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:88px;letter-spacing:6px;color:var(--text);line-height:1;margin-bottom:6px;filter:drop-shadow(0 0 24px rgba(255,45,85,.5));">N<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;">Å</span></div>
       <div style="font-size:15px;color:var(--muted);font-weight:500;">Din utfordring venter</div>
     </div>
     <button class="btn btn-primary" style="width:100%;font-size:17px;padding:18px;" onclick="startRevealCountdown()">START UTFORDRING</button>
+    <button class="btn btn-ghost" style="font-size:13px;padding:11px;margin-top:6px;" onclick="backToSetup()">← Endre valg</button>
   </div>
 
   <!-- COUNTDOWN -->
@@ -736,45 +756,28 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
       <div class="result-pts" id="result-pts">0</div>
       <div class="result-pts-lbl">POENG TOTALT</div>
 
-      <!-- STEG 1: Del video -->
-      <div class="share-section" id="share-step1">
-        <div class="share-title">📲 Del på sosiale medier</div>
-        <div class="share-subtitle">Lagrer video til kamera → åpner appen</div>
+      <!-- DEL -->
+      <div style="margin-top:16px;">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">Del med verden +5 pts 🔥</div>
         <div class="share-btns-row">
-          <button class="share-big-btn share-tiktok" onclick="quickShare('tiktok')">
+          <button class="share-big-btn share-tiktok" onclick="shareAndGetPoints('tiktok')">
             <span class="sbb-icon">🎵</span>
             <span class="sbb-label">TikTok</span>
           </button>
-          <button class="share-big-btn share-snap" onclick="quickShare('snap')">
+          <button class="share-big-btn share-snap" onclick="shareAndGetPoints('snap')">
             <span class="sbb-icon">👻</span>
             <span class="sbb-label">Snapchat</span>
           </button>
-          <button class="share-big-btn share-insta" onclick="quickShare('insta')">
+          <button class="share-big-btn share-insta" onclick="shareAndGetPoints('insta')">
             <span class="sbb-icon">📸</span>
             <span class="sbb-label">Reels</span>
           </button>
         </div>
-        <button class="btn-cam-result" onclick="openCameraFromResult()">🎥 Film med NÅ-filter først</button>
       </div>
 
-      <!-- STEG 2: Utfordre venn -->
-      <div class="share-section" id="share-step2">
-        <div class="share-divider">— eller —</div>
-        <div class="share-title">👯 Utfordre en venn!</div>
-        <div class="share-subtitle">Send utfordringen direkte — de får samme utfordring</div>
-        <div class="share-btns-row">
-          <button class="share-big-btn share-snap" onclick="inviteFriend('snap')">
-            <span class="sbb-icon">👻</span>
-            <span class="sbb-label">Send på Snap</span>
-          </button>
-          <button class="share-big-btn share-sms" onclick="inviteFriend('sms')">
-            <span class="sbb-icon">💬</span>
-            <span class="sbb-label">Send SMS</span>
-          </button>
-        </div>
-      </div>
-
-      <button class="btn btn-primary" style="margin-top:16px" onclick="nextChallenge()">Neste utfordring 🎯</button>
+      <!-- NESTE -->
+      <button class="btn btn-primary" style="margin-top:14px;font-size:18px;padding:18px;letter-spacing:.3px;" onclick="nextChallenge()">🎯 Neste utfordring!</button>
+      <button class="btn btn-ghost" style="font-size:13px;padding:11px;margin-top:6px;" onclick="inviteFriend('snap')">👻 Utfordre en venn på Snap</button>
     </div>
     <!-- SPILL MED VENN — nederst -->
     <div class="friend-box" id="friend-box">
@@ -864,7 +867,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
           <div class="my-code-label">👤 Din vennekode</div>
           <div class="my-code-sub">Del denne så venner kan legge deg til</div>
         </div>
-        <div class="my-code-val" id="my-code-val">NÅ-???</div>
+        <div class="my-code-val" id="my-code-val" onclick="copyMyCode()" style="cursor:pointer;" title="Trykk for å kopiere">NÅ-???</div>
       </div>
       <div style="display:flex;gap:8px;margin-top:12px">
         <button class="btn btn-snap" style="flex:1;padding:13px;font-size:14px" onclick="shareMyCode('snap')">👻 Send på Snap</button>
@@ -890,7 +893,13 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
       <div class="friends-empty">
         <div style="font-size:48px;margin-bottom:12px">👻</div>
         <div style="font-size:16px;font-weight:800;margin-bottom:6px">Ingen venner ennå</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.5">Del koden din på Snapchat<br>og legg dem til her!</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6">
+          <strong style="color:#fff">Slik legger du til venner:</strong><br><br>
+          1️⃣ Trykk <strong style="color:#ff2d55">Send på Snap</strong> øverst<br>
+          2️⃣ Send meldingen til vennen<br>
+          3️⃣ De åpner lenken → godtar<br>
+          4️⃣ Dere er venner! 🎉
+        </div>
       </div>
     </div>
     <div id="friends-list"></div>
@@ -967,7 +976,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     <div class="cam-filter-corner br"></div>
     <!-- Top -->
     <div class="cam-filter-top">
-      <div class="cam-filter-logo">NÅ</div>
+      <div class="cam-filter-logo">N<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;">Å</span></div>
       <div class="cam-filter-tag" id="cam-filter-tag">🔥 Utfordring</div>
     </div>
     <!-- TikTok-side knapper -->
@@ -1001,10 +1010,28 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
   <div class="cam-rec" id="cam-rec" style="display:none">
     <span class="cam-rec-dot"></span> REC <span id="cam-rec-time">0:00</span>
   </div>
+  <!-- Utfordring popup — vises alltid når kamera åpnes -->
+  <div id="cam-challenge-popup" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.88);border:1.5px solid rgba(255,45,85,.4);border-radius:20px;padding:20px;text-align:center;z-index:20;display:none;max-width:280px;backdrop-filter:blur(10px);">
+    <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#ff2d55;margin-bottom:8px;">DIN UTFORDRING</div>
+    <div id="cam-popup-text" style="font-size:15px;font-weight:700;color:#fff;line-height:1.5;margin-bottom:16px;">–</div>
+    <button onclick="document.getElementById('cam-challenge-popup').style.display='none';" style="width:100%;padding:13px;background:#ff2d55;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;">Klar! Start filming 🎬</button>
+    <button onclick="closeCamera();" style="width:100%;padding:10px;background:transparent;color:rgba(255,255,255,.4);border:none;font-size:13px;cursor:pointer;margin-top:4px;">← Tilbake</button>
+  </div>
+
+  <!-- Filming hint — vises kun første gang -->
+  <div id="cam-hint" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.75);border-radius:16px;padding:16px 20px;text-align:center;z-index:20;display:none;max-width:260px;">
+    <div style="font-size:28px;margin-bottom:8px;">🎬</div>
+    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:6px;">Slik filmer du</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.5;margin-bottom:12px;">Film deg selv mens du gjør utfordringen. Trykk på den store knappen for å ta bilde eller start video!</div>
+    <button onclick="document.getElementById('cam-hint').style.display='none';localStorage.setItem('na_cam_hint','1');" style="width:100%;padding:11px;background:#ff2d55;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;">Skjønte det! 🔥</button>
+  </div>
   <div class="cam-controls">
-    <button class="cam-close" onclick="closeCamera()">✕</button>
+    <button class="cam-close" onclick="closeCamera()" title="Tilbake">✕</button>
     <button class="cam-shutter" id="cam-shutter" onclick="camShutterPress()"></button>
     <button class="cam-flip" onclick="flipCamera()">🔄</button>
+  </div>
+  <div style="position:absolute;top:max(env(safe-area-inset-top,16px),16px);left:16px;z-index:20;">
+    <button onclick="closeCamera()" style="background:rgba(0,0,0,.5);border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:100px;cursor:pointer;">← Tilbake</button>
   </div>
 </div>
 
@@ -1013,7 +1040,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
   <img class="cam-preview-img" id="cam-preview-img" src="" alt="">
   <div class="cam-preview-filter">
     <div class="cam-filter-top">
-      <div class="cam-filter-logo">NÅ</div>
+      <div class="cam-filter-logo">N<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;">Å</span></div>
       <div class="cam-filter-tag">Jeg ble utfordret!</div>
     </div>
     <div class="cam-filter-bottom">
@@ -1023,11 +1050,14 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     </div>
   </div>
   <div class="cam-preview-actions">
-    <div class="cam-preview-title">Del bildet 🔥</div>
+    <div class="cam-preview-title">Bra! Del det nå 🔥</div>
+    <div id="share-photo-hint" style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;">Trykk en knapp for å dele direkte 📲</div>
+    <script>if(/iPhone|iPad/.test(navigator.userAgent))document.getElementById('share-photo-hint').textContent='Trykk en knapp → iOS deleark åpnes 📲';</script>
     <button class="btn btn-snap" onclick="sharePhoto('snap')">👻 Del på Snapchat</button>
     <button class="btn btn-insta" onclick="sharePhoto('insta')">📸 Del på Instagram</button>
     <button class="btn btn-tiktok" onclick="sharePhoto('tiktok')">🎵 Del på TikTok</button>
     <button class="btn btn-ghost" style="font-size:13px;padding:12px" onclick="retakePhoto()">↩ Ta nytt bilde</button>
+    <button class="btn btn-ghost" style="font-size:12px;padding:10px;color:var(--muted)" onclick="closeCamPreview()">← Tilbake til utfordringen</button>
   </div>
 </div>
 
@@ -1036,7 +1066,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
   <video class="cam-preview-img" id="vid-preview-video" controls playsinline style="object-fit:cover;width:100%;height:100%"></video>
   <div class="cam-preview-filter" style="pointer-events:none">
     <div class="cam-filter-top">
-      <div class="cam-filter-logo">NÅ</div>
+      <div class="cam-filter-logo">N<span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;">Å</span></div>
       <div class="cam-filter-tag">Jeg ble utfordret!</div>
     </div>
     <div class="cam-filter-bottom">
@@ -1046,11 +1076,13 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     </div>
   </div>
   <div class="cam-preview-actions">
-    <div class="cam-preview-title">Del videoen 🔥</div>
+    <div class="cam-preview-title">Bra! Del videoen nå 🔥</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;">Trykk på en app → videoen lagres → åpnes der du kan poste</div>
     <button class="btn btn-tiktok" onclick="shareVideo('tiktok')">🎵 Del på TikTok</button>
     <button class="btn btn-insta" onclick="shareVideo('insta')">📸 Del på Reels</button>
     <button class="btn btn-snap" onclick="shareVideo('snap')">👻 Del på Snapchat</button>
     <button class="btn btn-ghost" style="font-size:13px;padding:12px" onclick="retakeVideo()">↩ Ta ny video</button>
+    <button class="btn btn-ghost" style="font-size:12px;padding:10px;color:var(--muted)" onclick="closeVidPreview()">← Tilbake til utfordringen</button>
   </div>
 </div>
 
@@ -1061,8 +1093,8 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 // ══════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════
-const S={mood:null,time:null,players:null,challenge:null,punishment:null,code:null,wizStep:0,needsCamera:false};
-let PL={name:'',emoji:'🔥',age:'16-19',pts:0,streak:0,best:0,done:0,history:[],earnedBadges:[],dailyDone:false,dailyDate:''};
+const S={mood:null,time:null,players:null,challenge:null,punishment:null,code:null,wizStep:0,needsCamera:false,groupMembers:[],pendingSharePlatform:null,sharedThisChallenge:false};
+let PL={name:'',emoji:'🔥',age:'16-19',pts:0,streak:0,best:0,done:0,history:[],earnedBadges:[],dailyDone:false,dailyDate:'',dailyPtsDate:'',dailyPtsCount:0,dailyShareDate:'',dailyShareCount:0,sharedChallenges:[]};
 let selectedEmoji='🔥';
 let selectedAge='16-19';
 let camStream=null;
@@ -1113,9 +1145,18 @@ async function sbSaveProfile(){
     done:PL.done,
     last_seen:new Date().toISOString()
   };
-  // Upsert by friend_code
-  await sbFetch('/rest/v1/profiles?friend_code=eq.'+encodeURIComponent(code),'DELETE');
-  await sbFetch('/rest/v1/profiles','POST',data);
+  // Upsert - oppdater hvis eksisterer, lag ny hvis ikke
+  const opts={
+    method:'POST',
+    headers:{
+      'apikey':SB_KEY,
+      'Authorization':'Bearer '+SB_KEY,
+      'Content-Type':'application/json',
+      'Prefer':'resolution=merge-duplicates'
+    },
+    body:JSON.stringify(data)
+  };
+  try{await fetch(SB_URL+'/rest/v1/profiles',opts);}catch(e){}
 }
 
 async function sbLookupFriend(code){
@@ -1156,9 +1197,20 @@ function showFriendRequestPopup(profile, fromCode){
 
 async function sbSendFriendRequest(toCode){
   const myCode=getMyCode();
-  if(myCode===toCode)return;
-  // Send kun pending forespørsel — venter på godkjenning
-  await sbFetch('/rest/v1/friendships','POST',{from_code:myCode,to_code:toCode,status:'pending'});
+  if(!myCode||myCode===toCode)return;
+  try{
+    const opts={
+      method:'POST',
+      headers:{
+        'apikey':SB_KEY,
+        'Authorization':'Bearer '+SB_KEY,
+        'Content-Type':'application/json',
+        'Prefer':'resolution=merge-duplicates'
+      },
+      body:JSON.stringify({from_code:myCode,to_code:toCode,status:'pending'})
+    };
+    await fetch(SB_URL+'/rest/v1/friendships',opts);
+  }catch(e){console.log('Friend request error:',e);}
 }
 
 async function sbAcceptFriendRequest(fromCode){
@@ -1219,7 +1271,8 @@ async function sbMarkCompleted(code){
 
 // ── Leaderboard from Supabase ──
 async function sbFetchLeaderboard(){
-  const res=await sbFetch('/rest/v1/profiles?select=name,emoji,pts,streak&order=pts.desc&limit=10');
+  // Kun folk med poeng, og hent friend_code for å identifisere deg selv
+  const res=await sbFetch('/rest/v1/profiles?select=name,emoji,pts,streak,friend_code&order=pts.desc&limit=20&pts=gt.0');
   return res||[];
 }
 
@@ -1284,23 +1337,26 @@ const DB={
       {text:"Tegn ansiktet ditt med feil hånd og post resultatet 🖐️",cat:"kreativ",cam:true},
       {text:"Legg deg på gulvet og ta et bilde rett opp i taket 📷",cat:"kreativ",cam:true},
       {text:"Skriv ned fem rare ting du har gjort denne uken 📝",cat:"kreativ"},
+      {text:"Finn ett objekt hjemme og gi det en dramatisk backstory på 30 sek 🎭",cat:"kreativ",cam:true},
+      {text:"Send en voice melding til en venn der du bare sier ett ord — veldig dramatisk 🎤",cat:"sosial"},
+      {text:"Ta bilde av noe som ser ut som et kjent emoji 😂",cat:"kreativ",cam:true},
     ],
     group:[
-      {text:"Alle lager et ansikt av maten sin – send bilde til gjengen. Stem på beste! 🍽️",cat:"kreativ",cam:true,p:"Taperen gjør en kylling-dans og filmer det 🐔"},
+      {text:"Alle lager et ansikt av maten sin – send bilde til gjengen. Stem på beste! 🍽️",cat:"kreativ",cam:true,p:"Taperen lager et nytt ansikt med maten og holder det i 30 sek 😂"},
       {text:"Hvem holder rett ansikt lengst mens de andre lager grimaser? 😐",cat:"sosial",cam:true,p:"Taperen gjør sin beste kylling-dans foran alle 🐔"},
       {text:"Alle skriver en 4-linjes rap om personen til høyre og leser høyt 🎤",cat:"kreativ",p:"Dårligste rapper synger sin rap som voice memo til alle 🎵"},
       {text:"Hvem finner den rareste tingen i lommen sin? Alle viser frem! 👜",cat:"sosial",cam:true,p:"Den med kjedeligst gjenstand bærer den som halskjede i 30 min 😄"},
       {text:"Alle tegner hverandre – 60 sekunder per portrett. Vis frem og stem i gjengen! 🖼️",cat:"kreativ",cam:true,p:"Dårligste kunstner bruker bildet som profilbilde i 12 timer 😂"},
-      {text:"Alle poserer som en kjent statue i 30 sekunder – stem på best! 🗿",cat:"kreativ",cam:true,p:"Taperen er DJ resten av kvelden 🎵"},
+      {text:"Alle poserer som en kjent statue i 30 sekunder – stem på best! 🗿",cat:"kreativ",cam:true,p:"Taperen holder statuepose i 1 minutt ekstra 🗿"},
       {text:"Synkroniser et hopp og ta bilde akkurat idet alle er i luften 🦘",cat:"fysisk",cam:true,p:"Den som ikke hopper høyt nok gjør 10 squats 🏋️"},
-      {text:"Alle lager verdens beste grimase – stem på hvem som vinner! 😜",cat:"sosial",cam:true,p:"Den med kjedeligst grimase gjør en kylling-dans 🐔"},
+      {text:"Alle lager verdens beste grimase – stem på hvem som vinner! 😜",cat:"sosial",cam:true,p:"Den med kjedeligst grimase holder den i 1 minutt på kamera 😂"},
       {text:"Alle skriver ned en morsom fakta om seg selv på papir, blander og leser opp 🤫",cat:"sosial",p:"Alle gjetter hvem som eier hvilken fakta 🕵️"},
       {text:"Hvem kan balansere flest ting på hodet? Film det! 🎩",cat:"fysisk",cam:true,p:"Taperen bærer én ting på hodet i 10 minutter 😂"},
     ]
   },
   medium:{
     solo:[
-      {text:"Hold 1 min seriøs tale: du er Norges beste kokk 👨‍🍳 Ingen latter tillatt!",cat:"kreativ",cam:true},
+      {text:"Hold 1 min seriøs tale: du er Norges beste TikTok-danser 💃 Ingen latter!",cat:"kreativ",cam:true},
       {text:"Send en overdramatisk unnskyldning til noen for noe HELT uviktig 😭",cat:"sosial"},
       {text:"Gå ut og finn noe blått innen 5 minutter – ta et kunstnerisk bilde 🔵",cat:"fysisk",cam:true},
       {text:"Bytt profilbilde til det mest dramatiske selfiet du kan ta – hold det 24 timer 📷",cat:"sosial",cam:true},
@@ -1330,29 +1386,29 @@ const DB={
       {text:"Alle lager en 15-sekunders stumfilm med det rundt dere. Stem på beste! 🎬",cat:"kreativ",cam:true,p:"Dårligste regissør spiller statist i neste film 🎭"},
       {text:"Send til den 7. i kontaktlisten: 'Du vet hva du har gjort.' Vent på svar 😂",cat:"sosial",p:"Den som ler først sender samme melding til to nye kontakter 💀"},
       {text:"Alle bytter telefon i 3 minutter og sender én melding til tilfeldig kontakt 📱",cat:"kaos",p:"Den som sender noe kjedelig velger neste utfordring 🎯"},
-      {text:"Gjengen lager salg-pitch for et hverdagsobjekt på 5 min – stem! 💼",cat:"kreativ",cam:true,p:"Dårligste selger bruker objektet som hatt hele kvelden 🎩"},
-      {text:"Alle finner et objekt ute og lager en felles skulptur av det 🌿",cat:"kreativ",cam:true,p:"Den som bidrar minst gjør kylling-dansen sin på kamera 🐔"},
+      {text:"Overbevis gjengen om at en tilfeldig gjenstand er det kuleste som finnes – stem! 💼",cat:"kreativ",cam:true,p:"Dårligste selger bruker objektet som hatt hele kvelden 🎩"},
+      {text:"Alle finner et objekt ute og lager en felles skulptur av det 🌿",cat:"kreativ",cam:true,p:"Den som bidrar minst navngir skulpturen og forsvarer den med full alvor 🌿"},
       {text:"Alle springer til et mål 50 meter unna – siste er taper 🏃",cat:"fysisk",p:"Taperen gjør 20 jumping jacks foran alle 😅"},
       {text:"Lag en menneskepyramide og ta bilde – holder dere i 5 sekunder? 🏋️",cat:"fysisk",cam:true,p:"Pyramiden må holdes dobbelt så lenge neste forsøk 💪"},
-      {text:"Alle finner en pinne ute og lager et kunstverk i bakken 🌾",cat:"kreativ",cam:true,p:"Det morsomste kunstverket velger neste utfordring 🎨"},
-      {text:"Synkronisert løping rundt en blokk – alle må holde samme tempo 🏃",cat:"fysisk",p:"Den som henger etter velger neste utfordring 🎯"},
+      {text:"Alle finner en pinne ute og lager et kunstverk i bakken 🌾",cat:"kreativ",cam:true,p:"Dårligste kunstverk bæres som hatt i 10 minutter 🎨"},
+      {text:"Synkronisert løping rundt en blokk – alle må holde samme tempo 🏃",cat:"fysisk",p:"Den som henger etter synger 10 sek av en barnesang 🎵"},
       {text:"Alle setter seg på huk og beveger seg som krabber fra A til B 🦀",cat:"fysisk",cam:true,p:"Tregeste krabben gjør det om igjen – dobbel distanse 😂"},
       {text:"Lag en tegneserie på fire ruter der dere forteller kvelden til nå 📖",cat:"kreativ",cam:true,p:"Dårligste tegner leser tegneserien høyt for alle 😄"},
-      {text:"Finn tre tilfeldige ting ute og lag et felles kunstverk – gi det en tittel 🎨",cat:"kreativ",cam:true,p:"Den som bidrar minst navngir verket og må forsvare tittelen 🖼️"},
+      {text:"Finn tre tilfeldige ting ute og lag et felles kunstverk – gi det en tittel 🎨",cat:"kreativ",cam:true,p:"Den som bidrar minst holder forsvarsappell for verket med full alvor 🖼️"},
       {text:"Alle velger en tilfeldig dans-stil og danser til samme sang – ingen stopp! 💃",cat:"fysisk",cam:true,p:"Den som stopper danser solo én ekstra runde 🕺"},
     ]
   },
   wild:{
     solo:[
       {text:"Gå i en butikk og spør helt seriøst etter energikrystaller til hunden din 🔮",cat:"sosial",cam:true},
-      {text:"Bestill på kafé med falsk aksent — hold den HELE veien 🎭",cat:"sosial",cam:true},
+      {text:"Snakk med falsk aksent til neste person du møter — hold den HELE veien 🎭",cat:"sosial",cam:true},
       {text:"Gå bort til en fremmed og si at du er STOR fan av arbeidet deres 🌟",cat:"sosial",cam:true},
       {text:"Ring noen og si kun 'Du vet hva du har gjort' og legg på 📞",cat:"kaos"},
       {text:"Ta en spontan selfie med den første fremmede som sier ja på gaten 🤳",cat:"sosial",cam:true},
       {text:"Gå inn i en butikk og spør om de har 'retroaktiv pizza'. Film reaksjonen 🎥",cat:"kaos",cam:true},
       {text:"Snakk KUN i spørsmål til neste person i 5 min 🤔 Ingen påstander!",cat:"sosial"},
       {text:"Si til en fremmed at du har mistet hunden din — beskriv en helt oppdiktet hund 🐕",cat:"kaos"},
-      {text:"Sit down on a random bench and pretend to wait for someone very important 🕴️",cat:"sosial"},
+      {text:"Finn en benk ute og lat som du venter på en kjendis — full seriøsitet 🕴️",cat:"sosial"},
       {text:"Gå inn i en butikk og spør om de tar betalt i vitser 🤗",cat:"kaos"},
       {text:"Gi deg selv et falskt navn + yrke og presenter deg for neste fremmed 🕵️",cat:"sosial"},
       {text:"Ring en pizza-restaurant og spør om de leverer til månen 🌕",cat:"kaos"},
@@ -1361,13 +1417,13 @@ const DB={
       {text:"En i gjengen er berømt – resten er fans. Dere møtes tilfeldig ute. Spill det ut! 🌟",cat:"kaos",cam:true,p:"Den som bryter karakter bærer tittelen 'Amatørskuespiller' resten av dagen 🎭"},
       {text:"Alle lager synkronisert dans til tilfeldig sang. 5 min å øve – film og post! 💃",cat:"kaos",cam:true,p:"Den med dårligst timing ber gjengen om tilgivelse overdramatisk 😂"},
       {text:"En person er 'ja-personen' – sier ja til alt de andre foreslår i 10 minutter! 😈",cat:"kaos",p:"Nekter ja-personen dobles varigheten og alle bytter roller 😂"},
-      {text:"Gjengen gjennomfører en hemmelig koordinert aksjon i butikken 🕵️",cat:"kaos",p:"Den som kommuniserer utenfor planen velger neste utfordring 🎯"},
-      {text:"Alle bytter personlighet med personen til høyre i 15 minutter. Inn i karakter NÅ! 🎭",cat:"kaos",cam:true,p:"Den som bryter ut av karakteren raskest velger neste utfordring 🎯"},
+      {text:"Gjengen gjennomfører en hemmelig koordinert aksjon i butikken 🕵️",cat:"kaos",p:"Den som kommuniserer utenfor planen snakker kun i hviske-stemme i 5 min 🤫"},
+      {text:"Alle bytter personlighet med personen til høyre i 15 minutter. Inn i karakter NÅ! 🎭",cat:"kaos",cam:true,p:"Den som bryter karakter synger teksten til neste ting noen sier 🎤"},
       {text:"Gjengen deler seg i to og improviserer en telenovela-scene på 3 minutter 🎬",cat:"kaos",cam:true,p:"Dårligste skuespiller synger avslutningssangen alene 🎵"},
       {text:"En er guide, resten er turister – gå gjennom nabolaget og presenter alt overdramatisk 🗺️",cat:"kaos",cam:true,p:"Dårligste turist bærer en imaginær koffert resten av turen 🧳"},
-      {text:"Alle bytter sko med hverandre og går til nærmeste lykt og tilbake 👟",cat:"kaos",cam:true,p:"Den som nekter må gjøre 10 hønemiminger på kamera 🐔"},
+      {text:"Alle bytter sko med hverandre og går til nærmeste lykt og tilbake 👟",cat:"kaos",cam:true,p:"Den som nekter bærer alle de andres sko i 5 minutter 👟"},
       {text:"Gjengen bestemmer et hemmelig ord – den som sier det mister et poeng i 20 min 🤫",cat:"kaos",p:"Den med flest poeng bestemmer neste destinasjon 📍"},
-      {text:"Flash mob! Alle fryser på signal i et offentlig rom i 30 sekunder 🧊",cat:"kaos",cam:true,p:"Den som beveger seg velger neste utfordring 🎯"},
+      {text:"Flash mob! Alle fryser på signal i et offentlig rom i 30 sekunder 🧊",cat:"kaos",cam:true,p:"Den som beveger seg må fryse dobbelt så lenge neste runde ❄️"},
       {text:"Gjengen lager en spontan fotoutstilling – finn fem kunstverk ute og presenter dem 🖼️",cat:"kreativ",cam:true,p:"Dårligste kurator forklarer alle verkene med kun lyder 😂"},
       {text:"Alle velger et dyr å være – hold karakteren gjennom neste aktivitet 🦁",cat:"kaos",p:"Den som bryter karakteren raskest gjør tre triks som hund 🐕"},
     ]
@@ -1385,9 +1441,9 @@ const DB={
     ],
     group:[
       {text:"Alle lager det morsomste ansiktet de kan – stem i gjengen! 😜",cat:"sosial",cam:true,p:"Kjedeligste ansikt gjør en kylling-dans 🐔"},
-      {text:"Lag en synkronisert dans på 30 sekunder – film det! 💃",cat:"kreativ",cam:true,p:"Den med dårligst timing velger neste utfordring 😅"},
-      {text:"Alle poserer som berømte statuer – hvem er best? 🗿",cat:"kreativ",cam:true,p:"Taperen er DJ resten av kvelden 🎵"},
-      {text:"Lag en menneskekjede og gå ti skritt uten å miste grepet 🤝",cat:"fysisk",p:"Den som slipper velger neste utfordring 🎯"},
+      {text:"Lag en synkronisert dans på 30 sekunder – film det! 💃",cat:"kreativ",cam:true,p:"Den med dårligst timing danse solo samme sang én gang til 💃"},
+      {text:"Alle poserer som berømte statuer – hvem er best? 🗿",cat:"kreativ",cam:true,p:"Taperen holder statuepose i 30 sek og smiler ikke 🗿"},
+      {text:"Lag en menneskekjede og gå ti skritt uten å miste grepet 🤝",cat:"fysisk",p:"Den som slipper gjør 5 starhopp mens de synger 🌟"},
       {text:"Alle skriker favorittlåten sin samtidig i 10 sekunder 🎤",cat:"sosial",cam:true,p:"Den med lavest volum synger alene etterpå 🎵"},
     ]
   },
@@ -1418,9 +1474,9 @@ const DB={
       {text:"Alle lip syncer til samme sang – men ingen vet hvilken sang som kommer. Én holder telefonen skjult og trykker play 🎤",cat:"video",cam:true,p:"Den med minst bevegelse synger den ordentlig etterpå 😂"},
     ],
     solo:[
-      {text:"Sett på shuffle, trykk play – dans som om du VISSTE hvilken sang som kom. Full innsats fra første sekund, ikke stopp uansett! 🎵",cat:"video",cam:true},
+      {text:"Trykk shuffle og dans som om du VISSTE hvilken sang som kom. Stopp ALDRI! 🎵",cat:"video",cam:true},
       {text:"Film ansiktet ditt mens du åpner den seneste meldingen fra mamma og les den høyt med dramatisk stemme 📱",cat:"video",cam:true},
-      {text:"Hold kamera på ansiktet – velg en tilfeldig følelse og lag en 15-sekunders monolog om ingenting med den følelsen på MAKS 🎭",cat:"video",cam:true},
+      {text:"Kamera på ansiktet – velg en tilfeldig følelse og snakk om ingenting i 15 sek. MAKS intensitet! 🎭",cat:"video",cam:true},
       {text:"Les den mest absurde nyheten du finner — alvorlig nyhetsoppleserstemme, ingen smiling 📰",cat:"video",cam:true},
       {text:"Si Norsk er et morsomt språk på 5 forskjellige aksenter — ingen smiling 🌍",cat:"video",cam:true},
       {text:"Lær en TikTok-dans på 3 min og film hele prosessen — post det uferdig! 💃",cat:"video",cam:true},
@@ -1433,25 +1489,25 @@ const DB={
       {text:"Ta på deg den rareste kombinasjonen av klær du finner og film en 'outfit of the day' med full selvtillit 👗",cat:"video",cam:true},
       {text:"Film ansiktet ditt tett mens en venn velger en sang du hater og spiller den. Hold rett ansikt i 30 sekunder 😐",cat:"video",cam:true},
       {text:"Lag en 'morning routine' video av de neste 2 minuttene – uansett hva du gjør. Gjør det episk 🌅",cat:"video",cam:true},
-      {text:"Random dance! En venn roper en tilfeldig sang – du har 1 sekund på å begynne å danse. Ingen pause, ingen nøling. Kamera ruller! 🎵",cat:"video",cam:true},
-      {text:"Lip sync battle: velg den mest dramatiske sangen du finner og lip sync den med FULL kropp – ansikt, armer, alt. 60 sekunder 🎤",cat:"video",cam:true},
-      {text:"Bytt aksent hvert 10. sekund mens du forteller om dagen din. Norsk, britisk, amerikansk, fransk. Kamera på ansiktet hele tiden 🌍",cat:"video",cam:true},
-      {text:"'Get ready with me' – film deg selv de neste 90 sekundene akkurat som du er. Kommenter HVERT steg som om det er glamourøst 💅",cat:"video",cam:true},
+      {text:"Random dance! Noen roper en sang – du har 1 sekund på å begynne å danse. Ingen nøling! 🎵",cat:"video",cam:true},
+      {text:"Lip sync battle! Velg den villeste sangen og gå ALL IN – ansikt, armer, kropp. 60 sek! 🎤",cat:"video",cam:true},
+      {text:"Bytt aksent hvert 10. sek mens du forteller om dagen. Norsk → britisk → amerikansk → fransk 🌍",cat:"video",cam:true},
+      {text:"Film deg selv de neste 90 sek – kommenter ALT du gjør som om det er superglamorøst 💅",cat:"video",cam:true},
       {text:"Imiter lyden av 5 forskjellige dyr på rad mens du holder helt rett ansikt. Kamera tett på. Ingen smiling tillatt 🐄",cat:"video",cam:true},
     ],
     group:[
       {text:"To personer stirrer på hverandre rett i kamera. Den som smiler, blunker eller beveger seg TAPER. Film ansiktene tett 😐",cat:"video",cam:true,p:"Taperen gjør kylling-dans på kamera og poster det 🐔"},
       {text:"Noen roper et tilfeldig yrke — du har 3 sek på å gå INN i karakteren i 30 sek 🎭",cat:"video",cam:true,p:"Den som bryter karakteren gjør det om igjen som et dyr 🐾"},
       {text:"Speillek! A gjør bevegelser — B MÅ kopiere umiddelbart. Film begge. Bytt etter 30 sek 🔄",cat:"video",cam:true,p:"Den som henger etter bytter og må kopiere dobbelt så fort 😂"},
-      {text:"Alle fryser på signal midt i det dere gjør – hold posisjonen i 20 sekunder mens kamera går sakte rundt og filmer alle ❄️",cat:"video",cam:true,p:"Den som beveger seg velger neste utfordring og MÅ filme den"},
-      {text:"Film ansiktet til en venn mens du viser dem et bilde de ikke har sett. Ikke vis bildet – bare reaksjonen. La seerne gjette 👀",cat:"video",cam:true,p:"Den med kjedeligst reaksjon må se et enda verre bilde 😬"},
+      {text:"Frys på signal! Hold posisjonen i 20 sek mens kamera filmer alle. Ingen bevegelse! ❄️",cat:"video",cam:true,p:"Den som beveger seg velger neste utfordring og MÅ filme den"},
+      {text:"Vis en venn et bilde de IKKE har sett – film bare reaksjonen. Ikke vis bildet! La folk gjette 👀",cat:"video",cam:true,p:"Den med kjedeligst reaksjon må se et enda verre bilde 😬"},
       {text:"En er reporter, en er kjendis. Reporter stiller de villeste spørsmål mulig – kjendis må svare seriøst 🎤",cat:"video",cam:true,p:"Dårligste intervju-objekt svarer alle spørsmål på operastemme 🎤"},
       {text:"Alle velger en lydeffekt på telefonen – spill dem i tur og orden mens dere holder rett ansikt. First to laugh loses 🔊",cat:"video",cam:true,p:"Den som ler først må lage sin egen lydeffekt live 😂"},
       {text:"Én er regissør 🎬 Instrukser gjengen hvert 5. sek – de MÅ følge! Film det!",cat:"video",cam:true,p:"Dårligste skuespiller blir regissør neste gang"},
       {text:"Lag verdens raskeste makeover – 60 sekunder, det dere finner i nærheten. Film prosessen og resultatet 💄",cat:"video",cam:true,p:"Dårligste makeover beholder looken i 30 minutter 😂"},
 
       // ── VANN I MUNNEN ──
-      {text:"Alle har vann i munnen 💧 Én person leser høyt fra et tilfeldig Wikipedia-innlegg. Kamera på ansiktene – første som spruter taper!",cat:"video",cam:true,p:"Taperen har dobbelt vann neste runde 😂"},
+      {text:"Vann i munnen! 💧 Én leser fra Wikipedia. Kamera på ansiktene – første som spruter taper!",cat:"video",cam:true,p:"Taperen har dobbelt vann neste runde 😂"},
       {text:"Alle har vann i munnen 💧 Én person gjør sin beste hest-imitasjon. Ingen stopp før 30 sekunder er gått!",cat:"video",cam:true,p:"Taperen velger neste dyr som skal imiteres 🐴"},
       {text:"Alle har vann i munnen 💧 Én person prøver å fortelle en vits de finner på stedet. Kamera fanger ALLE reaksjoner!",cat:"video",cam:true,p:"Den som sprutet velger neste person som skal fortelle vits 😂"},
       {text:"Alle har vann i munnen 💧 Én spiller den rareste TikTok-lyden de finner på maks volum. Hold deg!",cat:"video",cam:true,p:"Taperen velger neste lyd og MÅ holde rett ansikt dobbelt så lenge 🔊"},
@@ -1461,27 +1517,27 @@ const DB={
 
       // ── EN GJØR NOE ABSURD, RESTEN PRØVER Å HOLDE SEG ──
       {text:"Én person velger et tilfeldig ord og bruker det i ALLE svar i 3 minutter uansett hva som blir sagt. Kamera på alle 🎭",cat:"video",cam:true,p:"Taperen bruker to ord resten av kvelden 😂"},
-      {text:"Én person forklarer hvordan man lager kaffe – men later som det er den farligste operasjonen i verden. Full alvor, kamera på resten 😰",cat:"video",cam:true,p:"Taperen forklarer neste hverdagsaktivitet med livsfare 😂"},
+      {text:"Forklar hvordan man lager kaffe – men lat som det er LIVSFARLIG. Full alvor. Film reaksjonene! 😰",cat:"video",cam:true,p:"Taperen forklarer neste hverdagsaktivitet med livsfare 😂"},
       {text:"Én person kommenterer det som skjer akkurat nå som sportskommentator på TV. Kamera på ansiktene til resten 🎙️",cat:"video",cam:true,p:"Taperen overtar kommentatorjobben i 2 minutter 🏆"},
-      {text:"Én person skal overbevise resten om at en tilfeldig gjenstand er det kuleste som finnes. Full reklame-energi. Kamera på reaksjonene 📺",cat:"video",cam:true,p:"Taperen overtar reklame-monologen for neste gjenstand 😂"},
+      {text:"Overbevise gjengen om at en tilfeldig gjenstand er det kuleste som finnes. Full reklame-energi! Film reaksjonene 📺",cat:"video",cam:true,p:"Taperen overtar reklame-monologen for neste gjenstand 😂"},
       {text:"Én person leser opp værmeldingen for i dag som om det er dommedagsprofeti. Kamera på resten – ingen latter tillatt ⛈️",cat:"video",cam:true,p:"Taperen framfører morgendagens værmelding på samme vis 🌪️"},
-      {text:"Én person intervjuer en tilfeldig gjenstand i rommet som om den er en kjendis. Resten holder rett ansikt. Kamera på alle 🎤",cat:"video",cam:true,p:"Taperen takker gjenstanden i en rørende tale 😂"},
+      {text:"Intervju en tilfeldig gjenstand som om den er en kjendis. Resten MÅ holde rett ansikt! 🎤",cat:"video",cam:true,p:"Taperen takker gjenstanden i en rørende tale 😂"},
       {text:"Én person forklarer reglene for et sport de ikke kan – med full selvtillit og masse feil. Resten holder rett ansikt ⚽",cat:"video",cam:true,p:"Taperen er dommer neste gang de faktisk spiller sporten 🏆"},
 
       // ── TO PERSONER, KAMERA MELLOM ──
-      {text:"To personer stirrer på hverandre rett i kamera. Ingen blunking, ingen smiling, ingen bevegelse. Første som gir seg TAPER 👁️",cat:"video",cam:true,p:"Taperen gjør kylling-dans på kamera og poster det 🐔"},
-      {text:"To personer sier det samme ordet frem og tilbake – men bytt tonefall hver gang. Trist, sint, forelsket, redd. Ingen latter! 🎭",cat:"video",cam:true,p:"Taperen sier ordet med 5 nye toneleier alene på kamera 😂"},
+      {text:"Stirrekonkurranse! Rett i kamera. Ingen blunking. Ingen smiling. Første som gir seg taper 👁️",cat:"video",cam:true,p:"Taperen gjør kylling-dans på kamera og poster det 🐔"},
+      {text:"Si samme ord frem og tilbake – men bytt tonefall hver gang. Trist → sint → forelsket → redd! 🎭",cat:"video",cam:true,p:"Taperen sier ordet med 5 nye toneleier alene på kamera 😂"},
       {text:"To personer forsøker å synge samme sang – men én synger 5 sekunder forsinket. Kamera fanger begge. Ikke stopp! 🎵",cat:"video",cam:true,p:"Taperen synger begge stemmene alene 🎤"},
       {text:"To personer har full krangel om noe helt ubetydelig – hvem som la igjen toalettpapiret tomt. FULL drama. Kamera ruller 🧻",cat:"video",cam:true,p:"Taperen av krangelen skaffer nytt toalettpapir til alle 😂"},
-      {text:"Flip the Switch! To personer bytter plass og kroppsspråk på signal – ALT av bevegelser og måten å snakke på. Kamera ruller hele tiden 🔄",cat:"video",cam:true,p:"Den som bytter dårligst beholder den andres stil i 10 min 😂"},
+      {text:"Flip the Switch! Bytt plass og kroppsspråk på signal. ALT byttes – film det! 🔄",cat:"video",cam:true,p:"Den som bytter dårligst beholder den andres stil i 10 min 😂"},
       {text:"Random dance challenge: én velger sang, alle andre har 2 sekunder på å begynne å danse. Ingen unntak, kamera på alle 🎵",cat:"video",cam:true,p:"Den med dårligst reaksjonstid danser alene til neste sang 💃"},
       {text:"Alle lip syncer til samme sang – men ingen vet hvilken sang som kommer. Én holder telefonen skjult og trykker play 🎤",cat:"video",cam:true,p:"Den med minst bevegelse synger den ordentlig etterpå 😂"},
-      {text:"Synkronisert dans challenge: dere har 3 minutter på å lage en synkronisert dans til en tilfeldig sang. Film og post resultatet! 💃",cat:"video",cam:true,p:"Den som er mest ute av synk velger neste sang 🎵"},
-      {text:"Blinking challenge: alle fixer blikket i kamera – ingen blunking tillatt. Kamera filmer alle ansiktene. Siste som blunker vinner 👁️",cat:"video",cam:true,p:"Taperen blunker 50 ganger med vilje på kamera som straff 😂"},
-      {text:"Én person velger en tilfeldig TikTok-lyd og spiller den – alle andre MÅ umiddelbart lage en dans til den. Ingen forberedelse 📱",cat:"video",cam:true,p:"Den med dårligste improvisasjon velger neste lyd 😂"},
+      {text:"3 minutter på å lage synkronisert dans til en tilfeldig sang. Film og post! 💃",cat:"video",cam:true,p:"Den som er mest ute av synk velger neste sang 🎵"},
+      {text:"Blinking challenge! Alle stirrer i kamera – ingen blunking. Siste som blunker vinner! 👁️",cat:"video",cam:true,p:"Taperen blunker 50 ganger med vilje på kamera som straff 😂"},
+      {text:"Spill en tilfeldig TikTok-lyd – alle MÅ lage en dans med en gang. Ingen forberedelse! 📱",cat:"video",cam:true,p:"Den med dårligste improvisasjon velger neste lyd 😂"},
       {text:"Alle gjør det samme bevegelsesmønsteret – men én person er 3 sekunder forsinket uten å vite det. Kamera fanger alt 🔄",cat:"video",cam:true,p:"Den som oppdaget det sist er forsinket dobbelt neste gang 😂"},
-      {text:"To personer bytter telefon og sender én melding til en tilfeldig kontakt som om de er den andre personen. Kamera på reaksjonene 📱",cat:"video",cam:true,p:"Den med den morsomste meldingen velger neste utfordring 🎯"},
-      {text:"Alle sier det samme ordet samtidig – men prøver å si det i akkurat samme rytme og toneleie. Film forsøkene. Første gang alle treffer vinner 🎵",cat:"video",cam:true,p:"Mest off-tune person velger neste ord 😂"},
+      {text:"Bytt telefon! Send én melding til en tilfeldig kontakt som om du ER den andre. Film reaksjonene 📱",cat:"video",cam:true,p:"Den med den morsomste meldingen velger neste utfordring 🎯"},
+      {text:"Alle sier samme ord – prøv å si det i akkurat samme rytme. Film. Første gang alle treffer vinner! 🎵",cat:"video",cam:true,p:"Mest off-tune person velger neste ord 😂"},
     ]
   }
 };
@@ -1512,13 +1568,20 @@ const SPECIAL={
 };
 
 const DAILY_POOL=[
-  {text:"Send en melding til noen du ikke har snakket med på lenge 💬",em:"💌"},
-  {text:"Gjør noe du aldri har gjort før i dag – stort eller lite 🌟",em:"🌟"},
-  {text:"Lær deg én ny ting på 10 minutter og del det med noen 🧠",em:"🧠"},
-  {text:"Ta én selfie et sted du aldri har tatt selfie før 📸",em:"📸",cam:true},
-  {text:"Gi noen et genuint kompliment ansikt til ansikt 😊",em:"😊"},
-  {text:"Gå en tur uten telefon i 15 minutter og observer omgivelsene 🚶",em:"🚶"},
-  {text:"Skriv ned tre ting du er takknemlig for i dag ✍️",em:"✍️"},
+  {text:"Ta et dramatisk selfie i den mest kjedelige settingen du finner i dag 😐",em:"📸",cam:true},
+  {text:"Film deg selv mens du forklarer hva du spiste til frokost som om det er verdens beste måltid 🍳",em:"🎬",cam:true},
+  {text:"Finn noe hjemme som ligner et kjent ansikt og ta bilde av det 👀",em:"📸",cam:true},
+  {text:"Ta bilde av skyggen din i den rareste posituren du klarer 🕶️",em:"📸",cam:true},
+  {text:"Film deg selv mens du danser til første sang på shuffle. Full innsats! 🕺",em:"🎵",cam:true},
+  {text:"Finn det styggeste objektet hjemme og ta et kunstnerisk nærbilde av det 🎨",em:"📸",cam:true},
+  {text:"Ta bilde av noe i nabolaget som du aldri har lagt merke til før 🔍",em:"📸",cam:true},
+  {text:"Film en 15-sekunders reklame for det kjedeligste du ser akkurat nå 📺",em:"🎬",cam:true},
+  {text:"Ta bilde av det morsomste du ser i dag – ute eller inne 😂",em:"📸",cam:true},
+  {text:"Film deg selv mens du gjør 10 push-ups og kommenter hvert eneste ett 💪",em:"🎬",cam:true},
+  {text:"Ta bilde av hendene dine mens du gjør noe helt vanlig – men gjør det episk 🙌",em:"📸",cam:true},
+  {text:"Film deg selv mens du synger med på en sang du bare halvt kan 🎤",em:"🎬",cam:true},
+  {text:"Ta bilde av noe blått, rødt og gult du finner i dag 🎨",em:"📸",cam:true},
+  {text:"Film en 20-sekunders vær-melding fra der du er akkurat nå 🌤️",em:"🎬",cam:true},
 ];
 
 const BADGES=[
@@ -1699,13 +1762,9 @@ function updateHeader(){
 // INSTALL
 // ══════════════════════════════════════════
 function renderInstallBanner(){
+  // Skjult — kommer i App Store-versjon
   const el=document.getElementById('install-wrap');
-  if(window.navigator.standalone||localStorage.getItem('na_installed')){el.innerHTML='';return;}
-  el.innerHTML=`<div class="install-banner" onclick="showInstallOverlay()">
-    <div class="install-icon">📱</div>
-    <div><div class="install-title">Legg til som app!</div><div class="install-sub">Få NÅ på hjemskjermen – ingen App Store nødvendig</div></div>
-    <div class="install-arrow">›</div>
-  </div>`;
+  if(el)el.innerHTML='';
 }
 function showInstallOverlay(){document.getElementById('install-overlay').classList.add('on')}
 function closeInstall(){
@@ -1745,13 +1804,28 @@ function renderDaily(){
   if(PL.dailyDone){
     el.innerHTML=`<div class="daily-card"><div class="daily-top"><div class="daily-lbl">📅 Dagens utfordring</div><div class="daily-countdown">Neste om ${getCountdown()}</div></div><div class="daily-txt">${d.em} ${d.text}</div><div class="daily-done">✅ Fullført i dag! +10 pts</div></div>`;
   }else{
-    el.innerHTML=`<div class="daily-card"><div class="daily-top"><div class="daily-lbl">📅 Dagens utfordring</div><div class="daily-countdown">Utløper om ${getCountdown()}</div></div><div class="daily-txt">${d.em} ${d.text}</div><button class="daily-btn" onclick="completeDaily()">Gjort det! +10 pts ✓</button></div>`;
+    el.innerHTML=`<div class="daily-card"><div class="daily-top"><div class="daily-lbl">📅 Dagens utfordring</div><div class="daily-countdown">Utløper om ${getCountdown()}</div></div><div class="daily-txt">${d.em} ${d.text}</div><div style="display:flex;gap:8px;margin-top:12px;"><button class="daily-btn" style="flex:1;" onclick="openDailyCamera()">📸 Ta bilde + fullfør</button></div></div>`;
   }
 }
+function openDailyCamera(){
+  const d=getDailyChallenge();
+  S.challenge=d.text;
+  S.needsCamera=true;
+  S.proofMode=true;
+  S.dailyMode=true; // flagg for å vite at vi er i daily-modus
+  openCamera();
+}
+
 function completeDaily(){
   if(PL.dailyDone)return;
   PL.dailyDone=true;
-  PL.pts+=10;PL.done++;PL.streak++;
+  PL.dailyDate=new Date().toDateString();
+  PL.pts+=10;PL.done++;
+  // Streak med dagsjekk
+  const today=new Date().toDateString();
+  const yesterday=new Date(Date.now()-86400000).toDateString();
+  if(PL.streakDate===yesterday){PL.streak++;PL.streakDate=today;}
+  else if(PL.streakDate!==today){PL.streak=1;PL.streakDate=today;}
   if(PL.streak>PL.best)PL.best=PL.streak;
   addToHistory(getDailyChallenge().text,'easy');
   LB[0].pts=PL.pts;LB[0].streak=PL.streak;
@@ -1759,6 +1833,7 @@ function completeDaily(){
   avatarDrop();vibrate();playSound('complete');
   toast('📅 +10 poeng! Streak: '+PL.streak+' 🔥');
   checkBadges();
+  sbSaveProfile();
 }
 
 // ══════════════════════════════════════════
@@ -1824,7 +1899,7 @@ function restoreSelections(step){
 function wizBack(step){wizNext(step-1);}
 function backToSetup(){
   stopTimer();
-  S.mood=null;S.time=null;S.players=null;S.wizStep=0;
+  S.mood=null;S.time=null;S.players=null;S.wizStep=0;S.groupMembers=[];S.sharedThisChallenge=false;
   navTo('s-setup','n0');wizNext(0);
 }
 
@@ -1893,8 +1968,18 @@ function showChallenge(c){
 
   // Punishment
   const pu=document.getElementById('punish');
-  if(S.punishment&&isGroup){document.getElementById('punish-txt').textContent=S.punishment;pu.style.display='block';}
-  else pu.style.display='none';
+  if(S.punishment&&isGroup){
+    // Sjekk om utfordringen er en konkurranse (alle gjør samme) vs én person
+    const challengeTxt=S.challenge||'';
+    const isSoloTask=challengeTxt.match(/én (person|er|gjør|velger|roper|er guide|er regissør|er reporter)/i)||
+                     challengeTxt.match(/^(én|en person|én person)/i);
+    if(!isSoloTask){
+      document.getElementById('punish-txt').textContent=S.punishment;
+      pu.style.display='block';
+    } else {
+      pu.style.display='none';
+    }
+  } else pu.style.display='none';
 
   // Reset proof bar
   resetProofBar();
@@ -1906,19 +1991,81 @@ function showChallenge(c){
   startTimer(S.time||'10 min');
 
   show('s-challenge');
-  confetti();vibrate();playSound('pop');
+  if(S.needsCamera)setTimeout(()=>openCamera(),2500);
+  vibrate();playSound('pop');
 }
 
 function start(){
   if(!S.mood||!S.time||!S.players)return;
   S.pendingChallenge=getChallenge();
+  // Hvis gruppe — vis vennevalg først
+  if(S.players!==1){
+    showGroupSelect();
+    return;
+  }
+  showReveal();
+}
+
+function showReveal(){
   const moodEmoji={Energisk:'⚡',Avslappet:'😌','Lei og rastløs':'😒','Klar for galskap':'🔥'};
-  const playersLabel=S.players===1?'👤 Solo':'👥 '+S.players+' pers.';
+  const playersLabel=S.players===1?'👤 Solo':(S.groupMembers&&S.groupMembers.length>0?'👥 '+S.groupMembers.map(m=>m.name).join(', '):'👥 '+S.players+' pers.');
   document.getElementById('reveal-tags').innerHTML=
     '<span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);">'+moodEmoji[S.mood]+' '+S.mood+'</span>'+
     '<span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);">⏱ '+S.time+'</span>'+
     '<span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);">'+playersLabel+'</span>';
   show('s-reveal');
+}
+
+function showGroupSelect(){
+  S.groupMembers=S.groupMembers||[];
+  const list=document.getElementById('group-friends-list');
+  list.innerHTML='';
+  // Vis venner fra vennelisten
+  const friends=PL.friends||[];
+  if(friends.length===0){
+    list.innerHTML='<div style="font-size:13px;color:var(--muted);text-align:center;padding:16px;">Ingen venner ennå — legg til manuelt under 👇</div>';
+  } else {
+    friends.forEach(f=>{
+      const isSelected=S.groupMembers.some(m=>m.code===f.code);
+      const card=document.createElement('div');
+      card.style.cssText='background:var(--card);border:1.5px solid '+(isSelected?'var(--red)':'var(--border)')+';border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s;';
+      card.innerHTML='<div style="font-size:24px;">'+f.emoji+'</div><div style="flex:1;"><div style="font-size:14px;font-weight:700;">'+f.name+'</div><div style="font-size:11px;color:var(--muted);">'+f.pts+' pts · '+f.streak+' streak</div></div>'+(isSelected?'<div style="color:var(--red);font-size:18px;">✓</div>':'');
+      card.onclick=()=>{
+        if(isSelected){S.groupMembers=S.groupMembers.filter(m=>m.code!==f.code);}
+        else{S.groupMembers.push({name:f.name,emoji:f.emoji,code:f.code});}
+        showGroupSelect();
+      };
+      list.appendChild(card);
+    });
+  }
+  renderGroupSelected();
+  show('s-group');
+}
+
+function addGroupManual(){
+  const input=document.getElementById('group-manual-input');
+  const name=input.value.trim();
+  if(!name)return;
+  if(!S.groupMembers)S.groupMembers=[];
+  if(!S.groupMembers.some(m=>m.name===name)){
+    S.groupMembers.push({name,emoji:'👤',code:null});
+  }
+  input.value='';
+  renderGroupSelected();
+}
+
+function renderGroupSelected(){
+  const list=document.getElementById('group-selected-list');
+  if(!S.groupMembers||S.groupMembers.length===0){
+    list.innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;">Ingen valgt ennå — du spiller solo</div>';
+    return;
+  }
+  list.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Med i spillet:</div>'+
+    S.groupMembers.map(m=>'<div style="background:rgba(255,45,85,.08);border:1px solid rgba(255,45,85,.2);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px;"><span style="font-size:18px;">'+m.emoji+'</span><span style="font-size:13px;font-weight:700;">'+m.name+'</span></div>').join('');
+}
+
+function confirmGroup(){
+  showReveal();
 }
 
 function startRevealCountdown(){
@@ -2144,6 +2291,15 @@ function completeChallenge(){
   const bonus=pct>0.7?5:pct>0.4?2:0;
   const pts=10+bonus;
 
+  // Maks 10 utfordringer med poeng per dag
+  const todayStr=new Date().toDateString();
+  if(!PL.dailyPtsDate||PL.dailyPtsDate!==todayStr){PL.dailyPtsDate=todayStr;PL.dailyPtsCount=0;}
+  if(PL.dailyPtsCount>=10){
+    toast('Du har nådd maks utfordringer for i dag! Kom tilbake i morgen 💪');
+    pts=0;
+  } else {
+    PL.dailyPtsCount=(PL.dailyPtsCount||0)+1;
+  }
   PL.pts+=pts;PL.done++;
   // Streak: kun én gang per dag
   const today=new Date().toDateString();
@@ -2164,11 +2320,29 @@ function completeChallenge(){
   avatarDrop();vibrate();playSound('complete');
   checkBadges();
 
-  // Save to Supabase
+  // Lagre til Supabase
   sbSaveProfile();
   if(S.code)sbMarkCompleted(S.code);
 
-  if(bonus>0)toast('⚡ Rask! +'+pts+' poeng ('+bonus+' bonuspoeng)!');
+  // Gi poeng til alle gruppemedlemmer
+  if(S.groupMembers&&S.groupMembers.length>0){
+    S.groupMembers.forEach(async m=>{
+      if(m.code){
+        // Hent profil og oppdater poeng
+        const profile=await sbLookupFriend(m.code);
+        if(profile){
+          const newPts=(profile.pts||0)+pts;
+          const newDone=(profile.done||0)+1;
+          await sbFetch('/rest/v1/profiles?friend_code=eq.'+encodeURIComponent(m.code),'PATCH',{pts:newPts,done:newDone,last_seen:new Date().toISOString()});
+        }
+      }
+    });
+    const names=S.groupMembers.map(m=>m.name).join(', ');
+    toast('🎉 +'+pts+' pts til deg og '+names+'!');
+  } else {
+    if(bonus>0)toast('⚡ Rask! +'+pts+' poeng ('+bonus+' bonuspoeng)!');
+  }
+
   setTimeout(()=>showResult(pts),900);
 }
 
@@ -2179,7 +2353,7 @@ function skipChallenge(){
   PL.pts=Math.max(0,PL.pts-5);
   LB[0].pts=PL.pts;
   updateHeader();saveData();
-  toast(lost>0?'⏭ Hoppet over – −'+lost+' poeng 😬':'⏭ Hoppet over 😅');
+  toast(lost>0?'⏭ Hoppet over – −'+lost+' poeng 😂😂':'⏭ Hoppet over 😂😂');
   vibrate();
   setTimeout(()=>nextChallenge(),700);
 }
@@ -2196,6 +2370,31 @@ function showResult(pts){
 // SHARING
 // ══════════════════════════════════════════
 // ── QUICK SHARE — 1 tap: lagrer video/bilde + åpner app ──
+function shareAndGetPoints(platform){
+  // +5 pts for deling — kun én gang per utfordring, lagres i history
+  const challengeKey='share_'+btoa(S.challenge||'').substring(0,10);
+  if(!PL.sharedChallenges)PL.sharedChallenges=[];
+  if(!PL.sharedChallenges.includes(challengeKey)){
+    PL.sharedChallenges.push(challengeKey);
+    // Behold kun siste 50
+    if(PL.sharedChallenges.length>50)PL.sharedChallenges.shift();
+    // Maks 3 del-poeng per dag
+    const todayStr=new Date().toDateString();
+    if(!PL.dailyShareDate||PL.dailyShareDate!==todayStr){PL.dailyShareDate=todayStr;PL.dailyShareCount=0;}
+    if((PL.dailyShareCount||0)<3){
+      PL.dailyShareCount=(PL.dailyShareCount||0)+1;
+      PL.pts+=5;
+      LB[0].pts=PL.pts;
+      updateHeader();saveData();
+      sbSaveProfile();
+      toast('🔥 +5 pts for deling! ('+PL.dailyShareCount+'/3 i dag)');
+    } else {
+      toast('Du har fått del-poeng 3 ganger i dag allerede! 😄');
+    }
+  }
+  quickShare(platform);
+}
+
 function quickShare(platform){
   const appUrls={tiktok:'tiktok://',snap:'snapchat://',insta:'instagram://story-camera'};
   const names={tiktok:'TikTok 🎵',snap:'Snapchat 👻',insta:'Instagram 📸'};
@@ -2319,6 +2518,15 @@ async function openCamera(){
   document.getElementById('cam-filter-challenge').textContent=S.challenge||'NÅ-utfordring';
   document.getElementById('cam-filter-user').textContent='@'+PL.name+' • 🔥'+PL.streak+' streak';
   setCamMode(S.needsCamera?'video':'photo');
+  // Vis utfordring-popup alltid
+  if(S.challenge){
+    const popup=document.getElementById('cam-challenge-popup');
+    document.getElementById('cam-popup-text').textContent=S.challenge;
+    popup.style.display='block';
+  } else if(!localStorage.getItem('na_cam_hint')){
+    // Vis hint første gang hvis ingen utfordring
+    setTimeout(()=>{document.getElementById('cam-hint').style.display='block';},800);
+  }
   await startCamStream();
 }
 
@@ -2339,10 +2547,78 @@ function camShutterPress(){
 function startRecording(){
   if(!camStream)return;
   recordedChunks=[];
-  const opts=typeof MediaRecorder!=='undefined'&&MediaRecorder.isTypeSupported('video/webm')
-    ?{mimeType:'video/webm'}:{};
+
+  // Tegn video + filter på canvas i sanntid
+  const video=document.getElementById('cam-video');
+  const canvas=document.getElementById('cam-canvas');
+  canvas.style.display='none'; // skjult men aktiv
+  canvas.width=video.videoWidth||1280;
+  canvas.height=video.videoHeight||720;
+  const ctx=canvas.getContext('2d');
+  const w=canvas.width, h=canvas.height;
+
+  function drawFilterFrame(){
+    if(!mediaRecorder||mediaRecorder.state!=='recording')return;
+    // Tegn video
+    if(facingMode==='user'){ctx.translate(w,0);ctx.scale(-1,1);}
+    ctx.drawImage(video,0,0,w,h);
+    if(facingMode==='user'){ctx.setTransform(1,0,0,1,0,0);}
+    // Gradienter
+    const topG=ctx.createLinearGradient(0,0,0,h*0.25);
+    topG.addColorStop(0,'rgba(0,0,0,0.72)');topG.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=topG;ctx.fillRect(0,0,w,h*0.25);
+    const botG=ctx.createLinearGradient(0,h*0.55,0,h);
+    botG.addColorStop(0,'rgba(0,0,0,0)');botG.addColorStop(1,'rgba(0,0,0,0.88)');
+    ctx.fillStyle=botG;ctx.fillRect(0,h*0.55,w,h*0.45);
+    // NÅ logo
+    ctx.font=`bold ${w*0.09}px Arial Black,sans-serif`;
+    ctx.fillStyle='#ff2d55';ctx.fillText('NÅ',w*0.06,w*0.1);
+    // Tag
+    ctx.fillStyle='rgba(255,45,85,0.75)';
+    ctx.beginPath();ctx.roundRect(w*0.22,w*0.048,w*0.42,w*0.068,w*0.02);ctx.fill();
+    ctx.font=`bold ${w*0.033}px Arial`;ctx.fillStyle='#fff';
+    ctx.fillText('🔥 NÅ-utfordring',w*0.235,w*0.09);
+    // REC indikator
+    ctx.fillStyle='rgba(255,45,85,0.85)';
+    ctx.beginPath();ctx.arc(w*0.88,h*0.06,w*0.012,0,Math.PI*2);ctx.fill();
+    ctx.font=`bold ${w*0.032}px Arial`;ctx.fillStyle='#fff';
+    ctx.fillText('REC',w*0.9,h*0.065);
+    // Utfordring tekst
+    const chalText=S.challenge||'NÅ-utfordring';
+    ctx.font=`bold ${w*0.038}px Arial`;ctx.fillStyle='#fff';
+    wrapTextMaxLines(ctx,chalText,w*0.06,h*0.68,w*0.88,w*0.046,3);
+    // Bruker
+    ctx.font=`${w*0.03}px Arial`;ctx.fillStyle='rgba(255,255,255,0.7)';
+    ctx.fillText('@'+PL.name+' • 🔥'+PL.streak+' streak',w*0.06,h*0.88);
+    // Hashtags
+    ctx.font=`${w*0.025}px Arial`;ctx.fillStyle='rgba(255,255,255,0.45)';
+    ctx.fillText('#NåUtfordringen #NåEllerAldri',w*0.06,h*0.94);
+    requestAnimationFrame(drawFilterFrame);
+  }
+
+  // Start canvas stream
+  const canvasStream=canvas.captureStream(30);
+  const mimeType=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':
+                 MediaRecorder.isTypeSupported('video/webm')?'video/webm':'';
   try{
-    mediaRecorder=new MediaRecorder(camStream,opts);
+    mediaRecorder=new MediaRecorder(canvasStream,mimeType?{mimeType}:{});
+    mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)recordedChunks.push(e.data);};
+    mediaRecorder.onstop=onRecordingStop;
+    mediaRecorder.start(100);
+    drawFilterFrame(); // Start tegning
+    document.getElementById('cam-rec').style.display='flex';
+    document.getElementById('cam-shutter').classList.add('recording');
+    recSeconds=0;
+    recInterval=setInterval(()=>{
+      recSeconds++;
+      const m=Math.floor(recSeconds/60),s=recSeconds%60;
+      document.getElementById('cam-rec-time').textContent=m+':'+(s<10?'0':'')+s;
+      if(recSeconds>=60)stopRecording();
+    },1000);
+  }catch(e){
+    console.warn('Canvas stream feilet, bruker rå kamera:',e);
+    // Fallback til rå kamera
+    mediaRecorder=new MediaRecorder(camStream,{});
     mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)recordedChunks.push(e.data);};
     mediaRecorder.onstop=onRecordingStop;
     mediaRecorder.start(100);
@@ -2355,7 +2631,7 @@ function startRecording(){
       document.getElementById('cam-rec-time').textContent=m+':'+(s<10?'0':'')+s;
       if(recSeconds>=60)stopRecording();
     },1000);
-  }catch(e){toast('Video støttes ikke i denne nettleseren 😬');}
+  }
 }
 
 function stopRecording(){
@@ -2509,6 +2785,12 @@ function retakePhoto(){
   document.getElementById('cam-preview').classList.remove('on');
   openCamera();
 }
+function closeCamPreview(){
+  document.getElementById('cam-preview').classList.remove('on');
+}
+function closeVidPreview(){
+  document.getElementById('vid-preview').classList.remove('on');
+}
 
 function retakeVideo(){
   document.getElementById('vid-preview').classList.remove('on');
@@ -2516,41 +2798,76 @@ function retakeVideo(){
   openCamera();
 }
 
-function shareVideo(platform){
+async function shareVideo(platform){
   if(!videoBlob){toast('Ingen video å dele 🤔');return;}
+  const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  // Prøv Web Share API med video
+  if(mob&&navigator.share&&navigator.canShare){
+    const ext=videoBlob.type.includes('mp4')?'mp4':'webm';
+    const file=new File([videoBlob],'nå-utfordring.'+ext,{type:videoBlob.type});
+    if(navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({files:[file],title:'NÅ-utfordring',text:'🔥 '+(S.challenge||'')+'
+
+#NåUtfordringen'});
+        toast('Delt! 🔥');return;
+      }catch(e){if(e.name==='AbortError')return;}
+    }
+  }
+  // Fallback: last ned
   try{
     const url=URL.createObjectURL(videoBlob);
     const a=document.createElement('a');
     a.href=url;a.download='nå-utfordring.mp4';a.click();
-    setTimeout(()=>{
-      const urls={snap:'snapchat://',insta:'instagram://story-camera',tiktok:'tiktok://'};
-      window.location.href=urls[platform]||urls.snap;
-    },800);
-    toast('Video lagret! Åpner '+platform+'... 📲');
-  }catch(e){
-    const txt=`🔥 Fullførte NÅ-utfordringen!\n\n"${S.challenge}"\n\ntsandvik2.github.io/naa-app2\n\n#NåAppen`;
-    sendToApp(txt,platform);
-  }
+    URL.revokeObjectURL(url);
+    if(mob){
+      const urls={tiktok:'tiktok://',insta:'instagram://story-camera',snap:'snapchat://'};
+      setTimeout(()=>{window.location.href=urls[platform]||urls.tiktok;},1000);
+      toast('Video lagret! Åpner appen... 🎵');
+    }else{toast('Video lastet ned! 🎬');}
+  }catch(e){toast('Noe gikk galt 😬');}
 }
-
 function sharePhoto(platform){
   const canvas=document.getElementById('cam-canvas');
-  // Try to save image and open app
+  const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   try{
-    canvas.toBlob(blob=>{
+    canvas.toBlob(async blob=>{
+      // Prøv Web Share API først (fungerer på iPhone Safari)
+      if(mob && navigator.share && navigator.canShare){
+        const file=new File([blob],'nå-utfordring.jpg',{type:'image/jpeg'});
+        if(navigator.canShare({files:[file]})){
+          try{
+            await navigator.share({
+              files:[file],
+              title:'NÅ-utfordring',
+              text:'🔥 '+S.challenge+'
+
+#NåUtfordringen'
+            });
+            toast('Delt! 🔥');
+            return;
+          }catch(e){
+            if(e.name!=='AbortError') console.warn('Share feilet:',e);
+          }
+        }
+      }
+      // Fallback: last ned og åpne app
       const url=URL.createObjectURL(blob);
       const a=document.createElement('a');
       a.href=url;a.download='nå-utfordring.jpg';a.click();
       URL.revokeObjectURL(url);
-      setTimeout(()=>{
-        const urls={snap:'snapchat://',insta:'instagram://story-camera',tiktok:'tiktok://'};
-        window.location.href=urls[platform]||urls.snap;
-      },800);
-      toast('Bilde lagret! Åpner appen... 📲');
+      if(mob){
+        setTimeout(()=>{
+          const urls={snap:'snapchat://',insta:'instagram://story-camera',tiktok:'tiktok://'};
+          window.location.href=urls[platform]||urls.snap;
+        },1000);
+        toast('Lagret! Åpner '+platform+'... 📲');
+      } else {
+        toast('Bilde lastet ned! 📸');
+      }
     },'image/jpeg',0.92);
   }catch(e){
-    const txt=`🔥 Fullførte NÅ-utfordringen!\n\n"${S.challenge}"\n\ntsandvik2.github.io/naa-app2\n\n#NåAppen`;
-    sendToApp(txt,platform);
+    toast('Bruk iOS: trykk og hold på bildet → Lagre 💡');
   }
 }
 
@@ -2612,27 +2929,35 @@ async function lbTab(btn){
   btn.classList.add('on');renderLB();
 }
 async function renderLB(){
-  // Show local data instantly while fetching
+  // Vis egne data umiddelbart
   LB[0].pts=PL.pts;LB[0].em=PL.emoji;LB[0].name=PL.name;LB[0].streak=PL.streak;
-  drawLB(LB);
+  if(PL.pts>0)drawLB(LB);
+  else drawLB([]);
 
-  // Fetch real data from Supabase
-  const remote=await sbFetchLeaderboard();
-  if(remote&&remote.length>0){
-    // Merge: map remote to LB format, mark current user
-    const rows=remote.map(r=>({
-      name:r.name,
-      em:r.emoji||'🔥',
-      pts:r.pts||0,
-      streak:r.streak||0,
-      me:r.name===PL.name&&r.friend_code===getMyCode()
-    }));
-    // Ensure current user always in list
-    if(!rows.find(r=>r.me)){
-      rows.push({name:PL.name,em:PL.emoji,pts:PL.pts,streak:PL.streak,me:true});
+  // Hent fra Supabase
+  try{
+    const remote=await sbFetchLeaderboard();
+    if(remote&&remote.length>0){
+      const myCode=getMyCode();
+      const rows=remote.map(r=>({
+        name:r.name,
+        em:r.emoji||'🔥',
+        pts:r.pts||0,
+        streak:r.streak||0,
+        done:r.done||0,
+        me:r.friend_code===myCode
+      }));
+      // Legg til deg selv hvis du har poeng og ikke er på listen
+      if(PL.pts>0&&!rows.find(r=>r.me)){
+        rows.push({name:PL.name,em:PL.emoji,pts:PL.pts,streak:PL.streak,me:true});
+        rows.sort((a,b)=>b.pts-a.pts);
+      }
+      drawLB(rows.slice(0,10));
+    } else if(PL.pts===0){
+      // Ingen på lista ennå
+      drawLB([]);
     }
-    drawLB(rows);
-  }
+  }catch(e){console.log('LB feil:',e);}
 }
 function drawLB(data){
   const sorted=[...data].sort((a,b)=>b.pts-a.pts);
@@ -2647,12 +2972,22 @@ function drawLB(data){
       <div class="pod-pts">${p.pts} pts</div>
       <div class="pod-bar" style="height:${barH[i]}px;background:${barC[i]}"></div>
     </div>`).join('');
+  if(!sorted||sorted.length===0){
+    document.getElementById('podium').innerHTML=
+      '<div style="text-align:center;padding:32px 20px;">'+
+      '<div style="font-size:52px;margin-bottom:12px;">🏆</div>'+
+      '<div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px;">Ingen på lista ennå!</div>'+
+      '<div style="font-size:13px;color:var(--muted);line-height:1.5;">Fullfør utfordringer og del med venner<br>for å komme på leaderboard 🔥</div>'+
+      '</div>';
+    document.getElementById('lb-list').innerHTML='';
+    return;
+  }
   document.getElementById('lb-list').innerHTML=sorted.map((p,i)=>`
     <div class="lb-row${p.me?' me':''}">
-      <div class="lb-pos">${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1}</div>
-      <div class="lb-av">${p.em||p.emoji||'👤'}</div>
-      <div class="lb-info"><div class="lb-name">${p.name}${p.me?' (deg)':''}</div><div class="lb-detail">🔥 ${p.streak} streak</div></div>
-      <div class="lb-pts">${p.pts}</div>
+      <div class="lb-pos">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'<span style=\"font-size:13px;font-weight:800;\">'+(i+1)+'</span>'}</div>
+      <div class="lb-av" style="font-size:26px;width:40px;height:40px;background:var(--card2);border-radius:50%;display:flex;align-items:center;justify-content:center;">${p.em||p.emoji||'👤'}</div>
+      <div class="lb-info"><div class="lb-name">${p.name}${p.me?' <span style=\"color:var(--red);font-size:11px;\">deg</span>':''}</div><div class="lb-detail">🔥 ${p.streak} streak · ${p.done||0} fullført</div></div>
+      <div class="lb-pts" style="font-family:'Bebas Neue',sans-serif;font-size:22px;">${p.pts}<span style="font-size:10px;font-weight:600;color:var(--muted);"> pts</span></div>
     </div>`).join('');
 }
 
@@ -2869,7 +3204,7 @@ async function addFriend(){
   hint.className='add-friend-hint ok';
   hint.textContent=(newFriend.real?'✅ '+newFriend.name+' funnet og lagt til! 🎉':'✅ '+newFriend.name+' lagt til!');
   setTimeout(()=>{hint.textContent='';hint.className='add-friend-hint';},3000);
-  playSound('complete');confetti();
+  playSound('complete');avatarDrop();
   renderFriends();
   // Send vennskap til Supabase — begge ser hverandre
   if(newFriend.real) sbSendFriendRequest(val);
@@ -2951,19 +3286,15 @@ function copyMyCode(){
 
 function shareMyCode(platform){
   const code=getMyCode();
-  const txt=`👋 Legg meg til som venn i NÅ-appen!\n\nKoden min: ${code}\n\nÅpne: tsandvik2.github.io/naa-app2\n\n#NåAppen`;
+  // Lenken legger deg automatisk til som venn når de åpner den
+  const link='https://tsandvik2.github.io/naa-app2?f='+encodeURIComponent(code);
+  const txt='👋 Bli venn med meg på NÅ-appen!\n\n'+PL.name+' vil legge deg til som venn 🔥\n\nTrykk her — så legges vi til automatisk:\n'+link+'\n\n#NåAppen';
   sendToApp(txt,platform);
 }
 
 // ── Add demo friends for new users so it doesn't look empty ──
 function addDemoFriendsIfEmpty(){
-  if(!PL.friends||PL.friends.length===0){
-    PL.friends=[
-      {name:'Marcus',emoji:'😎',code:'NÅ-MAR847',pts:47,streak:5,addedDate:'demo'},
-      {name:'Sara',emoji:'😈',code:'NÅ-SAR312',pts:31,streak:2,addedDate:'demo'},
-    ];
-    saveData();
-  }
+  // Demo-venner fjernet — kun ekte venner vises
 }
 
 
@@ -3012,29 +3343,36 @@ if(PL.name&&PL.name!==''){
   const pending=PL.pending||[];
   if(pending.length>0){const nb=document.getElementById('nav-badge');if(nb){nb.style.display='flex';nb.textContent=pending.length;}}
 
-  // Handle friend invite via URL: ?c=NÅ-ABC&f=NÅ-XYZ
+  // Handle URL params: ?c=utfordring &f=vennekode
   const urlParams=new URLSearchParams(window.location.search);
   const inviteCode=urlParams.get('c');
   const friendCode=urlParams.get('f');
+
+  async function handleFriendFromURL(fCode){
+    if(!fCode||fCode===getMyCode())return;
+    const profile=await sbLookupFriend(fCode);
+    if(profile){
+      if(!PL.friends)PL.friends=[];
+      const exists=PL.friends.some(f=>f.code===fCode);
+      if(!exists) showFriendRequestPopup(profile,fCode);
+    }
+  }
+
+  // Kun vennelenke uten utfordring
+  if(friendCode&&!inviteCode){
+    setTimeout(()=>handleFriendFromURL(friendCode),1500);
+    window.history.replaceState({},'',window.location.pathname);
+  }
+
+  // Utfordringslenke (med eller uten vennekode)
   if(inviteCode){
     toast('👯 Venn har utfordret deg! Henter utfordring...');
     setTimeout(async()=>{
-      // Vis godta/avslå popup hvis f= finnes
-      if(friendCode&&friendCode!==getMyCode()){
-        const profile=await sbLookupFriend(friendCode);
-        if(profile){
-          if(!PL.friends)PL.friends=[];
-          const exists=PL.friends.some(f=>f.code===friendCode);
-          if(!exists){
-            showFriendRequestPopup(profile, friendCode);
-          }
-        }
-      }
+      if(friendCode)await handleFriendFromURL(friendCode);
       S.mood='Klar for galskap';S.time='30 min';S.players=1;
       const c=await joinCode(inviteCode);
       if(c)showChallenge(c);
       else{const ch=getChallenge();showChallenge(ch);}
-      // Clean URL
       window.history.replaceState({},'',window.location.pathname);
     },1200);
   }

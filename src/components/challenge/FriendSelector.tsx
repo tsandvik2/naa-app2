@@ -26,21 +26,38 @@ export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, o
   const router = useRouter();
   const [friends, setFriends] = useState<FriendRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     loadFriends();
-  }, []);
+  }, [userId]);
 
   async function loadFriends() {
     const supabase = createClient();
-    const { data: friendships } = await supabase
+
+    // Get all friendships where user is either sender or receiver
+    const { data: friendships, error } = await supabase
       .from("friendships")
-      .select("to_user_id")
-      .eq("from_user_id", userId)
+      .select("from_user_id, to_user_id")
+      .or(`from_user_id.eq.${userId},to_user_id.eq.${userId}`)
       .eq("status", "accepted");
 
+    if (error) {
+      console.error("FriendSelector: failed to load friendships", error);
+      setLoading(false);
+      return;
+    }
+
     if (friendships && friendships.length > 0) {
-      const ids = friendships.map((f) => f.to_user_id);
+      // Get the OTHER user's ID from each friendship
+      const ids = friendships
+        .map((f) => (f.from_user_id === userId ? f.to_user_id : f.from_user_id))
+        .filter((id, i, arr) => arr.indexOf(id) === i); // deduplicate
+
       const { data: profiles } = await supabase
         .from("profiles")
         .select("id, username, avatar_url, pts")
@@ -181,5 +198,7 @@ export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, o
     </div>
   );
 
+  // Use portal to render outside parent stacking contexts
+  if (!mounted) return null;
   return createPortal(content, document.body);
 }

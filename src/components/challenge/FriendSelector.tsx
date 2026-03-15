@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { LoadingDots } from "@/components/shared/LoadingDots";
@@ -63,10 +62,10 @@ export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, o
     }
   }
 
-  const content = (
+  return (
     <div
       className="fixed inset-0 z-[9999] flex flex-col overflow-y-auto px-4 pt-6 pb-10"
-      style={{ background: "#080810", animation: "slideUp 0.3s cubic-bezier(0.16,1,0.3,1)" }}
+      style={{ background: "#080810" }}
     >
       {loading ? (
         <div className="flex-1 flex items-center justify-center">
@@ -158,8 +157,7 @@ export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, o
 
           <button
             onClick={onConfirm}
-            disabled={friends.length > 0 && selectedFriends.length === 0}
-            className="w-full mt-3 py-[18px] rounded-2xl text-white font-extrabold text-[17px] active:scale-[0.97] transition-all disabled:opacity-35 disabled:pointer-events-none"
+            className="w-full mt-4 py-[18px] rounded-2xl text-white font-extrabold text-[17px] active:scale-[0.97] transition-all"
             style={{
               background: "linear-gradient(135deg, #ff2d55, #ff6b00)",
               boxShadow: "0 8px 32px rgba(255,45,85,0.45)",
@@ -167,15 +165,7 @@ export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, o
           >
             {selectedFriends.length > 0
               ? `Start med ${selectedFriends.length} venn${selectedFriends.length > 1 ? "er" : ""} 🔥`
-              : "Start utfordring 🔥"}
-          </button>
-
-          <button
-            onClick={onConfirm}
-            className="w-full mt-2 py-3 rounded-2xl font-bold text-sm text-[#55556a] active:scale-[0.97] transition-all"
-            style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.063)" }}
-          >
-            Fortsett uten venner i appen
+              : "Start alene 🔥"}
           </button>
 
           <button
@@ -189,6 +179,4 @@ export function FriendSelector({ userId, selectedFriends, onSelect, onConfirm, o
       )}
     </div>
   );
-
-  return createPortal(content, document.body);
 }

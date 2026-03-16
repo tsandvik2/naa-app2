@@ -2090,23 +2090,29 @@ function confirmGroup(){
 }
 
 function startRevealCountdown(){
-  const flipper=document.getElementById('card-flipper');
-  flipper.style.transition='none';
-  flipper.style.transform='rotateY(0deg)';
-  const fa=document.getElementById('flip-actions');
-  fa.style.opacity='0';fa.style.transform='translateY(10px)';fa.style.pointerEvents='none';
-  void flipper.offsetWidth;
-  flipper.style.transition='transform 0.7s cubic-bezier(0.4,0,0.2,1)';
+  // Hent utfordring HER så den aldri er null
+  const c=S.pendingChallenge||getChallenge();
+  S.pendingChallenge=c;
   show('s-count');
-  let n=3;
   const el=document.getElementById('count-num');
+  let n=3;
   function tick(){
-    if(n===0){setTimeout(showFlipReveal,300);return;}
     el.style.animation='none';
     void el.offsetWidth;
-    el.style.color=n===1?'var(--red)':'var(--text)';
+    el.style.color=n<=1?'var(--red)':'var(--text)';
     el.style.animation='countPop .4s cubic-bezier(.34,1.56,.64,1)';
     el.textContent=n;
+    if(n===1){
+      setTimeout(()=>{
+        el.style.animation='none';
+        void el.offsetWidth;
+        el.style.color='var(--red)';
+        el.style.animation='countPop .4s cubic-bezier(.34,1.56,.64,1)';
+        el.textContent='NÅ!';
+        setTimeout(()=>showChallenge(c),600);
+      },900);
+      return;
+    }
     n--;
     setTimeout(tick,900);
   }

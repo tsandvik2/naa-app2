@@ -2855,7 +2855,7 @@ function sharePhoto(platform){
   const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   try{
     canvas.toBlob(async blob=>{
-      // Prøv Web Share API først (fungerer på iPhone Safari)
+      // Web Share API — iOS deleark, ikke låser appen
       if(mob && navigator.share && navigator.canShare){
         const file=new File([blob],'nå-utfordring.jpg',{type:'image/jpeg'});
         if(navigator.canShare({files:[file]})){
@@ -2863,32 +2863,30 @@ function sharePhoto(platform){
             await navigator.share({
               files:[file],
               title:'NÅ-utfordring',
-              text:'🔥 '+S.challenge+' #NåUtfordringen'
+              text:'🔥 '+(S.challenge||'')+' #NåUtfordringen'
             });
             toast('Delt! 🔥');
             return;
           }catch(e){
-            if(e.name!=='AbortError') console.warn('Share feilet:',e);
+            // AbortError = bruker lukket deleark — ikke feil
+            if(e.name==='AbortError'){return;}
+            // Annen feil — fall through til nedlasting
           }
         }
       }
-      // Fallback: last ned og åpne app
+      // Fallback: kun last ned, IKKE naviger vekk
       const url=URL.createObjectURL(blob);
       const a=document.createElement('a');
-      a.href=url;a.download='nå-utfordring.jpg';a.click();
-      URL.revokeObjectURL(url);
-      if(mob){
-        setTimeout(()=>{
-          const urls={snap:'snapchat://',insta:'instagram://story-camera',tiktok:'tiktok://'};
-          window.location.href=urls[platform]||urls.snap;
-        },1000);
-        toast('Lagret! Åpner '+platform+'... 📲');
-      } else {
-        toast('Bilde lastet ned! 📸');
-      }
+      a.href=url;
+      a.download='nå-utfordring.jpg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+      toast('📸 Bilde lastet ned! Åpne '+platform+' og del manuelt');
     },'image/jpeg',0.92);
   }catch(e){
-    toast('Bruk iOS: trykk og hold på bildet → Lagre 💡');
+    toast('Trykk og hold på bildet for å lagre 💡');
   }
 }
 

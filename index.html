@@ -2104,26 +2104,10 @@ function startRevealCountdown(){
 }
 
 function showFlipReveal(){
+  // Gå direkte til utfordringen — ingen flip-bug
   const c=S.pendingChallenge;
   if(!c){show('s-reveal');return;}
-  const cfgs={easy:['🟢 LETT','lv-easy'],medium:['🟡 MEDIUM','lv-med'],wild:['🔴 KAOS!','lv-wild']};
-  const[lbl,cls]=cfgs[c.level]||cfgs.easy;
-  const badge=document.getElementById('flip-badge');
-  badge.textContent=lbl;badge.className='c-level '+cls;
-  document.getElementById('flip-text').textContent=c.text;
-  document.getElementById('flip-timer').textContent=S.time||'–';
-  document.getElementById('flip-cam').style.display=c.cam?'block':'none';
-  show('s-flip');
-  setTimeout(()=>{
-    document.getElementById('card-flipper').style.transform='rotateY(180deg)';
-    setTimeout(()=>{
-      const fa=document.getElementById('flip-actions');
-      fa.style.opacity='1';
-      fa.style.transform='translateY(0)';
-      fa.style.pointerEvents='auto';
-      fa.style.transition='all 0.4s ease';
-    },600);
-  },200);
+  showChallenge(c);
 }
 
 async function goToChallenge(){

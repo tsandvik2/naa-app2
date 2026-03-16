@@ -684,8 +684,9 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
       </div>
     </div>
     <!-- Knapper under flip -->
-    <div id="flip-actions" style="width:100%;margin-top:14px;display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(10px);transition:all 0.4s ease 0.5s;">
-      <button class="btn btn-primary" onclick="goToChallenge()" style="font-size:15px;">Til utfordringen →</button>
+    <div id="flip-actions" style="width:100%;margin-top:14px;display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(10px);transition:all 0.4s ease 0.3s;pointer-events:none;">
+      <button class="btn btn-primary" onclick="goToChallenge()" style="font-size:17px;padding:18px;">START! 🔥</button>
+      <button class="btn btn-ghost" style="font-size:13px;padding:11px;" onclick="backToSetup()">← Endre valg</button>
     </div>
   </div>
 
@@ -2084,7 +2085,7 @@ function startRevealCountdown(){
   flipper.style.transition='none';
   flipper.style.transform='rotateY(0deg)';
   const fa=document.getElementById('flip-actions');
-  fa.style.opacity='0';fa.style.transform='translateY(10px)';
+  fa.style.opacity='0';fa.style.transform='translateY(10px)';fa.style.pointerEvents='none';
   void flipper.offsetWidth;
   flipper.style.transition='transform 0.7s cubic-bezier(0.4,0,0.2,1)';
   show('s-count');
@@ -2117,8 +2118,11 @@ function showFlipReveal(){
     document.getElementById('card-flipper').style.transform='rotateY(180deg)';
     setTimeout(()=>{
       const fa=document.getElementById('flip-actions');
-      fa.style.opacity='1';fa.style.transform='translateY(0)';
-    },500);
+      fa.style.opacity='1';
+      fa.style.transform='translateY(0)';
+      fa.style.pointerEvents='auto';
+      fa.style.transition='all 0.4s ease';
+    },600);
   },200);
 }
 

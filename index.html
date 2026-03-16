@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -728,27 +727,8 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 
     <!-- PROOF BAR: requires photo before completing -->
     <div class="complete-bar" id="complete-bar">
-      <div class="complete-steps">
-        <div class="complete-step" id="step-photo">
-          <div class="cs-num" id="cs-num-1">1</div>
-          <div>
-            <div class="cs-title">Ta bevisbildet 📸</div>
-            <div class="cs-sub">Kamera åpnes automatisk</div>
-          </div>
-        </div>
-        <div class="cs-arrow">›</div>
-        <div class="complete-step" id="step-done">
-          <div class="cs-num locked" id="cs-num-2">2</div>
-          <div>
-            <div class="cs-title" id="cs-done-title">Marker fullført ✓</div>
-            <div class="cs-sub" id="cs-done-sub">Ta bilde først</div>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button class="btn btn-camera" style="flex:1;padding:14px;font-size:14px" id="proof-photo-btn" onclick="openProofCamera()">📸 Ta bilde</button>
-        <button class="btn btn-green" style="flex:1;padding:14px;font-size:14px;opacity:.35;pointer-events:none" id="proof-done-btn" onclick="completeChallenge()">✓ Fullført!</button>
-      </div>
+      <button class="btn btn-primary" style="width:100%;font-size:18px;padding:18px;" onclick="completeChallenge()">✅ Fullført! +10 pts</button>
+      <button class="btn btn-camera" style="width:100%;font-size:14px;padding:13px;margin-top:8px;" id="proof-photo-btn" onclick="openProofCamera()">📸 Ta bilde og del (+5 pts bonus)</button>
     </div>
     <div class="result-card" id="result-card">
       <div class="result-top">🎉</div>
@@ -2287,15 +2267,6 @@ function unlockDoneButton(){
 // COMPLETE / SKIP
 // ══════════════════════════════════════════
 function completeChallenge(){
-  if(!proofPhotoTaken){
-    toast('📸 Ta bevisbildet først! 👆');
-    // Shake the photo button
-    const btn=document.getElementById('proof-photo-btn');
-    btn.style.transform='translateX(-6px)';
-    setTimeout(()=>btn.style.transform='translateX(6px)',100);
-    setTimeout(()=>btn.style.transform='translateX(0)',200);
-    return;
-  }
   if(timerExpiredFlag){
     toast('⏰ Tiden gikk ut – ingen poeng denne gangen!');
     return;

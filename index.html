@@ -1981,11 +1981,14 @@ function showChallenge(c){
   // Friend code
   const isGroup=S.players!==1;
   const fb=document.getElementById('friend-box');
-  if(isGroup){
-    S.code='NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase();
-    document.getElementById('friend-code').textContent=S.code;
-    fb.classList.add('show');
-  }else fb.classList.remove('show');
+  if(fb){
+    if(isGroup){
+      S.code='NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase();
+      const fc=document.getElementById('friend-code');
+      if(fc)fc.textContent=S.code;
+      fb.classList.add('show');
+    }else fb.classList.remove('show');
+  }
 
   // Punishment
   const pu=document.getElementById('punish');
@@ -2108,7 +2111,7 @@ function startRevealCountdown(){
         void el.offsetWidth;
         el.style.color='var(--red)';
         el.style.animation='countPop .4s cubic-bezier(.34,1.56,.64,1)';
-        el.textContent='NÅ!';
+        el.textContent='GO!';
         setTimeout(()=>showChallenge(c),600);
       },900);
       return;

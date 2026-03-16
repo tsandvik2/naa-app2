@@ -779,15 +779,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
       <button class="btn btn-primary" style="margin-top:14px;font-size:18px;padding:18px;letter-spacing:.3px;" onclick="nextChallenge()">🎯 Neste utfordring!</button>
       <button class="btn btn-ghost" style="font-size:13px;padding:11px;margin-top:6px;" onclick="inviteFriend('snap')">👻 Utfordre en venn på Snap</button>
     </div>
-    <!-- SPILL MED VENN — nederst -->
-    <div class="friend-box" id="friend-box">
-      <div class="friend-box-top">
-        <div><div class="friend-box-title">👯 Spill med venn</div><div class="friend-box-sub">Send koden – dere gjør samme utfordring</div></div>
-        <div class="friend-code" id="friend-code">NÅ-???</div>
-      </div>
-      <button class="btn btn-snap" onclick="snapChallenge()">👻 Send kode på Snapchat</button>
-      <button class="btn btn-ghost" style="font-size:13px;padding:10px;margin-top:6px;" onclick="document.getElementById('friend-box').classList.remove('show')">✕ Avbryt</button>
-    </div>
+
     <div class="skip-bar" id="skip-bar">
       <button class="btn btn-ghost skip-btn" onclick="skipChallenge()">⏭ Hopp over <span class="skip-cost">−5 pts</span></button>
     </div>

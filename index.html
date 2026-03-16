@@ -2802,35 +2802,89 @@ function wrapTextMaxLines(ctx,text,x,y,maxW,lineH,maxLines){
 // Legacy alias
 function wrapText(ctx,text,x,y,maxW,lineH){wrapTextMaxLines(ctx,text,x,y,maxW,lineH,99);}
 
-function savePhotoToRoll(){
+async function savePhotoToRoll(){
   const canvas=document.getElementById('cam-canvas');
-  canvas.toBlob(blob=>{
+  canvas.toBlob(async blob=>{
+    const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // iPhone: bruk Web Share API - dette lagrer til kamerarulle
+    if(mob && navigator.share && navigator.canShare){
+      const file=new File([blob],'nå-utfordring.jpg',{type:'image/jpeg'});
+      if(navigator.canShare({files:[file]})){
+        try{
+          await navigator.share({files:[file],title:'NÅ-utfordring'});
+          showAfterSaveButtons();
+          return;
+        }catch(e){
+          if(e.name==='AbortError'){return;}
+        }
+      }
+    }
+    // PC: last ned
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a');
-    a.href=url;
-    a.download='nå-utfordring.jpg';
-    document.body.appendChild(a);
-    a.click();
+    a.href=url;a.download='nå-utfordring.jpg';
+    document.body.appendChild(a);a.click();
     document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(url),1000);
-    toast('💾 Lagret! Åpne Snap eller TikTok og del 🔥');
+    showAfterSaveButtons();
   },'image/jpeg',0.92);
 }
 
-function saveVideoToRoll(){
+async function saveVideoToRoll(){
   if(!videoBlob){toast('Ingen video 🤔');return;}
+  const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(mob && navigator.share && navigator.canShare){
+    const ext=videoBlob.type.includes('mp4')?'mp4':'webm';
+    const file=new File([videoBlob],'nå-utfordring.'+ext,{type:videoBlob.type});
+    if(navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({files:[file],title:'NÅ-utfordring'});
+        showAfterSaveButtons();
+        return;
+      }catch(e){
+        if(e.name==='AbortError'){return;}
+      }
+    }
+  }
   const url=URL.createObjectURL(videoBlob);
   const a=document.createElement('a');
-  a.href=url;
-  a.download='nå-utfordring.mp4';
-  document.body.appendChild(a);
-  a.click();
+  a.href=url;a.download='nå-utfordring.mp4';
+  document.body.appendChild(a);a.click();
   document.body.removeChild(a);
   setTimeout(()=>URL.revokeObjectURL(url),1000);
-  toast('💾 Lagret! Åpne Snap eller TikTok og del 🔥');
+  showAfterSaveButtons();
 }
 
+function showAfterSaveButtons(){
+  // Vis knapper for å åpne sosiale medier etter lagring
+  const existing=document.getElementById('after-save-btns');
+  if(existing)return;
+  const div=document.createElement('div');
+  div.id='after-save-btns';
+  div.style.cssText='display:flex;flex-direction:column;gap:8px;margin-top:12px;';
+  div.innerHTML=
+    '<div style="font-size:12px;color:rgba(255,255,255,.5);text-align:center;margin-bottom:4px;">Åpne og del i:</div>'+
+    '<div style="display:flex;gap:8px;">'+
+    '<button onclick="location.href=String.fromCharCode(115,110,97,112,99,104,97,116,58,47,47)" style="flex:1;padding:12px;background:#FFFC00;color:#000;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;">👻 Snap</button>'+
+    '<button onclick="location.href=String.fromCharCode(116,105,107,116,111,107,58,47,47)" style="flex:1;padding:12px;background:#010101;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;">🎵 TikTok</button>'+
+    '<button onclick="location.href=String.fromCharCode(105,110,115,116,97,103,114,97,109,58,47,47)" style="flex:1;padding:12px;background:#cc2366;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;">📸 Insta</button>'+
+    '</div>';
+  // Finn preview-actions og legg til
+  const previews=['cam-preview','vid-preview'];
+  previews.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.classList.contains('on')){
+      const actions=el.querySelector('.cam-preview-actions');
+      if(actions)actions.appendChild(div);
+    }
+  });
+}
+
+
+
 function retakePhoto(){
+  const b=document.getElementById('after-save-btns');
+  if(b)b.remove();
   document.getElementById('cam-preview').classList.remove('on');
   openCamera();
 }

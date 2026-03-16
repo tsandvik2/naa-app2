@@ -1044,12 +1044,10 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     </div>
   </div>
   <div class="cam-preview-actions">
-    <div class="cam-preview-title">Bra! Del det nå 🔥</div>
-    <div id="share-photo-hint" style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;">Trykk en knapp for å dele direkte 📲</div>
-    <button class="btn btn-snap" onclick="sharePhoto('snap')">👻 Del på Snapchat</button>
-    <button class="btn btn-insta" onclick="sharePhoto('insta')">📸 Del på Instagram</button>
-    <button class="btn btn-tiktok" onclick="sharePhoto('tiktok')">🎵 Del på TikTok</button>
-    <button class="btn btn-ghost" style="font-size:13px;padding:12px" onclick="retakePhoto()">↩ Ta nytt bilde</button>
+    <div class="cam-preview-title">Bra! 🔥</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:12px;line-height:1.5;">Lagre til kamerarulle → åpne Snap/TikTok og del derfra</div>
+    <button class="btn btn-primary" style="font-size:16px;padding:16px;" onclick="savePhotoToRoll()">💾 Lagre til kamerarulle</button>
+    <button class="btn btn-ghost" style="font-size:13px;padding:12px;margin-top:4px;" onclick="retakePhoto()">↩ Ta nytt bilde</button>
     <button class="btn btn-ghost" style="font-size:12px;padding:10px;color:var(--muted)" onclick="closeCamPreview()">← Tilbake til utfordringen</button>
   </div>
 </div>
@@ -1069,12 +1067,10 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     </div>
   </div>
   <div class="cam-preview-actions">
-    <div class="cam-preview-title">Bra! Del videoen nå 🔥</div>
-    <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;">Trykk på en app → videoen lagres → åpnes der du kan poste</div>
-    <button class="btn btn-tiktok" onclick="shareVideo('tiktok')">🎵 Del på TikTok</button>
-    <button class="btn btn-insta" onclick="shareVideo('insta')">📸 Del på Reels</button>
-    <button class="btn btn-snap" onclick="shareVideo('snap')">👻 Del på Snapchat</button>
-    <button class="btn btn-ghost" style="font-size:13px;padding:12px" onclick="retakeVideo()">↩ Ta ny video</button>
+    <div class="cam-preview-title">Bra! 🔥</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:12px;line-height:1.5;">Lagre til kamerarulle → åpne Snap/TikTok og del derfra</div>
+    <button class="btn btn-primary" style="font-size:16px;padding:16px;" onclick="saveVideoToRoll()">💾 Lagre til kamerarulle</button>
+    <button class="btn btn-ghost" style="font-size:13px;padding:12px;margin-top:4px;" onclick="retakeVideo()">↩ Ta ny video</button>
     <button class="btn btn-ghost" style="font-size:12px;padding:10px;color:var(--muted)" onclick="closeVidPreview()">← Tilbake til utfordringen</button>
   </div>
 </div>
@@ -2805,6 +2801,34 @@ function wrapTextMaxLines(ctx,text,x,y,maxW,lineH,maxLines){
 
 // Legacy alias
 function wrapText(ctx,text,x,y,maxW,lineH){wrapTextMaxLines(ctx,text,x,y,maxW,lineH,99);}
+
+function savePhotoToRoll(){
+  const canvas=document.getElementById('cam-canvas');
+  canvas.toBlob(blob=>{
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='nå-utfordring.jpg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast('💾 Lagret! Åpne Snap eller TikTok og del 🔥');
+  },'image/jpeg',0.92);
+}
+
+function saveVideoToRoll(){
+  if(!videoBlob){toast('Ingen video 🤔');return;}
+  const url=URL.createObjectURL(videoBlob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='nå-utfordring.mp4';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  toast('💾 Lagret! Åpne Snap eller TikTok og del 🔥');
+}
 
 function retakePhoto(){
   document.getElementById('cam-preview').classList.remove('on');

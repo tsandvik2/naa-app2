@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -346,7 +347,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 /* ══ CAMERA OVERLAY ══ */
 .cam-overlay{display:none;position:fixed;inset:0;z-index:800;background:#000;flex-direction:column}
 .cam-overlay.on{display:flex}
-.cam-video{width:100%;flex:1;object-fit:cover;background:#000}
+.cam-video{width:100%;flex:1;object-fit:cover;background:#000}.cam-video.front{transform:scaleX(-1)}
 .cam-canvas{display:none}
 /* Filter overlay on video */
 .cam-filter{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:env(safe-area-inset-top,20px) 0 0;z-index:5}
@@ -633,7 +634,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     </div>
     <div id="group-selected-list" style="display:flex;flex-direction:column;gap:6px;"></div>
     <button class="btn btn-primary" style="font-size:16px;padding:17px;" onclick="confirmGroup()">Klar! Start utfordring 🚀</button>
-    <button class="btn btn-ghost" style="font-size:13px;padding:12px;" onclick="show('s-setup');wizNext(2);">← Endre antall</button>
+    <button class="btn btn-ghost" style="font-size:13px;padding:12px;" onclick="backToSetup()">← Tilbake</button>
   </div>
 
   <!-- REVEAL -->
@@ -1581,10 +1582,6 @@ const BADGES=[
 
 const LB=[
   {name:'Deg',em:'🔥',pts:0,streak:0,me:true},
-  {name:'Marcus',em:'😎',pts:47,streak:5,me:false},
-  {name:'Sara',em:'😈',pts:31,streak:2,me:false},
-  {name:'Lise',em:'🦋',pts:28,streak:1,me:false},
-  {name:'Tobias',em:'⚡',pts:19,streak:0,me:false},
 ];
 
 const LOAD_TEXTS=['Finner noe gøyalt...','Tenker på noe genialt...','Vent litt, dette blir bra...','Sjekker hva som passer...','Henter en utfordring til deg...'];
@@ -1608,7 +1605,7 @@ function obGoToAge(){
 
 function obNext(step){
   document.querySelectorAll('.ob-screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('ob'+step).classList.add('active');
+  const obEl=document.getElementById('ob'+step);if(obEl)obEl.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
   if(step===1)buildAvatarGrid();
 }
@@ -1937,10 +1934,13 @@ function getChallenge(){
     const filtered=pool.filter(c=>!groupWords.some(w=>c.text.toLowerCase().includes(w)));
     if(filtered.length>0)pool=filtered;
   }
-  return{...pool[Math.floor(Math.random()*pool.length)],level};
+  const pickIdx=Math.floor(Math.random()*pool.length);
+  const picked=pool[pickIdx]||DB.easy.solo[0];
+  return{...picked,level};
 }
 
 function showChallenge(c){
+  try{
   S.challenge=c.text;S.punishment=c.p||null;S.needsCamera=!!c.cam;
   const cfgs={easy:['🟢 LETT','lv-easy'],medium:['🟡 MEDIUM','lv-med'],wild:['🔴 KAOS!','lv-wild']};
   const[lbl,cls]=cfgs[c.level]||cfgs.easy;
@@ -1948,23 +1948,16 @@ function showChallenge(c){
   lv.textContent=lbl;lv.className='c-level '+cls;
   document.getElementById('c-text').textContent=c.text;
   const extra=c.special?(c.special==='wed'?'<span class="c-tag">🔮 Onsdag</span>':'<span class="c-tag">🎉 Helg</span>'):'';
-  document.getElementById('c-tags').innerHTML=`<span class="c-tag">🎯 ${c.cat}</span><span class="c-tag">⏱ ${S.time||'–'}</span><span class="c-tag">👥 ${S.players===1?'Solo':S.players+' pers.'}</span>${extra}`;
+  document.getElementById('c-tags').innerHTML=`<span class="c-tag">🎯 ${c.cat||'kreativ'}</span><span class="c-tag">⏱ ${S.time||'–'}</span><span class="c-tag">👥 ${S.players===1?'Solo':S.players+' pers.'}</span>${extra}`;
 
   // Camera button
   const cb=document.getElementById('camera-btn');
   cb.classList.toggle('show',!!c.cam);
 
-  // Friend code
+  // Generer alltid en kode og lagre i Supabase
   const isGroup=S.players!==1;
-  const fb=document.getElementById('friend-box');
-  if(fb){
-    if(isGroup){
-      S.code='NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase();
-      const fc=document.getElementById('friend-code');
-      if(fc)fc.textContent=S.code;
-      fb.classList.add('show');
-    }else fb.classList.remove('show');
-  }
+  S.code='NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase();
+  try{sbSaveChallenge(S.code, c.text);}catch(e){}
 
   // Punishment
   const pu=document.getElementById('punish');
@@ -1986,13 +1979,16 @@ function showChallenge(c){
   document.getElementById('complete-bar').classList.add('show');
   document.getElementById('skip-bar').style.display='flex';
   document.getElementById('result-card').classList.remove('show');
+  const oldBtns=document.getElementById('open-app-btns');
+  if(oldBtns)oldBtns.remove();
 
   // Start timer
   startTimer(S.time||'10 min');
 
   show('s-challenge');
-  if(S.needsCamera)setTimeout(()=>openCamera(),2500);
+  if(S.needsCamera)setTimeout(()=>openCamera(),4000);
   vibrate();playSound('pop');
+  }catch(err){console.error('showChallenge feil:',err);toast('Noe gikk galt – prøv igjen 🔄');show('s-setup');}
 }
 
 function start(){
@@ -2069,30 +2065,23 @@ function confirmGroup(){
 }
 
 function startRevealCountdown(){
-  // Hent utfordring HER så den aldri er null
   const c=S.pendingChallenge||getChallenge();
   S.pendingChallenge=c;
   show('s-count');
   const el=document.getElementById('count-num');
-  let n=3;
+  const steps=['3','2','1','NÅ!'];
+  let i=0;
   function tick(){
     el.style.animation='none';
     void el.offsetWidth;
-    el.style.color=n<=1?'var(--red)':'var(--text)';
+    el.style.color=(i>=2)?'var(--red)':'var(--text)';
     el.style.animation='countPop .4s cubic-bezier(.34,1.56,.64,1)';
-    el.textContent=n;
-    if(n===1){
-      setTimeout(()=>{
-        el.style.animation='none';
-        void el.offsetWidth;
-        el.style.color='var(--red)';
-        el.style.animation='countPop .4s cubic-bezier(.34,1.56,.64,1)';
-        el.textContent='GO!';
-        setTimeout(()=>showChallenge(c),600);
-      },900);
+    el.textContent=steps[i];
+    if(i===steps.length-1){
+      setTimeout(()=>showChallenge(c),700);
       return;
     }
-    n--;
+    i++;
     setTimeout(tick,900);
   }
   tick();
@@ -2110,12 +2099,14 @@ async function goToChallenge(){
 }
 
 async function nextChallenge(){
+  S.groupMembers=[];
+  S.sharedThisChallenge=false;
   if(!S.mood||!S.time||!S.players){navTo('s-setup','n0');wizNext(0);return;}
   start();
 }
 
-async function joinCode(){
-  const v=document.getElementById('join-input').value.trim().toUpperCase();
+async function joinCode(codeArg){
+  const v=(codeArg||document.getElementById('join-input').value||'').trim().toUpperCase();
   const clean=v.replace(/[^A-ZÆØÅ0-9]/g,'');
   if(clean.length<5){toast('Skriv inn koden du fikk fra vennen din 🤔');return;}
 
@@ -2226,15 +2217,16 @@ let proofPhotoTaken=false;
 
 function resetProofBar(){
   proofPhotoTaken=false;
-  // Step 1: active, Step 2: locked
-  document.getElementById('cs-num-1').className='cs-num';
-  document.getElementById('cs-num-2').className='cs-num locked';
-  document.getElementById('cs-done-title').textContent='Marker fullført ✓';
-  document.getElementById('cs-done-sub').textContent='Ta bilde først';
-  document.getElementById('proof-photo-btn').style.opacity='1';
-  document.getElementById('proof-photo-btn').style.pointerEvents='auto';
-  document.getElementById('proof-done-btn').style.opacity='.35';
-  document.getElementById('proof-done-btn').style.pointerEvents='none';
+  const safeSet=(id,prop,val)=>{const el=document.getElementById(id);if(el)el[prop]=val;};
+  const safeStyle=(id,prop,val)=>{const el=document.getElementById(id);if(el)el.style[prop]=val;};
+  safeSet('cs-num-1','className','cs-num');
+  safeSet('cs-num-2','className','cs-num locked');
+  safeSet('cs-done-title','textContent','Marker fullført ✓');
+  safeSet('cs-done-sub','textContent','Ta bilde først');
+  safeStyle('proof-photo-btn','opacity','1');
+  safeStyle('proof-photo-btn','pointerEvents','auto');
+  safeStyle('proof-done-btn','opacity','.35');
+  safeStyle('proof-done-btn','pointerEvents','none');
 }
 
 function openProofCamera(){
@@ -2250,15 +2242,17 @@ function unlockDoneButton(){
     setTimeout(()=>completeDaily(),300);
     return;
   }
-  document.getElementById('cs-num-1').className='cs-num done';
-  document.getElementById('cs-num-1').textContent='✓';
-  document.getElementById('cs-num-2').className='cs-num';
-  document.getElementById('cs-done-title').textContent='Marker fullført! 💪';
-  document.getElementById('cs-done-sub').textContent='Poeng og streak venter!';
-  document.getElementById('proof-photo-btn').style.opacity='.5';
-  document.getElementById('proof-photo-btn').textContent='📸 Nytt bilde';
-  document.getElementById('proof-done-btn').style.opacity='1';
-  document.getElementById('proof-done-btn').style.pointerEvents='auto';
+  const safeSet=(id,prop,val)=>{const el=document.getElementById(id);if(el)el[prop]=val;};
+  const safeStyle=(id,prop,val)=>{const el=document.getElementById(id);if(el)el.style[prop]=val;};
+  safeSet('cs-num-1','className','cs-num done');
+  safeSet('cs-num-1','textContent','✓');
+  safeSet('cs-num-2','className','cs-num');
+  safeSet('cs-done-title','textContent','Marker fullført! 💪');
+  safeSet('cs-done-sub','textContent','Poeng og streak venter!');
+  safeStyle('proof-photo-btn','opacity','.5');
+  safeSet('proof-photo-btn','textContent','📸 Nytt bilde');
+  safeStyle('proof-done-btn','opacity','1');
+  safeStyle('proof-done-btn','pointerEvents','auto');
   toast('✅ Bilde tatt! Trykk Fullført for å få poeng 🔥');
   playSound('pop');
 }
@@ -2441,7 +2435,9 @@ function afterCameraShare(){
 // ── INVITER VENN — sender utfordringen direkte ──
 function inviteFriend(method){
   const myCode=getMyCode();
-  const challengeCode=S.code||PL.friendCode||'NÅ-???';
+  const challengeCode=S.code||('NÅ-'+Math.random().toString(36).substring(2,5).toUpperCase());
+  if(!S.code)S.code=challengeCode;
+  sbSaveChallenge(challengeCode, S.challenge||'');
   const challenge=S.challenge||'en morsom utfordring';
   // Lenken inneholder BÅDE utfordring og din vennekode
   const url='https://tsandvik2.github.io/naa-app2?c='+encodeURIComponent(challengeCode)+'&f='+encodeURIComponent(myCode);
@@ -2548,10 +2544,8 @@ function startRecording(){
 
   function drawFilterFrame(){
     if(!mediaRecorder||mediaRecorder.state!=='recording')return;
-    // Tegn video
-    if(facingMode==='user'){ctx.translate(w,0);ctx.scale(-1,1);}
+    // iOS speiler frontkamera automatisk — ikke flippe i canvas
     ctx.drawImage(video,0,0,w,h);
-    if(facingMode==='user'){ctx.setTransform(1,0,0,1,0,0);}
     // Gradienter
     const topG=ctx.createLinearGradient(0,0,0,h*0.25);
     topG.addColorStop(0,'rgba(0,0,0,0.72)');topG.addColorStop(1,'rgba(0,0,0,0)');
@@ -2658,6 +2652,7 @@ async function startCamStream(){
     });
     const video=document.getElementById('cam-video');
     video.srcObject=camStream;
+    video.className='cam-video'+(facingMode==='user'?' front':'');
   }catch(e){
     toast('Kan ikke åpne kamera. Sjekk tillatelser 📷');
     closeCamera();
@@ -2674,6 +2669,7 @@ function closeCamera(){
   if(recInterval){clearInterval(recInterval);recInterval=null;}
   if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
   document.getElementById('cam-overlay').classList.remove('on');
+  const cp=document.getElementById('cam-challenge-popup');if(cp)cp.style.display='none';
   const rec=document.getElementById('cam-rec');
   if(rec)rec.style.display='none';
   const sh=document.getElementById('cam-shutter');
@@ -2687,10 +2683,8 @@ function takePhoto(){
   canvas.height=video.videoHeight||720;
   const ctx=canvas.getContext('2d');
 
-  // Flip if front camera
-  if(facingMode==='user'){ctx.translate(canvas.width,0);ctx.scale(-1,1);}
+  // iOS speiler frontkamera automatisk — ikke flippe i canvas
   ctx.drawImage(video,0,0,canvas.width,canvas.height);
-  if(facingMode==='user'){ctx.setTransform(1,0,0,1,0,0);}
 
   // Draw filter overlay on canvas
   const w=canvas.width,h=canvas.height;

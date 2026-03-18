@@ -2132,7 +2132,9 @@ async function joinCode(codeArg){
     if(!S.mood)S.mood='Avslappet';
     if(!S.time)S.time='30 min';
     if(!S.players)S.players=2;
-    setTimeout(()=>showChallenge(getChallenge()),600);
+    const fallback=getChallenge();
+    setTimeout(()=>showChallenge(fallback),600);
+    return fallback;
   }
 }
 
@@ -2352,29 +2354,34 @@ function showResult(pts){
 // SHARING
 // ══════════════════════════════════════════
 // ── QUICK SHARE — 1 tap: lagrer video/bilde + åpner app ──
-function shareAndGetPoints(platform){
-  // +5 pts for deling — kun én gang per utfordring, lagres i history
+async function shareAndGetPoints(platform){
+  // Gi +5 pts
   const challengeKey='share_'+btoa(S.challenge||'').substring(0,10);
   if(!PL.sharedChallenges)PL.sharedChallenges=[];
   if(!PL.sharedChallenges.includes(challengeKey)){
     PL.sharedChallenges.push(challengeKey);
-    // Behold kun siste 50
     if(PL.sharedChallenges.length>50)PL.sharedChallenges.shift();
-    // Maks 3 del-poeng per dag
     const todayStr=new Date().toDateString();
     if(!PL.dailyShareDate||PL.dailyShareDate!==todayStr){PL.dailyShareDate=todayStr;PL.dailyShareCount=0;}
     if((PL.dailyShareCount||0)<3){
       PL.dailyShareCount=(PL.dailyShareCount||0)+1;
-      PL.pts+=5;
-      LB[0].pts=PL.pts;
-      updateHeader();saveData();
-      sbSaveProfile();
-      toast('🔥 +5 pts for deling! ('+PL.dailyShareCount+'/3 i dag)');
-    } else {
-      toast('Du har fått del-poeng 3 ganger i dag allerede! 😄');
+      PL.pts+=5;LB[0].pts=PL.pts;
+      updateHeader();saveData();sbSaveProfile();
+      toast('🔥 +5 pts for deling!');
     }
   }
-  quickShare(platform);
+  // Bruk Web Share API direkte — ingen popup
+  const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const shareText=`🔥 ${S.challenge||'NÅ-utfordring'} - tsandvik2.github.io/naa-app2 #NåAppen`;
+  if(mob&&navigator.share){
+    try{
+      await navigator.share({title:'NÅ-utfordring',text:shareText});
+      return;
+    }catch(e){if(e.name==='AbortError')return;}
+  }
+  // Fallback: åpne app direkte
+  const urls={snap:'snapchat://',tiktok:'tiktok://',insta:'instagram://'};
+  if(urls[platform])location.href=urls[platform];
 }
 
 function quickShare(platform){
@@ -2480,7 +2487,7 @@ function sendToApp(txt,platform){
     +'<div id="share-txt-box" style="background:#000;border-radius:14px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:rgba(255,255,255,.8);line-height:1.6;white-space:pre-wrap;border:1px solid rgba(255,255,255,.1);">'+txt+'</div>'
     +'<button id="share-copy-btn" style="width:100%;padding:16px;background:#ff2d55;color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;margin-bottom:10px;">📋 Kopier tekst</button>'
     +(mob?'<button id="share-open-btn" style="width:100%;padding:14px;background:#222;color:#fff;border:1px solid rgba(255,255,255,.1);border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px;">Åpne '+appName+' →</button>':'')
-    +'<button onclick="document.getElementById(\"share-popup\").remove()" style="width:100%;padding:13px;background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);border-radius:14px;font-size:14px;cursor:pointer;">Avbryt</button>'
+    +'<button id="share-popup-close" style="width:100%;padding:13px;background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);border-radius:14px;font-size:14px;cursor:pointer;">Avbryt</button>'
     +'</div>';
   document.body.appendChild(popup);
   document.getElementById('share-copy-btn').onclick=function(){
@@ -2491,6 +2498,11 @@ function sendToApp(txt,platform){
   };
   const openBtn=document.getElementById('share-open-btn');
   if(openBtn)openBtn.onclick=function(){window.location.href=appUrl;};
+  const closeBtn=document.getElementById('share-popup-close');
+  if(closeBtn)closeBtn.onclick=function(){
+    const p=document.getElementById('share-popup');
+    if(p)p.remove();
+  };
 }
 
 // ══════════════════════════════════════════
@@ -2659,6 +2671,10 @@ async function startCamStream(){
 }
 
 function flipCamera(){
+  // Stopp opptak hvis aktiv
+  if(mediaRecorder&&mediaRecorder.state==='recording'){
+    stopRecording();
+  }
   facingMode=facingMode==='user'?'environment':'user';
   startCamStream();
 }
@@ -3129,10 +3145,12 @@ document.addEventListener('visibilitychange',()=>{
 // Pending challenges stored in PL.pending = [{from, fromEmoji, challenge, code, date}]
 
 function getMyCode(){
-  // Koden genereres kun én gang og lagres permanent
   if(!PL.myCode){
-    const base=(PL.name||'USER').toUpperCase().replace(/[^A-ZÆØÅ]/g,'').substring(0,3).padEnd(3,'X');
-    const num=Math.floor(Math.random()*900)+100;
+    const base=(PL.name||'USER').toUpperCase().replace(/[^A-Z]/g,'').substring(0,3).padEnd(3,'X');
+    // Bruk crypto.getRandomValues for sikker tilfeldig kode
+    const arr=new Uint32Array(1);
+    crypto.getRandomValues(arr);
+    const num=100+(arr[0]%900);
     PL.myCode='NÅ-'+base+num;
     saveData();
   }
@@ -3426,9 +3444,16 @@ if(PL.name&&PL.name!==''){
     setTimeout(async()=>{
       if(friendCode)await handleFriendFromURL(friendCode);
       S.mood='Klar for galskap';S.time='30 min';S.players=1;
-      const c=await joinCode(inviteCode);
-      if(c)showChallenge(c);
-      else{const ch=getChallenge();showChallenge(ch);}
+      // Hent utfordring fra DB
+      show('s-load');
+      const row=await sbFetchChallenge(inviteCode);
+      if(row){
+        const c={text:row.challenge_text,level:'medium',cat:'sosial',p:null};
+        toast('🔥 Utfordring fra '+row.created_emoji+' '+row.created_by+'!');
+        setTimeout(()=>showChallenge(c),400);
+      } else {
+        showChallenge(getChallenge());
+      }
       window.history.replaceState({},'',window.location.pathname);
     },1200);
   }

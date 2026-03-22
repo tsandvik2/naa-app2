@@ -693,21 +693,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 
       <!-- DEL -->
       <div style="margin-top:16px;">
-        <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">POST ELLER TAPER 📲 +5 PTS</div>
-        <div class="share-btns-row">
-          <button class="share-big-btn share-tiktok" onclick="shareAndGetPoints('tiktok')">
-            <span class="sbb-icon">🎵</span>
-            <span class="sbb-label">TikTok</span>
-          </button>
-          <button class="share-big-btn share-snap" onclick="shareAndGetPoints('snap')">
-            <span class="sbb-icon">👻</span>
-            <span class="sbb-label">Snapchat</span>
-          </button>
-          <button class="share-big-btn share-insta" onclick="shareAndGetPoints('insta')">
-            <span class="sbb-icon">📸</span>
-            <span class="sbb-label">Reels</span>
-          </button>
-        </div>
+        <button onclick="shareAndGetPoints('share')" style="width:100%;padding:16px;background:linear-gradient(135deg,#ff2d55,#ff6b00);color:#fff;border:none;border-radius:16px;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;">📲 Del og få +5 pts!</button>
       </div>
 
       <!-- NESTE -->
@@ -822,10 +808,10 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 
       <!-- Nektet -->
       <div id="noway-rejected" style="display:none;">
-        <div style="font-size:36px;margin-bottom:8px;">😤</div>
-        <div style="font-size:15px;font-weight:900;color:#ff2d55;margin-bottom:10px;">No way? Greit. Straffen din er:</div>
-        <div id="noway-rej-txt" style="font-size:16px;font-weight:700;color:#fff;line-height:1.5;margin-bottom:16px;background:rgba(255,45,85,.08);border:1px solid rgba(255,45,85,.25);border-radius:12px;padding:14px;">–</div>
-        <button onclick="openDailyCamera()" class="btn btn-primary" style="font-size:15px;padding:14px;">🎬 Film straffen din nå</button>
+        <div style="font-size:36px;margin-bottom:8px;">😅</div>
+        <div style="font-size:16px;font-weight:900;color:#fff;margin-bottom:6px;">Ok, du slapp denne gang.</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;">Men nominer en venn — la dem prøve!</div>
+        <button onclick="nominateNoWayFriend()" class="btn btn-primary" style="font-size:15px;padding:16px;">👻 Send til venn på Snap</button>
       </div>
     </div>
   </div>
@@ -1039,11 +1025,9 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
     <span class="cam-rec-dot"></span> REC <span id="cam-rec-time">0:00</span>
   </div>
   <!-- Utfordring popup — vises alltid når kamera åpnes -->
-  <div id="cam-challenge-popup" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.88);border:1.5px solid rgba(255,45,85,.4);border-radius:20px;padding:20px;text-align:center;z-index:20;display:none;max-width:280px;backdrop-filter:blur(10px);">
-    <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#ff2d55;margin-bottom:8px;">DIN UTFORDRING</div>
-    <div id="cam-popup-text" style="font-size:15px;font-weight:700;color:#fff;line-height:1.5;margin-bottom:16px;">–</div>
-    <button onclick="document.getElementById('cam-challenge-popup').style.display='none';" style="width:100%;padding:13px;background:#ff2d55;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;">Klar! Start filming 🎬</button>
-    <button onclick="closeCamera();" style="width:100%;padding:10px;background:transparent;color:rgba(255,255,255,.4);border:none;font-size:13px;cursor:pointer;margin-top:4px;">← Tilbake</button>
+  <div id="cam-challenge-popup" style="position:absolute;top:env(safe-area-inset-top,20px);left:12px;right:60px;background:rgba(0,0,0,.6);border-radius:10px;padding:8px 12px;z-index:20;display:none;backdrop-filter:blur(8px);">
+    <div style="font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#ff2d55;margin-bottom:2px;">DIN UTFORDRING</div>
+    <div id="cam-popup-text" style="font-size:12px;font-weight:700;color:#fff;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">–</div>
   </div>
 
   <!-- Filming hint — vises kun første gang -->
@@ -2676,7 +2660,6 @@ async function shareAndGetPoints(platform){
   if(!PL.sharedChallenges)PL.sharedChallenges=[];
   if(!PL.sharedChallenges.includes(challengeKey)){
     PL.sharedChallenges.push(challengeKey);
-    if(PL.sharedChallenges.length>50)PL.sharedChallenges.shift();
     const todayStr=new Date().toDateString();
     if(!PL.dailyShareDate||PL.dailyShareDate!==todayStr){PL.dailyShareDate=todayStr;PL.dailyShareCount=0;}
     if((PL.dailyShareCount||0)<3){
@@ -2686,23 +2669,18 @@ async function shareAndGetPoints(platform){
       toast('🔥 +5 pts for deling!');
     }
   }
-  // Bruk Web Share API direkte — ingen popup
-  const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  const _shareOpts=[
-    `😭 Jeg fikk denne fra DrivX: "${S.challenge||''}" — tør du? tsandvik2.github.io/drivx-app`,
-    `💀 DrivX ga meg dette: "${S.challenge||''}" #DrivXAppen`,
-    `😈 Tør du dette? Jeg måtte: "${S.challenge||''}" — tsandvik2.github.io/drivx-app`,
-  ];
-  const shareText=_shareOpts[Math.floor(Math.random()*_shareOpts.length)];
-  if(mob&&navigator.share){
+  const shareText='😈 Jeg måtte gjøre dette på DrivX: "'+( S.challenge||'')+'"
+
+Tør du? 👉 tsandvik2.github.io/drivx-app
+#DrivXAppen';
+  if(navigator.share){
     try{
-      await navigator.share({title:'DrivX-utfordring',text:shareText});
-      return;
-    }catch(e){if(e.name==='AbortError')return;}
+      await navigator.share({title:'DrivX-utfordring 🔥',text:shareText});
+    }catch(e){}
+  } else {
+    navigator.clipboard.writeText(shareText).catch(()=>{});
+    toast('Kopiert! Lim inn på Snap 👻');
   }
-  // Fallback: åpne app direkte
-  const urls={snap:'snapchat://',tiktok:'tiktok://',insta:'instagram://'};
-  if(urls[platform])location.href=urls[platform];
 }
 
 function quickShare(platform){

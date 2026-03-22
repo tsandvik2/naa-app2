@@ -564,7 +564,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
   <div class="screen active" id="s-setup" style="padding:0;">
     <div id="install-wrap"></div>
     <div id="special-banner" style="display:none"></div>
-    <div id="daily-teaser" style="margin:10px 0 0;"></div>
+    
 
     <!-- LOGO + PROFIL -->
     <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px 0;">
@@ -1824,7 +1824,7 @@ function finishOnboarding(){
   document.querySelectorAll('.ob-screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('main-app').style.display='flex';
   document.getElementById('main-nav').style.display='flex';
-  updateHeader();renderInstallBanner();renderSpecialBanner();renderDaily();renderProfile();renderLB();renderTodayScreen();
+  updateHeader();renderInstallBanner();renderSpecialBanner();renderProfile();renderLB();renderTodayScreen();
   window.scrollTo({top:0,behavior:'smooth'});
   setTimeout(()=>showInstallHint(),4000);
 }
@@ -2038,17 +2038,7 @@ function noWayReject(){
 }
 
 function updateHeaderProfile(){updateHeader();}
-function renderDaily(){
-  const el=document.getElementById('daily-teaser');
-  if(!el)return;
-  if(PL.dailyDone){
-    el.style.display='block';
-    el.innerHTML='<div onclick="navTo(\'s-today\',\'n1\')" style="background:rgba(0,230,118,.06);border:1.5px solid rgba(0,230,118,.25);border-radius:14px;padding:11px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;"><span style="font-size:18px;">✅</span><div style="flex:1;font-size:13px;font-weight:700;color:rgba(0,230,118,.9);">Dagens utfordring fullført!</div><span style="font-size:16px;color:rgba(255,255,255,.3);">›</span></div>';
-  }else{
-    el.style.display='block';
-    el.innerHTML='<div onclick="navTo(\'s-today\',\'n1\')" style="background:rgba(255,45,85,.07);border:1.5px solid rgba(255,45,85,.3);border-radius:14px;padding:11px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;"><span style="font-size:18px;">🔥</span><div style="flex:1;"><div style="font-size:13px;font-weight:800;color:#fff;">Dagens utfordring venter!</div><div style="font-size:11px;color:rgba(255,45,85,.7);font-weight:700;">Utløper om '+getCountdown()+'</div></div><span style="font-size:16px;color:rgba(255,255,255,.3);">›</span></div>';
-  }
-}
+
 function openDailyCamera(){
   const d=getDailyChallenge();
   S.challenge=d.text;
@@ -2071,7 +2061,7 @@ function completeDaily(){
   if(PL.streak>PL.best)PL.best=PL.streak;
   addToHistory(getDailyChallenge().text,'easy');
   LB[0].pts=PL.pts;LB[0].streak=PL.streak;
-  updateHeader();saveData();renderDaily();
+  updateHeader();saveData();
   avatarDrop();vibrate();playSound('complete');
   toast('📅 +10 poeng! Streak: '+PL.streak+' 🔥');
   checkBadges();
@@ -3329,7 +3319,7 @@ function navTo(sid,nid){
   if(nb)nb.classList.add('on');
   if(sid==='s-lb')renderLB();
   if(sid==='s-profile')renderProfile();
-  if(sid==='s-setup'){renderDaily();renderInstallBanner();}
+  if(sid==='s-setup'){renderInstallBanner();}
   if(sid==='s-friends')renderFriends();
   if(sid==='s-today')renderTodayScreen();
   if(sid==='s-nww')loadNWWStats();
@@ -3775,7 +3765,7 @@ if(PL.name&&PL.name!==''){
   document.getElementById('main-nav').style.display='flex';
   LB[0].name=PL.name;LB[0].em=PL.emoji;LB[0].pts=PL.pts;LB[0].streak=PL.streak;
   addDemoFriendsIfEmpty();
-  updateHeader();renderInstallBanner();renderSpecialBanner();renderDaily();renderProfile();renderLB();renderTodayScreen();
+  updateHeader();renderInstallBanner();renderSpecialBanner();renderProfile();renderLB();renderTodayScreen();
   // Sjekk ventende venneforespørsler
   setTimeout(async()=>{
     const pending=await sbCheckPendingRequests();

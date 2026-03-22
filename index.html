@@ -1935,7 +1935,7 @@ function noWayAccept(){
 function nominateNoWayFriend(){
   const d=getDailyChallenge();
   const myCode=getMyCode();
-  const link='https://tsandvik2.github.io/naa-app2?now=1';
+  const link='https://tsandvik2.github.io/drivx-app?now=1';
   const txt=`😈 ${PL.name} utfordrer deg til No Way!
 
 "${d.text}"
@@ -2643,9 +2643,9 @@ async function shareAndGetPoints(platform){
   // Bruk Web Share API direkte — ingen popup
   const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const _shareOpts=[
-    `😭 Jeg fikk denne fra DrivX: "${S.challenge||''}" — tør du? tsandvik2.github.io/naa-app2`,
+    `😭 Jeg fikk denne fra DrivX: "${S.challenge||''}" — tør du? tsandvik2.github.io/drivx-app`,
     `💀 DrivX ga meg dette: "${S.challenge||''}" #DrivXAppen`,
-    `😈 Tør du dette? Jeg måtte: "${S.challenge||''}" — tsandvik2.github.io/naa-app2`,
+    `😈 Tør du dette? Jeg måtte: "${S.challenge||''}" — tsandvik2.github.io/drivx-app`,
   ];
   const shareText=_shareOpts[Math.floor(Math.random()*_shareOpts.length)];
   if(mob&&navigator.share){
@@ -2730,7 +2730,7 @@ function inviteFriend(method){
   const challenge=S.challenge||'en morsom utfordring';
   sbSaveChallenge(challengeCode, challenge);
   // Lenken inneholder BÅDE utfordring og din vennekode
-  const url='https://tsandvik2.github.io/naa-app2?c='+encodeURIComponent(challengeCode)+'&f='+encodeURIComponent(myCode);
+  const url='https://tsandvik2.github.io/drivx-app?c='+encodeURIComponent(challengeCode)+'&f='+encodeURIComponent(myCode);
   const txt='👋 Jeg utfordrer deg på DrivX-appen!\n\n"'+challenge+'"\n\nKlarer du det? Trykk her:\n'+url+'\n\n#DrivXAppen';
 
   sendToApp(txt, method==='sms'?'sms':method);
@@ -3632,7 +3632,7 @@ function getRandomChallenge(){
 function sendFriendChallenge(platform){
   if(!cfTarget||!cfChallenge)return;
   const code='DRV-'+Math.random().toString(36).substring(2,5).toUpperCase();
-  const txt=`🔥 ${PL.name} utfordrer deg!\n\n"${cfChallenge}"\n\nSkriv inn koden ${code} på:\ntsandvik2.github.io/naa-app2\n\n#DrivXAppen`;
+  const txt=`🔥 ${PL.name} utfordrer deg!\n\n"${cfChallenge}"\n\nSkriv inn koden ${code} på:\ntsandvik2.github.io/drivx-app\n\n#DrivXAppen`;
   // Also store as pending for demo purposes
   if(!PL.pending)PL.pending=[];
   // (In real app this would go to server — here we simulate receiving it back)
@@ -3670,7 +3670,7 @@ function copyMyCode(){
 function shareMyCode(platform){
   const code=getMyCode();
   // Lenken legger deg automatisk til som venn når de åpner den
-  const link='https://tsandvik2.github.io/naa-app2?f='+encodeURIComponent(code);
+  const link='https://tsandvik2.github.io/drivx-app?f='+encodeURIComponent(code);
   const txt='👋 Bli venn med meg på DrivX-appen!\n\n'+PL.name+' vil legge deg til som venn 🔥\n\nTrykk her — så legges vi til automatisk:\n'+link+'\n\n#DrivXAppen';
   sendToApp(txt,platform);
 }
@@ -3863,29 +3863,33 @@ function nwwRevanche(){
 
 </script>
   <!-- NO WAY WATER -->
-  <div class="screen" id="s-nww">
-    <div style="padding:48px 24px 24px;text-align:center;">
-      <div style="font-size:72px;margin-bottom:8px;">💦</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;color:#fff;line-height:1;">NO WAY</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;color:#00b4ff;line-height:1;text-shadow:0 0 20px rgba(0,180,255,.5)">WATER</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.35);font-weight:700;margin-top:8px;letter-spacing:2px;">DRIVX SIGNATUR</div>
+  <div class="screen" id="s-nww" style="display:flex;flex-direction:column;justify-content:space-between;min-height:100vh;padding:env(safe-area-inset-top,20px) 20px env(safe-area-inset-bottom,20px);">
+    <!-- Logo + tittel -->
+    <div style="text-align:center;padding-top:16px;">
+      <div style="font-size:48px;margin-bottom:4px;">💦</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px;color:#fff;line-height:1;">NO WAY</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px;color:#00b4ff;line-height:1;text-shadow:0 0 20px rgba(0,180,255,.5);">WATER</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.3);font-weight:700;margin-top:4px;letter-spacing:2px;">DRIVX SIGNATUR</div>
     </div>
-    <div style="background:#111113;border:1px solid rgba(0,180,255,.2);border-radius:20px;margin:0 20px 20px;padding:22px;">
-      <div style="font-size:12px;font-weight:800;color:#00b4ff;letter-spacing:2px;margin-bottom:14px;">REGLENE</div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:#fff;font-weight:600;"><span style="font-size:22px;">💦</span>Fyll munnen med vann</div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:#fff;font-weight:600;"><span style="font-size:22px;">😂</span>Prøv å få den andre til å le</div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:#fff;font-weight:600;"><span style="font-size:22px;">💀</span>Første som spytter, ler eller svelger taper</div>
+    <!-- Regler -->
+    <div style="background:#111113;border:1px solid rgba(0,180,255,.2);border-radius:18px;padding:16px 18px;margin:12px 0;">
+      <div style="font-size:11px;font-weight:800;color:#00b4ff;letter-spacing:2px;margin-bottom:10px;">REGLENE</div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#fff;font-weight:600;"><span style="font-size:18px;">💦</span>Fyll munnen med vann</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#fff;font-weight:600;"><span style="font-size:18px;">😂</span>Prøv å få den andre til å le</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#fff;font-weight:600;"><span style="font-size:18px;">💀</span>Første som spytter, ler eller svelger taper</div>
       </div>
     </div>
-    <div style="padding:0 20px 16px;">
-      <button onclick="navTo('s-nww-ready','n0')" class="btn btn-primary" style="font-size:18px;padding:20px;background:linear-gradient(135deg,#0080ff,#00b4ff);box-shadow:0 8px 32px rgba(0,180,255,.3);">💦 Start No Way Water</button>
+    <!-- Stats -->
+    <div style="display:flex;justify-content:center;gap:40px;margin:4px 0;">
+      <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:#00b4ff;" id="nww-wins-num">0</div><div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;font-weight:700;">SEIRE</div></div>
+      <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:#ff2d55;" id="nww-losses-num">0</div><div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;font-weight:700;">TAP</div></div>
     </div>
-    <div style="padding:0 20px 20px;display:flex;justify-content:center;gap:40px;">
-      <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#00b4ff;" id="nww-wins-num">0</div><div style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px;font-weight:700;">SEIRE</div></div>
-      <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#ff2d55;" id="nww-losses-num">0</div><div style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px;font-weight:700;">TAP</div></div>
+    <!-- Knapper -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button onclick="navTo('s-nww-ready','n0')" class="btn btn-primary" style="font-size:17px;padding:18px;background:linear-gradient(135deg,#0080ff,#00b4ff);box-shadow:0 8px 24px rgba(0,180,255,.3);">💦 Start No Way Water</button>
+      <button class="btn btn-ghost" style="padding:14px;" onclick="navTo('s-setup','n0')">← Tilbake</button>
     </div>
-    <button class="btn btn-ghost" style="margin:0 20px;" onclick="navTo('s-setup','n0')">← Tilbake</button>
   </div>
 
   <div class="screen" id="s-nww-ready">

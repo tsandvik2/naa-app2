@@ -861,84 +861,6 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
       </div>
     </div>
   </div>
-
-  <!-- NO WAY WATER -->
-  <div class="screen" id="s-nww">
-    <div style="padding:60px 20px 0;text-align:center;">
-      <div style="font-size:64px;margin-bottom:8px;">💦</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:3px;color:#00c6ff;text-shadow:0 0 30px rgba(0,198,255,.5);">NO WAY WATER</div>
-      <div style="font-size:13px;color:var(--muted);font-weight:700;letter-spacing:2px;margin-bottom:28px;">SIGNATUR CHALLENGE</div>
-    </div>
-    <div style="padding:0 20px;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
-      <div style="background:var(--card);border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:center;"><div style="font-size:28px;">💧</div><div style="font-size:15px;font-weight:800;color:#fff;">Fyll munnen med vann</div></div>
-      <div style="background:var(--card);border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:center;"><div style="font-size:28px;">😂</div><div style="font-size:15px;font-weight:800;color:#fff;">Prøv å få den andre til å le</div></div>
-      <div style="background:var(--card);border:1.5px solid rgba(0,198,255,.3);border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:center;"><div style="font-size:28px;">💀</div><div><div style="font-size:15px;font-weight:800;color:#00c6ff;">Første som ler, spytter eller svelger</div><div style="font-size:13px;color:var(--muted);margin-top:2px;">= TAPER</div></div></div>
-    </div>
-    <div id="nww-stats" style="display:flex;gap:12px;padding:0 20px;margin-bottom:24px;">
-      <div style="flex:1;background:var(--card);border-radius:14px;padding:14px;text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#30d158;" id="nww-wins">0</div><div style="font-size:11px;color:var(--muted);font-weight:700;">SEIRE 💪</div></div>
-      <div style="flex:1;background:var(--card);border-radius:14px;padding:14px;text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#ff2d55;" id="nww-losses">0</div><div style="font-size:11px;color:var(--muted);font-weight:700;">TAP 💀</div></div>
-    </div>
-    <div style="padding:0 20px 40px;display:flex;flex-direction:column;gap:10px;">
-      <button onclick="navTo('s-nww-ready','n0')" style="width:100%;padding:20px;background:linear-gradient(135deg,#0080ff,#00c6ff);border:none;border-radius:16px;font-size:20px;font-weight:900;color:#fff;cursor:pointer;">💦 START</button>
-      <button onclick="navTo('s-setup','n0')" style="width:100%;padding:14px;background:transparent;border:1px solid var(--border);border-radius:14px;font-size:14px;color:var(--muted);cursor:pointer;">Vanlig challenge</button>
-    </div>
-  </div>
-
-  <!-- NWW READY -->
-  <div class="screen" id="s-nww-ready">
-    <div style="padding:80px 20px 0;text-align:center;">
-      <div style="font-size:64px;margin-bottom:16px;">💦</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;margin-bottom:8px;">ER DERE KLARE?</div>
-      <div style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:40px;">Finn en venn<br>Fyll munnen med vann<br>Sett mobilen klar</div>
-      <button onclick="startNWWCountdown()" style="width:100%;padding:22px;background:linear-gradient(135deg,#0080ff,#00c6ff);border:none;border-radius:18px;font-size:22px;font-weight:900;color:#fff;cursor:pointer;">VI ER KLARE 💦</button>
-      <button onclick="navTo('s-nww','n0')" style="width:100%;padding:14px;background:transparent;border:none;font-size:14px;color:var(--muted);cursor:pointer;margin-top:10px;">← Tilbake</button>
-    </div>
-  </div>
-
-  <!-- NWW COUNTDOWN -->
-  <div class="screen" id="s-nww-count">
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:20px;background:#000;">
-      <div style="font-size:18px;color:rgba(0,198,255,.7);font-weight:700;letter-spacing:3px;">HOLD VANNET</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:200px;color:#00c6ff;line-height:1;text-shadow:0 0 60px rgba(0,198,255,.6);" id="nww-count-num">3</div>
-      <div style="font-size:52px;">💦</div>
-    </div>
-  </div>
-
-  <!-- NWW RESULT -->
-  <div class="screen" id="s-nww-result">
-    <div style="padding:60px 20px 0;text-align:center;">
-      <div style="font-size:52px;margin-bottom:8px;">💦</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;margin-bottom:4px;">HVEM TAPTE?</div>
-      <div style="font-size:14px;color:var(--muted);margin-bottom:28px;">Vær ærlig 😂</div>
-    </div>
-    <div style="padding:0 20px;display:flex;flex-direction:column;gap:12px;">
-      <button onclick="nwwLoser(1)" style="width:100%;padding:20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;font-size:18px;font-weight:800;color:#fff;cursor:pointer;">😭 Jeg tapte</button>
-      <button onclick="nwwLoser(2)" style="width:100%;padding:20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;font-size:18px;font-weight:800;color:#fff;cursor:pointer;">😭 Han/hun tapte</button>
-      <button onclick="nwwDraw()" style="width:100%;padding:14px;background:transparent;border:1px solid var(--border);border-radius:14px;font-size:14px;color:var(--muted);cursor:pointer;">🤝 Uavgjort — ny runde</button>
-    </div>
-  </div>
-
-  <!-- NWW PUNISHMENT -->
-  <div class="screen" id="s-nww-punish">
-    <div style="padding:60px 20px 0;text-align:center;">
-      <div style="font-size:52px;margin-bottom:8px;">😭</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:#ff2d55;margin-bottom:4px;">DU TAPTE</div>
-      <div style="font-size:14px;color:var(--muted);margin-bottom:24px;">Velg straffen din 😈</div>
-    </div>
-    <div style="padding:0 20px;display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
-      <button onclick="nwwPunish('challenge')" style="width:100%;padding:18px;background:linear-gradient(135deg,#ff2d55,#ff6b35);border:none;border-radius:14px;font-size:16px;font-weight:800;color:#fff;cursor:pointer;">🎯 Gjør en pinlig solo challenge</button>
-      <button onclick="nwwPunish('send')" style="width:100%;padding:18px;background:var(--card);border:1.5px solid rgba(255,45,85,.3);border-radius:14px;font-size:16px;font-weight:800;color:#fff;cursor:pointer;">📱 Send "jeg tapte 💀" til en venn</button>
-      <button onclick="nwwPunish('post')" style="width:100%;padding:18px;background:var(--card);border:1.5px solid rgba(255,45,85,.3);border-radius:14px;font-size:16px;font-weight:800;color:#fff;cursor:pointer;">📢 Post videoen</button>
-      <button onclick="nwwPunish('rematch')" style="width:100%;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;font-size:15px;font-weight:700;color:var(--muted);cursor:pointer;">🔁 Revansje</button>
-    </div>
-    <div style="padding:0 20px 40px;">
-      <div style="background:rgba(0,198,255,.08);border:1.5px solid rgba(0,198,255,.2);border-radius:16px;padding:16px;text-align:center;">
-        <div style="font-size:13px;font-weight:800;color:#00c6ff;margin-bottom:8px;">💦 Utfordre 3 venner nå</div>
-        <button onclick="nwwChallengeFriends()" style="width:100%;padding:14px;background:linear-gradient(135deg,#0080ff,#00c6ff);border:none;border-radius:12px;font-size:15px;font-weight:800;color:#fff;cursor:pointer;">👻 Send på Snap</button>
-      </div>
-    </div>
-  </div>
-
 <div class="screen" id="s-friends">
     <div class="my-code-card">
       <div class="my-code-top">
@@ -987,10 +909,9 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 </div>
 
 <!-- ══ NAV ══ -->
-<nav class="nav" id="main-nav" style="display:none;grid-template-columns:repeat(6,1fr)">
-  <button class="nav-btn on" id="n0" onclick="navTo('s-setup','n0')"><span class="ni">🎯</span>Spill</button>
+<nav class="nav" id="main-nav" style="display:none">
+  <button class="nav-btn on" id="n0" onclick="navTo('s-setup','n0')"><span class="ni">🎯</span>Utfordring</button>
   <button class="nav-btn" id="n4" onclick="navTo('s-today','n4')"><span class="ni">🔥</span>No Way<span class="nav-badge" id="noway-badge" style="display:none">!</span></button>
-  <button class="nav-btn" id="n5" onclick="navTo('s-nww','n5')"><span class="ni">💦</span>Water</button>
   <button class="nav-btn" id="n1" onclick="navTo('s-lb','n1')"><span class="ni">🏆</span>Toppen</button>
   <button class="nav-btn" id="n3" onclick="navTo('s-friends','n3')"><span class="ni">👯</span>Venner<span class="nav-badge" id="nav-badge" style="display:none"></span></button>
   <button class="nav-btn" id="n2" onclick="navTo('s-profile','n2')"><span class="ni">🏅</span>Profil</button>
@@ -1133,7 +1054,7 @@ html,body{height:100%;background:#000;background:var(--bg);color:var(--text);fon
 // STATE
 // ══════════════════════════════════════════
 const S={mood:null,time:null,players:null,challenge:null,punishment:null,code:null,wizStep:0,needsCamera:false,groupMembers:[],pendingSharePlatform:null,sharedThisChallenge:false,dailyMode:false,pendingChallenge:null,proofMode:false,shareAfterCamera:false};
-let PL={name:'',emoji:'🔥',age:'16-19',pts:0,streak:0,best:0,done:0,history:[],earnedBadges:[],dailyDone:false,dailyDate:'',dailyPtsDate:'',dailyPtsCount:0,dailyShareDate:'',dailyShareCount:0,sharedChallenges:[],noWayCount:0,nwwWins:0,nwwLosses:0};
+let PL={name:'',emoji:'🔥',age:'16-19',pts:0,streak:0,best:0,done:0,history:[],earnedBadges:[],dailyDone:false,dailyDate:'',dailyPtsDate:'',dailyPtsCount:0,dailyShareDate:'',dailyShareCount:0,sharedChallenges:[],noWayCount:0};
 let selectedEmoji='🔥';
 let selectedAge='16-19';
 let camStream=null;
@@ -1313,111 +1234,6 @@ async function sbFetchLeaderboard(){
   // Kun folk med poeng, og hent friend_code for å identifisere deg selv
   const res=await sbFetch('/rest/v1/profiles?select=name,emoji,pts,streak,friend_code&order=pts.desc&limit=20&pts=gt.0');
   return res||[];
-}
-
-// ══════════════════════
-// NO WAY WATER
-// ══════════════════════
-let nwwTimer=null;
-
-function loadNWWStats(){
-  const el_w=document.getElementById('nww-wins');
-  const el_l=document.getElementById('nww-losses');
-  if(el_w)el_w.textContent=PL.nwwWins||0;
-  if(el_l)el_l.textContent=PL.nwwLosses||0;
-}
-
-function startNWWCountdown(){
-  navTo('s-nww-count','n0');
-  let n=3;
-  const el=document.getElementById('nww-count-num');
-  if(el)el.textContent=n;
-  vibrate();
-  nwwTimer=setInterval(()=>{
-    n--;
-    if(el)el.textContent=n<=0?'GO! 💦':n;
-    if(n<=0){
-      clearInterval(nwwTimer);
-      setTimeout(()=>{
-        // Åpne kamera
-        S.challenge='No Way Water 💦';
-        S.needsCamera=true;
-        openCamera();
-        // Vis result etter kamera lukkes
-        setTimeout(()=>navTo('s-nww-result','n0'),500);
-      },800);
-    } else {
-      vibrate();
-    }
-  },1000);
-}
-
-function nwwLoser(player){
-  if(player===1){
-    // Jeg tapte
-    PL.nwwLosses=(PL.nwwLosses||0)+1;
-    PL.pts=Math.max(0,(PL.pts||0)-5);
-  } else {
-    // Han/hun tapte — jeg vant
-    PL.nwwWins=(PL.nwwWins||0)+1;
-    PL.pts=(PL.pts||0)+15;
-    toast('🏆 Du vant! +15 pts 💪');
-  }
-  saveData();
-  sbSaveProfile();
-  // Oppdater Supabase stats
-  const code=getMyCode();
-  if(code){
-    sbFetch('/rest/v1/noway_water_stats','POST',{
-      friend_code:code,
-      wins:PL.nwwWins||0,
-      losses:PL.nwwLosses||0,
-      updated_at:new Date().toISOString()
-    });
-  }
-  navTo('s-nww-punish','n0');
-}
-
-function nwwDraw(){
-  toast('🤝 Uavgjort — prøv igjen!');
-  navTo('s-nww-ready','n0');
-}
-
-function nwwPunish(type){
-  if(type==='challenge'){
-    navTo('s-setup','n0');
-    setTimeout(()=>start(),200);
-  } else if(type==='send'){
-    const txt='😭 Jeg tapte No Way Water på DrivX… Du tør ikke denne 👉 tsandvik2.github.io/naa-app2 #DrivX #NoWayWater';
-    navigator.clipboard.writeText(txt).catch(()=>{});
-    toast('📋 Tekst kopiert! Lim inn på Snap 👻');
-  } else if(type==='post'){
-    toast('📢 Lagre videoen og post den! #DrivX');
-  } else if(type==='rematch'){
-    navTo('s-nww-ready','n0');
-  }
-}
-
-function nwwChallengeFriends(){
-  const txt='💦 Jeg tapte No Way Water på DrivX 💀 — Nå utfordrer jeg DEG: Du tør ikke klare denne 👉 tsandvik2.github.io/naa-app2 #DrivX #NoWayWater';
-  navigator.clipboard.writeText(txt).catch(()=>{});
-  const popup=document.createElement('div');
-  popup.id='nww-share-popup';
-  popup.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:flex-end;justify-content:center;';
-  popup.innerHTML='<div style="width:100%;max-width:430px;background:#1a1a1d;border-radius:28px 28px 0 0;padding:24px 20px 40px;border-top:1px solid rgba(255,255,255,.1);">'+
-    '<div style="font-size:18px;font-weight:900;color:#fff;margin-bottom:6px;">💦 Utfordre venner</div>'+
-    '<div style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:16px;">Teksten er kopiert — lim inn på Snap!</div>'+
-    '<div style="background:#111;border-radius:14px;padding:14px;font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:16px;">'+txt.replace(/\n/g,'<br>')+'</div>'+
-    '<button id="nww-snap-btn" style="width:100%;padding:16px;background:#FFFC00;color:#000;border:none;border-radius:14px;font-size:16px;font-weight:900;cursor:pointer;margin-bottom:10px;">👻 Åpne Snapchat</button>'+
-    '<button id="nww-close-btn" style="width:100%;padding:13px;background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);border-radius:14px;font-size:14px;cursor:pointer;">Lukk</button>'+
-    '</div>';
-  document.body.appendChild(popup);
-  setTimeout(()=>{
-    const s=document.getElementById('nww-snap-btn');
-    if(s)s.onclick=()=>{location.href='snapchat://';};
-    const c=document.getElementById('nww-close-btn');
-    if(c)c.onclick=()=>{document.getElementById('nww-share-popup')?.remove();};
-  },100);
 }
 
 function saveData(){try{localStorage.setItem('na_v3',JSON.stringify(PL))}catch(e){}}
@@ -2112,7 +1928,7 @@ function noWayAccept(){
 function nominateNoWayFriend(){
   const d=getDailyChallenge();
   const myCode=getMyCode();
-  const link='https://tsandvik2.github.io/naa-app2?now=1';
+  const link='https://tsandvik2.github.io/drivx-app?now=1';
   const txt=`😈 ${PL.name} utfordrer deg til No Way!
 
 "${d.text}"
@@ -2820,9 +2636,9 @@ async function shareAndGetPoints(platform){
   // Bruk Web Share API direkte — ingen popup
   const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const _shareOpts=[
-    `😭 Jeg fikk denne fra DrivX: "${S.challenge||''}" — tør du? tsandvik2.github.io/naa-app2`,
+    `😭 Jeg fikk denne fra DrivX: "${S.challenge||''}" — tør du? tsandvik2.github.io/drivx-app`,
     `💀 DrivX ga meg dette: "${S.challenge||''}" #DrivXAppen`,
-    `😈 Tør du dette? Jeg måtte: "${S.challenge||''}" — tsandvik2.github.io/naa-app2`,
+    `😈 Tør du dette? Jeg måtte: "${S.challenge||''}" — tsandvik2.github.io/drivx-app`,
   ];
   const shareText=_shareOpts[Math.floor(Math.random()*_shareOpts.length)];
   if(mob&&navigator.share){
@@ -2907,7 +2723,7 @@ function inviteFriend(method){
   const challenge=S.challenge||'en morsom utfordring';
   sbSaveChallenge(challengeCode, challenge);
   // Lenken inneholder BÅDE utfordring og din vennekode
-  const url='https://tsandvik2.github.io/naa-app2?c='+encodeURIComponent(challengeCode)+'&f='+encodeURIComponent(myCode);
+  const url='https://tsandvik2.github.io/drivx-app?c='+encodeURIComponent(challengeCode)+'&f='+encodeURIComponent(myCode);
   const txt='👋 Jeg utfordrer deg på DrivX-appen!\n\n"'+challenge+'"\n\nKlarer du det? Trykk her:\n'+url+'\n\n#DrivXAppen';
 
   sendToApp(txt, method==='sms'?'sms':method);
@@ -3015,67 +2831,40 @@ function startRecording(){
     // iOS speiler frontkamera automatisk — ikke flippe i canvas
     ctx.drawImage(video,0,0,w,h);
 
-    // Neon linje topp
-    const neonTop=ctx.createLinearGradient(0,0,w,0);
-    neonTop.addColorStop(0,'rgba(255,45,85,0)');
-    neonTop.addColorStop(0.5,'rgba(255,45,85,0.9)');
-    neonTop.addColorStop(1,'rgba(255,45,85,0)');
-    ctx.fillStyle=neonTop;ctx.fillRect(0,0,w,3);
+    // Gradient bunn — berre nederst
+    const botG=ctx.createLinearGradient(0,h*0.72,0,h);
+    botG.addColorStop(0,'rgba(0,0,0,0)');
+    botG.addColorStop(1,'rgba(0,0,0,0.82)');
+    ctx.fillStyle=botG;ctx.fillRect(0,h*0.72,w,h*0.28);
 
-    // Neon linje bunn
-    const neonBot=ctx.createLinearGradient(0,0,w,0);
-    neonBot.addColorStop(0,'rgba(255,45,85,0)');
-    neonBot.addColorStop(0.5,'rgba(255,107,53,0.9)');
-    neonBot.addColorStop(1,'rgba(255,45,85,0)');
-    ctx.fillStyle=neonBot;ctx.fillRect(0,h-3,w,3);
+    // Liten gradient topp for logo
+    const topG=ctx.createLinearGradient(0,0,0,h*0.12);
+    topG.addColorStop(0,'rgba(0,0,0,0.5)');
+    topG.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=topG;ctx.fillRect(0,0,w,h*0.12);
 
-    // Gradient bunn for tekst
-    const botG=ctx.createLinearGradient(0,h*0.50,0,h);
-    botG.addColorStop(0,'rgba(0,0,0,0)');botG.addColorStop(1,'rgba(0,0,0,0.88)');
-    ctx.fillStyle=botG;ctx.fillRect(0,h*0.50,w,h*0.50);
-
-    // Gradient topp
-    const topG=ctx.createLinearGradient(0,0,0,h*0.2);
-    topG.addColorStop(0,'rgba(0,0,0,0.65)');topG.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=topG;ctx.fillRect(0,0,w,h*0.2);
-
-    // DRIV logo med glow
-    ctx.shadowColor='#ff2d55';
-    ctx.shadowBlur=20;
-    ctx.font=`900 ${w*0.082}px 'Arial Black',sans-serif`;
+    // DrivX logo — liten øverst venstre
+    ctx.shadowColor='#ff2d55';ctx.shadowBlur=14;
+    ctx.font=`900 ${w*0.068}px 'Arial Black',sans-serif`;
     ctx.fillStyle='#ff2d55';
-    ctx.fillText('DrivX',w*0.05,w*0.095);
+    ctx.fillText('DrivX',w*0.04,w*0.078);
     ctx.shadowBlur=0;
 
-    // REC dot
-    ctx.fillStyle='rgba(255,45,85,0.9)';
-    ctx.shadowColor='#ff2d55';ctx.shadowBlur=8;
-    ctx.beginPath();ctx.arc(w*0.9,h*0.053,w*0.011,0,Math.PI*2);ctx.fill();
-    ctx.shadowBlur=0;
-    ctx.font=`bold ${w*0.028}px Arial`;ctx.fillStyle='rgba(255,255,255,0.9)';
-    ctx.fillText('REC',w*0.915,h*0.062);
+    // REC dot — liten øverst høyre
+    ctx.fillStyle='rgba(255,45,85,0.85)';
+    ctx.beginPath();ctx.arc(w*0.88,h*0.042,w*0.009,0,Math.PI*2);ctx.fill();
+    ctx.font=`bold ${w*0.024}px Arial`;ctx.fillStyle='rgba(255,255,255,0.8)';
+    ctx.fillText('REC',w*0.9,h*0.048);
 
-    // Utfordring boks med glow-ramme
+    // Utfordring tekst — helt nede
     const chalText=S.challenge||'DrivX';
-    const boxY=h*0.58;const boxH=h*0.26;const boxX=w*0.04;const boxW=w*0.92;
-    ctx.strokeStyle='rgba(255,45,85,0.35)';
-    ctx.lineWidth=1.5;
-    ctx.shadowColor='#ff2d55';ctx.shadowBlur=12;
-    ctx.strokeRect(boxX,boxY,boxW,boxH);
-    ctx.shadowBlur=0;
+    const textY=h*0.80;
+    ctx.font=`bold ${w*0.038}px Arial`;ctx.fillStyle='#fff';
+    wrapTextMaxLines(ctx,chalText,w*0.05,textY,w*0.9,w*0.046,3);
 
-    // Label
-    ctx.font=`bold ${w*0.026}px Arial`;
-    ctx.fillStyle='#ff2d55';
-    ctx.fillText('DIN UTFORDRING',boxX+w*0.03,boxY+h*0.038);
-
-    // Utfordring tekst
-    ctx.font=`bold ${w*0.04}px Arial`;ctx.fillStyle='#fff';
-    wrapTextMaxLines(ctx,chalText,boxX+w*0.03,boxY+h*0.075,boxW-w*0.06,w*0.048,3);
-
-    // Bruker + hash
-    ctx.font=`${w*0.026}px Arial`;ctx.fillStyle='rgba(255,45,85,0.6)';
-    ctx.fillText('@'+PL.name+' • #DrivXAppen',w*0.05,h*0.935);
+    // Bruker + hash — nederst
+    ctx.font=`${w*0.024}px Arial`;ctx.fillStyle='rgba(255,255,255,0.45)';
+    ctx.fillText('@'+PL.name+' • #DrivXAppen',w*0.05,h*0.965);
 
     requestAnimationFrame(drawFilterFrame);
   }
@@ -3193,33 +2982,23 @@ function takePhoto(){
   // iOS speiler frontkamera automatisk — ikke flippe i canvas
   ctx.drawImage(video,0,0,canvas.width,canvas.height);
   const w=canvas.width,h=canvas.height;
-  const nT=ctx.createLinearGradient(0,0,w,0);
-  nT.addColorStop(0,'rgba(255,45,85,0)');nT.addColorStop(0.5,'rgba(255,45,85,0.9)');nT.addColorStop(1,'rgba(255,45,85,0)');
-  ctx.fillStyle=nT;ctx.fillRect(0,0,w,3);
-  const nB=ctx.createLinearGradient(0,0,w,0);
-  nB.addColorStop(0,'rgba(255,45,85,0)');nB.addColorStop(0.5,'rgba(255,107,53,0.9)');nB.addColorStop(1,'rgba(255,45,85,0)');
-  ctx.fillStyle=nB;ctx.fillRect(0,h-3,w,3);
-  const topGrad=ctx.createLinearGradient(0,0,0,h*0.2);
-  topGrad.addColorStop(0,'rgba(0,0,0,0.65)');topGrad.addColorStop(1,'rgba(0,0,0,0)');
-  ctx.fillStyle=topGrad;ctx.fillRect(0,0,w,h*0.2);
-  const botGrad=ctx.createLinearGradient(0,h*0.5,0,h);
-  botGrad.addColorStop(0,'rgba(0,0,0,0)');botGrad.addColorStop(1,'rgba(0,0,0,0.88)');
-  ctx.fillStyle=botGrad;ctx.fillRect(0,h*0.5,w,h*0.5);
-  ctx.shadowColor='#ff2d55';ctx.shadowBlur=20;
-  ctx.font=`900 ${w*0.082}px 'Arial Black',sans-serif`;
-  ctx.fillStyle='#ff2d55';ctx.fillText('DrivX',w*0.05,w*0.095);
+  const botGrad=ctx.createLinearGradient(0,h*0.72,0,h);
+  botGrad.addColorStop(0,'rgba(0,0,0,0)');
+  botGrad.addColorStop(1,'rgba(0,0,0,0.82)');
+  ctx.fillStyle=botGrad;ctx.fillRect(0,h*0.72,w,h*0.28);
+  const topGrad=ctx.createLinearGradient(0,0,0,h*0.12);
+  topGrad.addColorStop(0,'rgba(0,0,0,0.5)');
+  topGrad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=topGrad;ctx.fillRect(0,0,w,h*0.12);
+  ctx.shadowColor='#ff2d55';ctx.shadowBlur=14;
+  ctx.font=`900 ${w*0.068}px 'Arial Black',sans-serif`;
+  ctx.fillStyle='#ff2d55';ctx.fillText('DrivX',w*0.04,w*0.078);
   ctx.shadowBlur=0;
   const chalText=S.challenge||'DrivX';
-  const boxX=w*0.04,boxY=h*0.57,boxW=w*0.92,boxH=h*0.27;
-  ctx.strokeStyle='rgba(255,45,85,0.35)';ctx.lineWidth=1.5;
-  ctx.shadowColor='#ff2d55';ctx.shadowBlur=12;
-  ctx.strokeRect(boxX,boxY,boxW,boxH);ctx.shadowBlur=0;
-  ctx.font=`bold ${w*0.026}px Arial`;ctx.fillStyle='#ff2d55';
-  ctx.fillText('DIN UTFORDRING',boxX+w*0.03,boxY+h*0.038);
-  ctx.font=`bold ${w*0.042}px Arial`;ctx.fillStyle='#fff';
-  wrapTextMaxLines(ctx,chalText,boxX+w*0.03,boxY+h*0.078,boxW-w*0.06,w*0.05,3);
-  ctx.font=`${w*0.027}px Arial`;ctx.fillStyle='rgba(255,45,85,0.6)';
-  ctx.fillText('@'+PL.name+' • #DrivXAppen',w*0.05,h*0.93);
+  ctx.font=`bold ${w*0.038}px Arial`;ctx.fillStyle='#fff';
+  wrapTextMaxLines(ctx,chalText,w*0.05,h*0.80,w*0.9,w*0.046,3);
+  ctx.font=`${w*0.024}px Arial`;ctx.fillStyle='rgba(255,255,255,0.45)';
+  ctx.fillText('@'+PL.name+' • #DrivXAppen',w*0.05,h*0.965);
 
   // Show preview
   const imgData=canvas.toDataURL('image/jpeg',0.92);
@@ -3453,7 +3232,6 @@ function navTo(sid,nid){
   if(sid==='s-setup'){renderDaily();renderInstallBanner();}
   if(sid==='s-friends')renderFriends();
   if(sid==='s-today')renderTodayScreen();
-  if(sid==='s-nww'){loadNWWStats();}
 }
 
 // ══════════════════════════════════════════
@@ -3809,7 +3587,7 @@ function getRandomChallenge(){
 function sendFriendChallenge(platform){
   if(!cfTarget||!cfChallenge)return;
   const code='DRV-'+Math.random().toString(36).substring(2,5).toUpperCase();
-  const txt=`🔥 ${PL.name} utfordrer deg!\n\n"${cfChallenge}"\n\nSkriv inn koden ${code} på:\ntsandvik2.github.io/naa-app2\n\n#DrivXAppen`;
+  const txt=`🔥 ${PL.name} utfordrer deg!\n\n"${cfChallenge}"\n\nSkriv inn koden ${code} på:\ntsandvik2.github.io/drivx-app\n\n#DrivXAppen`;
   // Also store as pending for demo purposes
   if(!PL.pending)PL.pending=[];
   // (In real app this would go to server — here we simulate receiving it back)
@@ -3847,7 +3625,7 @@ function copyMyCode(){
 function shareMyCode(platform){
   const code=getMyCode();
   // Lenken legger deg automatisk til som venn når de åpner den
-  const link='https://tsandvik2.github.io/naa-app2?f='+encodeURIComponent(code);
+  const link='https://tsandvik2.github.io/drivx-app?f='+encodeURIComponent(code);
   const txt='👋 Bli venn med meg på DrivX-appen!\n\n'+PL.name+' vil legge deg til som venn 🔥\n\nTrykk her — så legges vi til automatisk:\n'+link+'\n\n#DrivXAppen';
   sendToApp(txt,platform);
 }
